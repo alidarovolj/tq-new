@@ -100,7 +100,7 @@ const generateRandomString = () => {
 
 const makeCheckout = async () => {
   if(!token.value) {
-    form.value.temproary_code = tempCode.value
+    form.value.temporary_code = tempCode.value.toString()
   }
 
   loading.value = true;
