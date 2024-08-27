@@ -13,7 +13,6 @@ export const useUserStore = defineStore("user", () => {
                 const response = await api(`/auth/me`, "GET", {}, route.query);
                 userProfile.value = response;
             } catch (e) {
-                notifications.showNotification("error", "Произошла ошибка", e);
                 userProfile.value = false;
             }
         },

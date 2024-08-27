@@ -36,7 +36,7 @@ export const useCartStore = defineStore("cart", () => {
                     });
                 }
             } catch (e) {
-                notifications.showNotification("error", "Произошла ошибка", e);
+                console.log(e);
             }
         },
         async addItem(product) {
