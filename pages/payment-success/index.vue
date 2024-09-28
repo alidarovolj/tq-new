@@ -20,7 +20,7 @@ const links = [
   <div>
     <Breadcrumbs :links="links"/>
     <div class="container mx-auto px-4 md:px-0">
-      <div class="flex md:flex-row flex-col justify-between items-start pb-24 pt-12">
+      <div class="flex md:flex-row flex-col justify-between items-start py-36">
         <div class="text-center w-full md:w-half md:mb-0 mb-8">
           <div class="mx-auto p-2 rounded-full border-2 w-max border-green-500 mb-6">
             <CheckIcon class="!text-green-500 w-10 h-10"/>

@@ -10,6 +10,7 @@ import {useUserStore} from "~/stores/user.js";
 import YandexMap from "~/components/maps/YandexMaps.vue";
 import {useVuelidate} from "@vuelidate/core";
 import {required} from "@vuelidate/validators";
+import {vMaska} from "maska/vue"
 
 const {t} = useI18n()
 const localePath = useLocalePath()
@@ -26,13 +27,13 @@ const {token} = storeToRefs(auth)
 const user = useUserStore()
 const addresses = useAddressesStore()
 const loading = ref(false)
+const closeCity = ref(false)
 
 const editForm = ref({
   quantity: null
 })
 
 const form = ref({
-  order_number: "",
   name: "",
   phone: "",
   delivery_address: "",
@@ -50,7 +51,6 @@ const formAddress = ref({
 
 const v$ = useVuelidate({
   phone: {required, minLength: 11},
-  order_number: {required},
   name: {required},
   delivery_address: {required},
   delivery_type: {required},
@@ -138,15 +138,16 @@ const makeCheckout = async () => {
 
 onMounted(async () => {
   await nextTick()
+  await addresses.getCities()
   if(token.value) {
     await user.getProfile()
-    form.value.phone = user.userProfile.data.phone
-    form.value.name = user.userProfile.data.name
+    form.value.phone = user.userProfile.phone
+    form.value.name = user.userProfile.name
+    form.value.city_id = user.userProfile.city.id
+    closeCity.value = true
   } else {
     await cart.getTemporaryCart()
   }
-  form.value.order_number = generateRandomString();
-  await addresses.getCities()
 })
 </script>
 
@@ -188,6 +189,9 @@ onMounted(async () => {
                       :placeholder="$t('checkout.first.phone')"
                       v-model="form.phone"
                       :disabled="isDisabledPhone"
+                      v-maska
+                      data-maska="+7 (###) ###-##-##"
+                      placeholder="+7 (___) ___-__-__"
                       class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3">
                 </div>
               </div>
@@ -241,6 +245,7 @@ onMounted(async () => {
                               :class="{ 'border-red-500' : v$.city_id.$error }"
                               class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
                               name=""
+                              :disabled="closeCity"
                               id="">
                             <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
                             <option
@@ -338,7 +343,7 @@ onMounted(async () => {
               </p>
               <p
                   @click="makeCheckout"
-                  class="w-full md:w-1/3 bg-mainColor text-white py-3 rounded-lg text-lg font-semibold text-center">
+                  class="w-full md:w-1/3 bg-mainColor cursor-pointer text-white py-3 rounded-lg text-lg font-semibold text-center">
                 {{ $t('cart.checkout.checkout_button') }}
               </p>
             </div>

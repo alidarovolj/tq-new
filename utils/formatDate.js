@@ -8,9 +8,9 @@ export function formatDate(isoDate) {
         day: "numeric", // день месяца
         hour: "numeric", // час
         minute: "numeric", // минуты
-        hour12: true, // формат 12-часового времени
+        hour12: false, // формат 12-часового времени
     };
 
     // Используем toLocaleString для форматирования
-    return date.toLocaleString("en-US", options);
+    return date.toLocaleString("ru-RU", options);
 }

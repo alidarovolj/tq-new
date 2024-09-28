@@ -14,7 +14,7 @@ import Catalog from "~/components/mainPage/catalog.vue";
     <Catalog />
 <!--    <Products />-->
     <Testimonials />
-    <News />
+<!--    <News />-->
     <ContactForm />
   </div>
 </template>

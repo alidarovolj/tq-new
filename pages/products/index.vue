@@ -56,7 +56,7 @@ onMounted(async () => {
       </p>
     </div>
     <div class="flex flex-col md:flex-row items-start gap-5">
-      <div class="w-full md:w-1/4 shadow p-5 rounded-lg relative mb-5 md:md-0">
+      <div class="w-full md:w-1/4 shadow p-5 rounded-lg relative mb-5 md:md-0 bg-white">
         <div v-if="catalogList">
           <h3 class="text-lg font-bold text-gray-900 mb-5">Категории</h3>
           <div
@@ -85,7 +85,7 @@ onMounted(async () => {
         </div>
       </div>
       <div
-          class="bg-white w-full md:w-3/4">
+          class="w-full md:w-3/4">
         <div v-if="categoryWithProducts && !route.query.category">
           <div
               v-for="(item, index) in displayedItems"

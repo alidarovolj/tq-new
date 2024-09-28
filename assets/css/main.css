@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+  color: #333;
+}
+
 input:focus-visible,
 button:focus-visible,
 textarea:focus-visible,

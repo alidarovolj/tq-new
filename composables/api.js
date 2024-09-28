@@ -49,11 +49,6 @@ export async function api(url, method, options = {}, query = {}) {
         return response.data;
     } catch (error) {
         if (error.response && error.response.status === 401 || error.response.status === 500) {
-            notifications.showNotification(
-                "error",
-                "Токен не получен или истек",
-                "Пожалуйста, авторизуйтесь снова"
-            );
             const authCookie = useCookie('token')
             authCookie.value = null
             user.userProfile = false
