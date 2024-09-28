@@ -5,6 +5,11 @@ import {useCartStore} from '~/stores/cart.js';
 const props = defineProps(['product']);
 const cart = useCartStore();
 
+const addToCart = ref({
+  product_id: props.product.id,
+  quantity: 1
+})
+
 const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.data) && cart.cartList.data.some(item => item.product.id === props.product.id));
 </script>
 
@@ -43,7 +48,7 @@ const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.dat
           v-if="product.quantity === 0"
           class="relative bg-gray-200 cursor-not-allowed flex transition-all items-center justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium text-gray-900"
       >
-        Добавить в корзину<span class="sr-only">, {{ product.name }}</span>
+        Добавить в корзину
       </div>
       <div
           v-else
@@ -51,9 +56,9 @@ const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.dat
   'relative flex transition-all bg-mainColor items-center cursor-pointer justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium',
   isInCart ? '!bg-green-500 text-white' : 'bg-green-500 text-white'
 ]"
-          v-bind="isInCart ? {} : { 'onClick': () => cart.addItem(product) }"
+          v-bind="isInCart ? {} : { 'onClick': () => cart.addItem(addToCart) }"
       >
-        {{ isInCart ? 'В корзине' : 'Добавить в корзину' }}<span class="sr-only">, {{ product.name }}</span>
+        {{ isInCart ? 'В корзине' : `Добавить в корзину` }}
       </div>
     </div>
   </div>

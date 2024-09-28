@@ -34,6 +34,14 @@ const setCategory = async (id) => {
   await productsStore.getProductsByCategory(id);
 }
 
+watch(() => route.query.category, async (category) => {
+  if(category) {
+    await productsStore.getProductsByCategory(category);
+  } else {
+    await productsStore.getCategoryWithEightProducts();
+  }
+})
+
 onMounted(async () => {
   await nextTick();
   await productsStore.getCategoryWithEightProducts();

@@ -42,16 +42,10 @@ export const useCartStore = defineStore("cart", () => {
         async addItem(product) {
             let body = null
             if(token.value) {
-                body = {
-                    product_id: product.id,
-                    quantity: 1
-                }
+                body = product
             } else {
-                body = {
-                    product_id: product.id,
-                    quantity: 1,
-                    temporary_code: tempCode.value
-                }
+                body = product
+                body.temporary_code = tempCode.value
             }
             try {
                 const response = await api(`/carts/add`, "POST", {
@@ -101,7 +95,7 @@ export const useCartStore = defineStore("cart", () => {
                 const response = await api(`/carts/temporary`, "GET", {}, route.query);
                 temporaryCode.value = response;
             } catch (e) {
-                notifications.showNotification("error", "Произошла ошибка", e);
+                // notifications.showNotification("error", "Произошла ошибка", e);
             }
         },
         async getTemporaryCart() {

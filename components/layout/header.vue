@@ -1,9 +1,20 @@
 <script setup>
 import {Dialog, DialogPanel, Menu, MenuButton, MenuItem, MenuItems, PopoverGroup,} from '@headlessui/vue'
-import {Bars3Icon, ShoppingBagIcon, XMarkIcon, ArchiveBoxIcon, MapPinIcon, UserIcon, ArrowRightStartOnRectangleIcon} from '@heroicons/vue/24/outline'
+import {
+  Bars3Icon,
+  ShoppingBagIcon,
+  XMarkIcon,
+  ArchiveBoxIcon,
+  MapPinIcon,
+  UserIcon,
+  ArrowRightStartOnRectangleIcon,
+  MapIcon,
+  ClockIcon
+} from '@heroicons/vue/24/outline'
 import {ChevronDownIcon} from '@heroicons/vue/20/solid'
 import {useUserStore} from "~/stores/user.js";
 import {useNotificationStore} from "~/stores/notifications.js";
+import SelectSearch from "~/components/general/selectSearch.vue";
 
 const loading = ref(false)
 const router = useRouter()
@@ -15,6 +26,7 @@ auth.initCookieToken()
 const {token} = useAuthStore()
 const notifications = useNotificationStore()
 const cart = useCartStore()
+const productsStore = useProductsStore()
 
 const mobileMenuOpen = ref(false)
 
@@ -48,6 +60,8 @@ const tempCode = useCookie('temporary_code', {
 
 onMounted(async () => {
   await nextTick()
+  await productsStore.getCategoryWithEightProducts();
+  await productsStore.getCatalog()
   if (auth.token) {
     await user.getProfile()
     await cart.getCart()
@@ -66,67 +80,20 @@ onMounted(async () => {
 
 <template>
   <header class="bg-white">
-    <nav class="mx-auto flex container px-4 md:px-0 items-center justify-between py-6" aria-label="Global">
-      <div class="flex lg:flex-1">
-        <NuxtLink :to="localePath('/')" class="-m-1.5 p-1.5">
-          <span class="sr-only">
-            Your Company
-          </span>
-          <img
-              class="h-5 w-auto"
-              src="@/assets/img/logos/main.png"
-              alt=""
-          />
-        </NuxtLink>
-      </div>
-      <div class="flex lg:hidden">
-        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                @click="mobileMenuOpen = true">
-          <span class="sr-only">Open main menu</span>
-          <Bars3Icon class="h-6 w-6" aria-hidden="true"/>
-        </button>
-      </div>
-      <client-only>
-        <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-          <NuxtLink
-              to="/products"
-              :class="{ 'text-mainColor' : route.fullPath.includes('/products') }"
-              class="text-sm font-semibold leading-6 text-gray-900">
-            Продукты
-          </NuxtLink>
-          <NuxtLink
-              to="/about"
-              :class="{ 'text-mainColor' : route.fullPath.includes('/about') }"
-              class="text-sm font-semibold leading-6 text-gray-900">
-            О компании
-          </NuxtLink>
-<!--          <NuxtLink-->
-<!--              to="/news"-->
-<!--              :class="{ 'text-mainColor' : route.fullPath.includes('/news') }"-->
-<!--              class="text-sm font-semibold leading-6 text-gray-900">-->
-<!--            Новости-->
-<!--          </NuxtLink>-->
-          <NuxtLink
-              to="/contacts"
-              :class="{ 'text-mainColor' : route.fullPath.includes('/contacts') }"
-              class="text-sm font-semibold leading-6 text-gray-900">
-            Контакты
-          </NuxtLink>
-        </PopoverGroup>
-      </client-only>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3 items-center">
-        <div v-if="cart.cartList">
-          <NuxtLink
-              class="relative"
-              :to="localePath('/cart')">
-            <div
-                v-if="cart.cartList.data.length > 0"
-                class="bg-mainColor text-white w-5 h-5 absolute right-0 top-0 translate-x-1/2 -translate-y-2/3 flex items-center justify-center rounded-full text-xs">
-              {{ cart.cartList.data.length }}
-            </div>
-            <ShoppingBagIcon class="w-5 h-5 cursor-pointer text-mainColor"/>
-          </NuxtLink>
+    <div class="container mx-auto px-4 md:px-0 pt-3 flex items-center justify-between">
+      <div class="flex flex-col md:flex-row gap-3 md:gap-5 items-start md:items-center">
+        <a
+            href="https://2gis.kz/almaty/firm/70000001083914324"
+            class="flex items-center gap-2 hover:text-mainColor transition-all">
+          <MapIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor"/>
+          <p class="text-xs md:text-sm">г. Алматы, Улица Садовникова, 99</p>
+        </a>
+        <div class="flex items-center gap-2">
+          <ClockIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor"/>
+          <p class="text-xs md:text-sm">Ежедневно с 9:00 - 18:00</p>
         </div>
+      </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3 items-center">
         <div
             v-if="user.userProfile === false"
             class="flex items-center gap-3 text-sm">
@@ -186,23 +153,23 @@ onMounted(async () => {
                     </div>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                      <NuxtLink
-                          to="profile"
-                          class="flex gap-2"
-                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                    <NuxtLink
+                        to="profile"
+                        class="flex gap-2"
+                        :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
 
-                        <UserIcon class="h-5 w-5"/>
-                        <p>Мой профиль</p>
-                      </NuxtLink>
+                      <UserIcon class="h-5 w-5"/>
+                      <p>Мой профиль</p>
+                    </NuxtLink>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                      <div
-                          @click="logoutUser"
-                          class="text-red-500 flex gap-2"
-                          :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
-                        <ArrowRightStartOnRectangleIcon class="h-5 w-5"/>
-                        <p>{{ $t('profile.logout') }}</p>
-                      </div>
+                    <div
+                        @click="logoutUser"
+                        class="text-red-500 flex gap-2"
+                        :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm']">
+                      <ArrowRightStartOnRectangleIcon class="h-5 w-5"/>
+                      <p>{{ $t('profile.logout') }}</p>
+                    </div>
                   </MenuItem>
                 </div>
               </MenuItems>
@@ -211,7 +178,118 @@ onMounted(async () => {
         </div>
         <div v-else class="spinner"></div>
       </div>
+    </div>
+    <nav class="mx-auto flex container px-4 md:px-0 items-center justify-between py-6" aria-label="Global">
+      <div class="flex lg:flex-1">
+        <NuxtLink :to="localePath('/')" class="-m-1.5 p-1.5">
+          <span class="sr-only">
+            Your Company
+          </span>
+          <img
+              class="h-7 md:h-10 w-auto"
+              src="@/assets/img/logos/main.png"
+              alt=""
+          />
+        </NuxtLink>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                @click="mobileMenuOpen = true">
+          <span class="sr-only">Open main menu</span>
+          <Bars3Icon class="h-6 w-6" aria-hidden="true"/>
+        </button>
+      </div>
+      <client-only>
+        <PopoverGroup class="hidden lg:flex lg:gap-x-12">
+          <NuxtLink
+              to="/delivery"
+              :class="{ 'text-mainColor' : route.fullPath.includes('/delivery') }"
+              class="text-sm font-semibold leading-6 text-gray-900">
+            Оплата и доставка
+          </NuxtLink>
+          <NuxtLink
+              to="/products"
+              :class="{ 'text-mainColor' : route.fullPath.includes('/products') }"
+              class="text-sm font-semibold leading-6 text-gray-900">
+            Продукты
+          </NuxtLink>
+          <NuxtLink
+              to="/about"
+              :class="{ 'text-mainColor' : route.fullPath.includes('/about') }"
+              class="text-sm font-semibold leading-6 text-gray-900">
+            О компании
+          </NuxtLink>
+          <!--          <NuxtLink-->
+          <!--              to="/news"-->
+          <!--              :class="{ 'text-mainColor' : route.fullPath.includes('/news') }"-->
+          <!--              class="text-sm font-semibold leading-6 text-gray-900">-->
+          <!--            Новости-->
+          <!--          </NuxtLink>-->
+          <NuxtLink
+              to="/contacts"
+              :class="{ 'text-mainColor' : route.fullPath.includes('/contacts') }"
+              class="text-sm font-semibold leading-6 text-gray-900">
+            Контакты
+          </NuxtLink>
+        </PopoverGroup>
+      </client-only>
     </nav>
+    <div class="container mx-auto px-4 md:px-0">
+      <div class="flex mb-2 pb-3 w-full gap-3">
+        <client-only>
+          <Menu v-if="productsStore.catalogList" as="div" class="relative inline-block text-left">
+            <div>
+              <MenuButton
+                  class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-xs md:text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 items-center">
+                <Bars3Icon class="w-4 md:w-5 h-4 md:h-5" />
+                <p>Каталог</p>
+                <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
+              </MenuButton>
+            </div>
+
+            <transition enter-active-class="transition ease-out duration-100"
+                        enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                        leave-active-class="transition ease-in duration-75"
+                        leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+              <MenuItems
+                  class="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div class="py-1">
+                  <MenuItem
+                      v-for="(item, index) of productsStore.catalogList.data"
+                      :key="index"
+                      v-slot="{ active }"
+                  >
+                    <NuxtLink
+                        :to="{ path: `/products`, query: { category: item.id } }"
+                        :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+                      {{ item.name }}
+                    </NuxtLink>
+                  </MenuItem>
+                </div>
+              </MenuItems>
+            </transition>
+          </Menu>
+        </client-only>
+        <SelectSearch class="w-full"/>
+        <div v-if="cart.cartList">
+          <NuxtLink
+              :to="localePath('/cart')"
+              class="flex items-center gap-2 border border-gray-300 hover:text-white transition-all hover:bg-mainColor h-full px-2 rounded">
+            <div class="relative">
+              <div
+                  v-if="cart.cartList.data.length > 0"
+                  class="bg-mainColor text-white w-5 h-5 absolute right-0 top-0 translate-x-1/2 -translate-y-2/3 flex items-center justify-center rounded-full text-xs">
+                {{ cart.cartList.data.length }}
+              </div>
+              <ShoppingBagIcon class="w-5 h-5 cursor-pointer"/>
+            </div>
+            <p class="hidden md:block text-sm">
+              Корзина
+            </p>
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
       <div class="fixed inset-0 z-10"/>
       <DialogPanel
@@ -235,6 +313,12 @@ onMounted(async () => {
             <div class="space-y-2 py-6">
               <NuxtLink
                   @click="mobileMenuOpen = false"
+                  to="/delivery"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                Оплата и доставка
+              </NuxtLink>
+              <NuxtLink
+                  @click="mobileMenuOpen = false"
                   to="/products"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                 Продукты
@@ -245,12 +329,12 @@ onMounted(async () => {
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                 О компании
               </NuxtLink>
-<!--              <NuxtLink-->
-<!--                  @click="mobileMenuOpen = false"-->
-<!--                  to="/news"-->
-<!--                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">-->
-<!--                Новости-->
-<!--              </NuxtLink>-->
+              <!--              <NuxtLink-->
+              <!--                  @click="mobileMenuOpen = false"-->
+              <!--                  to="/news"-->
+              <!--                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">-->
+              <!--                Новости-->
+              <!--              </NuxtLink>-->
               <NuxtLink
                   @click="mobileMenuOpen = false"
                   to="/contacts"

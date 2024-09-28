@@ -3,7 +3,7 @@
 
 <template>
   <div class="bg-white">
-    <div class="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+    <div class="mx-auto max-w-7xl py-24 sm:px-6 sm:py-14 lg:px-8">
       <div
           class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
         <svg viewBox="0 0 1024 1024"
