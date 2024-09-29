@@ -67,7 +67,7 @@ const editQuantity = async (id, quantity) => {
     return
   }
   await cart.editItem(id, editForm.value)
-  if(token.value) {
+  if (token.value) {
     await cart.getCart()
   } else {
     await cart.getTemporaryCart()
@@ -99,7 +99,7 @@ const generateRandomString = () => {
 };
 
 const makeCheckout = async () => {
-  if(!token.value) {
+  if (!token.value) {
     form.value.temporary_code = tempCode.value.toString()
   }
 
@@ -120,10 +120,10 @@ const makeCheckout = async () => {
 
     notifications.showNotification("success", "Успешно", "Вы успешно оформили заказ");
     await nextTick()
-    if(token.value) {
+    if (token.value) {
       await user.getProfile()
     }
-    if(token.value) {
+    if (token.value) {
       await cart.getCart()
     } else {
       await cart.getTemporaryCart()
@@ -139,7 +139,7 @@ const makeCheckout = async () => {
 onMounted(async () => {
   await nextTick()
   await addresses.getCities()
-  if(token.value) {
+  if (token.value) {
     await user.getProfile()
     form.value.phone = user.userProfile.phone
     form.value.name = user.userProfile.name
@@ -177,22 +177,22 @@ onMounted(async () => {
               <div class="flex flex-col gap-4">
                 <div>
                   <input
-                      type="text"
-                      :placeholder="$t('checkout.first.name')"
                       v-model="form.name"
                       :disabled="isDisabled"
-                      class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3">
+                      :placeholder="$t('checkout.first.name')"
+                      class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3"
+                      type="text">
                 </div>
                 <div>
                   <input
-                      type="text"
-                      :placeholder="$t('checkout.first.phone')"
                       v-model="form.phone"
-                      :disabled="isDisabledPhone"
                       v-maska
+                      :disabled="isDisabledPhone"
+                      :placeholder="$t('checkout.first.phone')"
+                      class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3"
                       data-maska="+7 (###) ###-##-##"
                       placeholder="+7 (___) ___-__-__"
-                      class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3">
+                      type="text">
                 </div>
               </div>
             </div>
@@ -213,18 +213,18 @@ onMounted(async () => {
                   </p>
                   <div>
                     <label
-                        for="address"
-                        class="block text-sm font-medium text-gray-700">
+                        class="block text-sm font-medium text-gray-700"
+                        for="address">
                       Способ доставки
                     </label>
                     <input
-                        :class="{ 'border-red-500' : v$.delivery_type.$error }"
-                        v-model="form.delivery_type"
-                        placeholder="Укажите способ"
-                        type="text"
-                        name="address"
                         id="address"
-                        class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white ">
+                        v-model="form.delivery_type"
+                        :class="{ 'border-red-500' : v$.delivery_type.$error }"
+                        class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
+                        name="address"
+                        placeholder="Укажите способ"
+                        type="text">
                   </div>
                   <div>
                     <YandexMap
@@ -236,17 +236,17 @@ onMounted(async () => {
                             v-if="addresses.citiesList"
                             class="mb-4">
                           <label
-                              for="city"
-                              class="block text-sm font-medium text-gray-700">
+                              class="block text-sm font-medium text-gray-700"
+                              for="city">
                             {{ $t('addresses.create.city') }}
                           </label>
                           <select
+                              id=""
                               v-model="form.city_id"
                               :class="{ 'border-red-500' : v$.city_id.$error }"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
-                              name=""
                               :disabled="closeCity"
-                              id="">
+                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
+                              name="">
                             <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
                             <option
                                 v-for="(city, index) of addresses.citiesList"
@@ -258,60 +258,60 @@ onMounted(async () => {
                         </div>
                         <div class="mb-4">
                           <label
-                              for="address"
-                              class="block text-sm font-medium text-gray-700">
+                              class="block text-sm font-medium text-gray-700"
+                              for="address">
                             {{ $t('addresses.create.address') }}
                           </label>
                           <input
-                              :class="{ 'border-red-500' : v$.delivery_address.$error }"
-                              v-model="form.delivery_address"
-                              :placeholder="$t('addresses.create.address_placeholder')"
-                              type="text"
-                              name="address"
                               id="address"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white ">
+                              v-model="form.delivery_address"
+                              :class="{ 'border-red-500' : v$.delivery_address.$error }"
+                              :placeholder="$t('addresses.create.address_placeholder')"
+                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
+                              name="address"
+                              type="text">
                         </div>
                         <div class="mb-4">
                           <label
-                              for="address"
-                              class="block text-sm font-medium text-gray-700">
+                              class="block text-sm font-medium text-gray-700"
+                              for="address">
                             {{ $t('addresses.create.entrance') }} <span class="text-gray-400">(необязательно)</span>
                           </label>
                           <input
+                              id="address"
                               v-model="formAddress.entrance"
                               :placeholder="$t('addresses.create.entrance_placeholder')"
-                              type="text"
+                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
                               name="address"
-                              id="address"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white ">
+                              type="text">
                         </div>
                         <div class="mb-4">
                           <label
-                              for="address"
-                              class="block text-sm font-medium text-gray-700">
+                              class="block text-sm font-medium text-gray-700"
+                              for="address">
                             {{ $t('addresses.create.floor') }} <span class="text-gray-400">(необязательно)</span>
                           </label>
                           <input
+                              id="address"
                               v-model="formAddress.floor"
                               :placeholder="$t('addresses.create.floor_placeholder')"
-                              type="text"
+                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
                               name="address"
-                              id="address"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white ">
+                              type="text">
                         </div>
                         <div class="mb-4">
                           <label
-                              for="address"
-                              class="block text-sm font-medium text-gray-700">
+                              class="block text-sm font-medium text-gray-700"
+                              for="address">
                             {{ $t('addresses.create.apartment') }} <span class="text-gray-400">(необязательно)</span>
                           </label>
                           <input
+                              id="address"
                               v-model="formAddress.float"
                               :placeholder="$t('addresses.create.apartment_placeholder')"
-                              type="text"
+                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
                               name="address"
-                              id="address"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white ">
+                              type="text">
                         </div>
                       </div>
                     </div>
@@ -331,9 +331,9 @@ onMounted(async () => {
               </div>
               <div class="flex flex-col md:flex-row gap-5 mb-6">
                 <div
-                    @click="deliveryType = 1"
                     :class="{ 'bg-[#F0DFDF]' : deliveryType === 1 }"
-                    class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2">
+                    class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"
+                    @click="deliveryType = 1">
                   <CreditCardIcon class="w-5 h-5"/>
                   <p>Оплата через менеджера</p>
                 </div>
@@ -342,8 +342,8 @@ onMounted(async () => {
                 {{ $t('checkout.third.to_pay') }}: {{ cartPrice }} ₸
               </p>
               <p
-                  @click="makeCheckout"
-                  class="w-full md:w-1/3 bg-mainColor cursor-pointer text-white py-3 rounded-lg text-lg font-semibold text-center">
+                  class="w-full md:w-1/3 bg-mainColor cursor-pointer text-white py-3 rounded-lg text-lg font-semibold text-center"
+                  @click="makeCheckout">
                 {{ $t('cart.checkout.checkout_button') }}
               </p>
             </div>
@@ -366,13 +366,13 @@ onMounted(async () => {
                       class="min-w-full divide-y divide-gray-300 text-xs">
                     <thead class="bg-[#FAFAFA]">
                     <tr>
-                      <th scope="col" class="py-3.5 pr-3 text-left  font-semibold text-gray-900">
+                      <th class="py-3.5 pr-3 text-left  font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.product') }}
                       </th>
-                      <th scope="col" class="px-3 py-3.5 text-left  font-semibold text-gray-900">
+                      <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.quantity') }}
                       </th>
-                      <th scope="col" class="px-3 py-3.5 text-left  font-semibold text-gray-900">
+                      <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.total') }}
                       </th>
                     </tr>
@@ -387,16 +387,16 @@ onMounted(async () => {
                       <td class="whitespace-nowrap px-3 py-5">
                         <div class="text-mainColor flex gap-3 items-center">
                           <button
-                              @click="editQuantity(item.id, item.quantity - 1)"
-                              class="border border-[#F0DFDF] rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#F0DFDF] transition-all">
+                              class="border border-[#F0DFDF] rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                              @click="editQuantity(item.id, item.quantity - 1)">
                             <MinusIcon class="w-5 h-5"/>
                           </button>
                           <p class=" text-xs">
                             {{ item.quantity }}
                           </p>
                           <button
-                              @click="editQuantity(item.id, item.quantity + 1)"
-                              class="border border-[#F0DFDF] rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#F0DFDF] transition-all">
+                              class="border border-[#F0DFDF] rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                              @click="editQuantity(item.id, item.quantity + 1)">
                             <PlusIcon class="w-5 h-5"/>
                           </button>
                         </div>
@@ -418,8 +418,8 @@ onMounted(async () => {
                     :key="index">
                   <div class="flex justify-between mb-3 border p-2 rounded-lg gap-3">
                     <div
-                        class="skeleton w-10 h-4"
                         :class="{ 'bg-[#989898]' : index === 0 }"
+                        class="skeleton w-10 h-4"
                     ></div>
                     <div
                         :class="{ 'bg-[#989898]' : index === 0 }"

@@ -8,8 +8,8 @@
         <div class="flex">
           <input
               v-model="searchQuery"
-              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
               :placeholder="$t('addresses.create.address_placeholder')"
+              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
               type="text"
               @input="updateSuggestions"
           />

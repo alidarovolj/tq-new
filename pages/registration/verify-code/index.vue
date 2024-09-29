@@ -77,64 +77,64 @@ const registerUser = async () => {
             <h2 class="text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Подтвердите номер телефона
             </h2>
-<!--            <p class="mt-2 text-sm leading-6 text-gray-500">-->
-<!--              {{ $t('forms.registration.already_have') }}-->
-<!--              {{ ' ' }}-->
-<!--              <NuxtLink-->
-<!--                  :to="localePath('/login')"-->
-<!--                  class="font-semibold text-mainColor">-->
-<!--                {{ $t('forms.registration.login') }}-->
-<!--              </NuxtLink>-->
-<!--            </p>-->
+            <!--            <p class="mt-2 text-sm leading-6 text-gray-500">-->
+            <!--              {{ $t('forms.registration.already_have') }}-->
+            <!--              {{ ' ' }}-->
+            <!--              <NuxtLink-->
+            <!--                  :to="localePath('/login')"-->
+            <!--                  class="font-semibold text-mainColor">-->
+            <!--                {{ $t('forms.registration.login') }}-->
+            <!--              </NuxtLink>-->
+            <!--            </p>-->
           </div>
 
           <div class="mt-10">
             <div>
               <form
-                  @submit.prevent="registerUser"
                   action=""
-                  class="space-y-6">
+                  class="space-y-6"
+                  @submit.prevent="registerUser">
 
                 <div
                     :class="{ '!border !border-red-500' : v$.phone.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="phone" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="phone">
                     {{ $t('forms.phone_number.title') }}
                   </label>
                   <input
-                      v-model="form.phone"
                       id="phone"
-                      name="phone"
-                      type="text"
-                      autocomplete="phone"
+                      v-model="form.phone"
                       v-maska
-                      data-maska="+7 (###) ###-##-##"
-                      placeholder="+7 (___) ___-__-__"
-                      disabled
+                      autocomplete="phone"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      data-maska="+7 (###) ###-##-##"
+                      disabled
+                      name="phone"
+                      placeholder="+7 (___) ___-__-__"
+                      type="text"
                   />
                 </div>
 
                 <div
                     :class="{ '!border !border-red-500' : v$.code.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="name" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="name">
                     Код
                   </label>
                   <input
-                      v-model="form.code"
                       id="name"
-                      name="name"
-                      type="text"
+                      v-model="form.code"
                       autocomplete="name"
-                      placeholder="Введите код"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      name="name"
+                      placeholder="Введите код"
+                      type="text"
                   />
                 </div>
 
                 <div>
-                  <button type="submit"
-                          class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor">
+                  <button class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                          type="submit">
                     Подтвердить номер
                   </button>
                 </div>
@@ -157,8 +157,8 @@ const registerUser = async () => {
             >
               <img
                   :src="item"
-                  class="w-full h-full object-cover rounded-2xl"
                   alt=""
+                  class="w-full h-full object-cover rounded-2xl"
               />
             </my-carousel-slide>
             <template #addons>

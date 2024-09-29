@@ -68,19 +68,19 @@ const sendForm = async () => {
           <div
               class="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2">
             <svg
-                class="absolute inset-0 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-                aria-hidden="true">
+                aria-hidden="true"
+                class="absolute inset-0 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]">
               <defs>
-                <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" width="200" height="200" x="100%" y="-1"
-                         patternUnits="userSpaceOnUse">
+                <pattern id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527" height="200" patternUnits="userSpaceOnUse" width="200" x="100%"
+                         y="-1">
                   <path d="M130 200V.5M.5 .5H200" fill="none"/>
                 </pattern>
               </defs>
-              <rect width="100%" height="100%" stroke-width="0" fill="white"/>
-              <svg x="100%" y="-1" class="overflow-visible fill-gray-50">
+              <rect fill="white" height="100%" stroke-width="0" width="100%"/>
+              <svg class="overflow-visible fill-gray-50" x="100%" y="-1">
                 <path d="M-470.5 0h201v201h-201Z" stroke-width="0"/>
               </svg>
-              <rect width="100%" height="100%" stroke-width="0" fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"/>
+              <rect fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)" height="100%" stroke-width="0" width="100%"/>
             </svg>
           </div>
           <h2 class="text-3xl font-bold tracking-tight text-gray-900">Свяжитесь с нами</h2>
@@ -92,21 +92,21 @@ const sendForm = async () => {
             <div class="flex gap-x-4">
               <dt class="flex-none">
                 <span class="sr-only">Адрес</span>
-                <BuildingOffice2Icon class="h-7 w-6 text-gray-400" aria-hidden="true"/>
+                <BuildingOffice2Icon aria-hidden="true" class="h-7 w-6 text-gray-400"/>
               </dt>
               <dd>Алматы, Казахстан, Садовников 99</dd>
             </div>
             <div class="flex gap-x-4">
               <dt class="flex-none">
                 <span class="sr-only">Телефон</span>
-                <PhoneIcon class="h-7 w-6 text-gray-400" aria-hidden="true"/>
+                <PhoneIcon aria-hidden="true" class="h-7 w-6 text-gray-400"/>
               </dt>
               <dd><a class="hover:text-gray-900" href="tel:+77714142525">+7 (771) 414-25-25</a></dd>
             </div>
             <div class="flex gap-x-4">
               <dt class="flex-none">
                 <span class="sr-only">Email</span>
-                <EnvelopeIcon class="h-7 w-6 text-gray-400" aria-hidden="true"/>
+                <EnvelopeIcon aria-hidden="true" class="h-7 w-6 text-gray-400"/>
               </dt>
               <dd><a class="hover:text-gray-900" href="mailto:support@tq.kz">support@tq.kz</a></dd>
             </div>
@@ -114,90 +114,90 @@ const sendForm = async () => {
         </div>
       </div>
       <form
-          @submit.prevent="sendForm"
-          class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+          class="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
+          @submit.prevent="sendForm">
         <div class="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div>
-              <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">
+              <label class="block text-sm font-semibold leading-6 text-gray-900" for="first-name">
                 Имя
               </label>
               <div class="mt-2.5">
                 <input
+                    id="first-name"
                     v-model="form.name"
                     :class="{ '!border !border-red-500' : v$.name.$error }"
-                    type="text"
-                    name="first-name"
-                    id="first-name"
                     autocomplete="given-name"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
+                    name="first-name"
                     placeholder="Иван Иванов"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                    type="text"/>
               </div>
             </div>
             <div class="sm:col-span-2">
-              <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+              <label class="block text-sm font-semibold leading-6 text-gray-900" for="email">Email</label>
               <div class="mt-2.5">
                 <input
+                    id="email"
                     v-model="form.email"
                     :class="{ '!border !border-red-500' : v$.email.$error }"
-                    type="email"
-                    name="email"
-                    id="email"
                     autocomplete="email"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
+                    name="email"
                     placeholder="test@test.com"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                    type="email"/>
               </div>
             </div>
             <div class="sm:col-span-2">
-              <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900">
+              <label class="block text-sm font-semibold leading-6 text-gray-900" for="phone-number">
                 Номер телефона
               </label>
               <div class="mt-2.5">
                 <input
-                    v-model="form.phone"
-                    :class="{ '!border !border-red-500' : v$.phone.$error }"
-                    type="tel"
-                    name="phone-number"
                     id="phone-number"
-                    autocomplete="tel"
+                    v-model="form.phone"
                     v-maska
+                    :class="{ '!border !border-red-500' : v$.phone.$error }"
+                    autocomplete="tel"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
                     data-maska="+7 (###) ###-##-##"
+                    name="phone-number"
                     placeholder="+7 (___) ___-__-__"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                    type="tel"/>
               </div>
             </div>
             <div class="sm:col-span-2">
-              <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">
+              <label class="block text-sm font-semibold leading-6 text-gray-900" for="message">
                 Сообщение
               </label>
               <div class="mt-2.5">
                 <textarea
+                    id="message"
                     v-model="form.note"
                     :class="{ '!border !border-red-500' : v$.note.$error }"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
                     name="message"
-                    id="message"
-                    rows="4"
                     placeholder="Ваше сообщение..."
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                    rows="4"/>
               </div>
             </div>
           </div>
           <div class="mt-8 flex flex-col gap-5">
             <div class="flex items-center">
               <input
+                  id="agreement"
                   v-model="form.agreement"
                   :class="{ '!border !border-red-500' : v$.agreement.$error }"
-                  type="checkbox"
-                  id="agreement"
+                  aria-describedby="agreement-description"
                   class="rounded border-gray-300 text-mainColor focus:ring-mainColor"
-                  aria-describedby="agreement-description"/>
-              <label for="agreement" class="ml-2 block text-sm text-gray-900">
+                  type="checkbox"/>
+              <label class="ml-2 block text-sm text-gray-900" for="agreement">
                 Подавая заявку, вы принимаете условия офертового соглашения и соглашаетесь на обработку ваших
                 персональных данных в соответствии с политикой конфиденциальности
               </label>
             </div>
-            <button type="submit"
-                    class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor">
+            <button class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                    type="submit">
               Отправить сообщение
             </button>
           </div>

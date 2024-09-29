@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {vMaska} from "maska/vue"
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 import {useNotificationStore} from "~/stores/notifications";
@@ -70,98 +70,98 @@ const sendForm = async () => {
       </div>
       <div class="flex flex-col md:flex-row gap-10">
         <form
-            @submit.prevent="sendForm"
-            class="w-full lg:flex-auto">
+            class="w-full lg:flex-auto"
+            @submit.prevent="sendForm">
           <div class="mx-auto">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
-                <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">
+                <label class="block text-sm font-semibold leading-6 text-gray-900" for="first-name">
                   Имя
                 </label>
                 <div class="mt-2.5">
                   <input
+                      id="first-name"
                       v-model="form.name"
                       :class="{ '!border !border-red-500' : v$.name.$error }"
-                      type="text"
-                      name="first-name"
-                      id="first-name"
                       autocomplete="given-name"
+                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
+                      name="first-name"
                       placeholder="Иван Иванов"
-                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                      type="text"/>
                 </div>
               </div>
               <div class="sm:col-span-2">
-                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                <label class="block text-sm font-semibold leading-6 text-gray-900" for="email">Email</label>
                 <div class="mt-2.5">
                   <input
+                      id="email"
                       v-model="form.email"
                       :class="{ '!border !border-red-500' : v$.email.$error }"
-                      type="email"
-                      name="email"
-                      id="email"
                       autocomplete="email"
+                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
+                      name="email"
                       placeholder="test@test.com"
-                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                      type="email"/>
                 </div>
               </div>
               <div class="sm:col-span-2">
-                <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900">
+                <label class="block text-sm font-semibold leading-6 text-gray-900" for="phone-number">
                   Номер телефона
                 </label>
                 <div class="mt-2.5">
                   <input
-                      v-model="form.phone"
-                      :class="{ '!border !border-red-500' : v$.phone.$error }"
-                      type="tel"
-                      name="phone-number"
                       id="phone-number"
-                      autocomplete="tel"
+                      v-model="form.phone"
                       v-maska
+                      :class="{ '!border !border-red-500' : v$.phone.$error }"
+                      autocomplete="tel"
+                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
                       data-maska="+7 (###) ###-##-##"
+                      name="phone-number"
                       placeholder="+7 (___) ___-__-__"
-                      class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                      type="tel"/>
                 </div>
               </div>
               <div class="sm:col-span-2">
-                <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">
+                <label class="block text-sm font-semibold leading-6 text-gray-900" for="message">
                   Сообщение
                 </label>
                 <div class="mt-2.5">
                 <textarea
+                    id="message"
                     v-model="form.note"
                     :class="{ '!border !border-red-500' : v$.note.$error }"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"
                     name="message"
-                    id="message"
-                    rows="4"
                     placeholder="Ваше сообщение..."
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-mainColor sm:text-sm sm:leading-6"/>
+                    rows="4"/>
                 </div>
               </div>
             </div>
             <div class="mt-8 flex flex-col gap-5">
               <div class="flex items-center">
                 <input
+                    id="agreement"
                     v-model="form.agreement"
                     :class="{ '!border !border-red-500' : v$.agreement.$error }"
-                    type="checkbox"
-                    id="agreement"
+                    aria-describedby="agreement-description"
                     class="rounded border-gray-300 text-mainColor focus:ring-mainColor"
-                    aria-describedby="agreement-description"/>
-                <label for="agreement" class="ml-2 block text-sm text-gray-900">
+                    type="checkbox"/>
+                <label class="ml-2 block text-sm text-gray-900" for="agreement">
                   Подавая заявку, вы принимаете условия офертового соглашения и соглашаетесь на обработку ваших
                   персональных данных в соответствии с политикой конфиденциальности
                 </label>
               </div>
-              <button type="submit"
-                      class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor">
+              <button class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                      type="submit">
                 Отправить сообщение
               </button>
             </div>
           </div>
         </form>
         <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3A4c6d3f0416cfdbf45c45ea2f3603b94ebf8147db2aaac311ea6d6bba015a23b9&amp;source=constructor"
-            width="100%" height="538" frameborder="0"></iframe>
+            frameborder="0"
+            height="538" src="https://yandex.ru/map-widget/v1/?um=constructor%3A4c6d3f0416cfdbf45c45ea2f3603b94ebf8147db2aaac311ea6d6bba015a23b9&amp;source=constructor" width="100%"></iframe>
       </div>
       <div
           class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4">

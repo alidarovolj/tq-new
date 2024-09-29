@@ -65,23 +65,23 @@ const team = [
       <!-- Hero section -->
       <div class="relative isolate -z-10">
         <svg
-            class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
-            aria-hidden="true">
+            aria-hidden="true"
+            class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]">
           <defs>
-            <pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" width="200" height="200" x="50%" y="-1"
-                     patternUnits="userSpaceOnUse">
+            <pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" height="200" patternUnits="userSpaceOnUse" width="200" x="50%"
+                     y="-1">
               <path d="M.5 200V.5H200" fill="none"/>
             </pattern>
           </defs>
-          <svg x="50%" y="-1" class="overflow-visible fill-gray-50">
+          <svg class="overflow-visible fill-gray-50" x="50%" y="-1">
             <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
                   stroke-width="0"/>
           </svg>
-          <rect width="100%" height="100%" stroke-width="0" fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)"/>
+          <rect fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)" height="100%" stroke-width="0" width="100%"/>
         </svg>
         <div
-            class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
-            aria-hidden="true">
+            aria-hidden="true"
+            class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48">
           <div class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
                style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"/>
         </div>
@@ -104,36 +104,36 @@ const team = [
                     class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
                   <div class="relative">
                     <img
-                        src="@/assets/img/about/1.jpeg"
-                        alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"/>
+                        alt=""
+                        class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg" src="@/assets/img/about/1.jpeg"/>
                     <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"/>
                   </div>
                 </div>
                 <div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
                   <div class="relative">
                     <img
-                        src="@/assets/img/about/2.jpg"
-                        alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"/>
+                        alt=""
+                        class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg" src="@/assets/img/about/2.jpg"/>
                     <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"/>
                   </div>
                   <div class="relative">
                     <img
-                        src="@/assets/img/about/4.jpg"
-                        alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"/>
+                        alt=""
+                        class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg" src="@/assets/img/about/4.jpg"/>
                     <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"/>
                   </div>
                 </div>
                 <div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
                   <div class="relative">
                     <img
-                        src="@/assets/img/about/3.jpg"
-                        alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover object-left shadow-lg"/>
+                        alt=""
+                        class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover object-left shadow-lg" src="@/assets/img/about/3.jpg"/>
                     <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"/>
                   </div>
                   <div class="relative">
                     <img
-                        src="@/assets/img/about/5.jpg"
-                        alt="" class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"/>
+                        alt=""
+                        class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg" src="@/assets/img/about/5.jpg"/>
                     <div class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"/>
                   </div>
                 </div>
@@ -159,7 +159,8 @@ const team = [
               <div class="mt-10 max-w-xl text-base leading-7 text-gray-700">
                 <p>
                   Мы работаем только с проверенными производителями, чтобы предоставить клиентам доступ к самым
-                  надежным и современным автомобильным аксессуарам. Все товары проходят строгий контроль качества, чтобы вы
+                  надежным и современным автомобильным аксессуарам. Все товары проходят строгий контроль качества, чтобы
+                  вы
                   могли быть уверены в их надежности и долговечности.
                 </p>
                 <p class="mt-10">
@@ -185,8 +186,8 @@ const team = [
       <!-- Image section -->
       <div class="mt-32 sm:mt-40 xl:mx-auto xl:max-w-7xl xl:px-8">
         <img
-            src="@/assets/img/about/imageSection.jpg"
-            alt="" class="aspect-[5/2] w-full object-cover xl:rounded-3xl"/>
+            alt=""
+            class="aspect-[5/2] w-full object-cover xl:rounded-3xl" src="@/assets/img/about/imageSection.jpg"/>
       </div>
 
       <!-- Values section -->
@@ -211,17 +212,17 @@ const team = [
       <div class="relative isolate -z-10 mt-32 sm:mt-48">
         <div
             class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
-          <svg class="h-[40rem] w-[80rem] flex-none stroke-gray-200" aria-hidden="true">
+          <svg aria-hidden="true" class="h-[40rem] w-[80rem] flex-none stroke-gray-200">
             <defs>
-              <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" width="200" height="200" x="50%" y="50%"
-                       patternUnits="userSpaceOnUse" patternTransform="translate(-100 0)">
+              <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" height="200" patternTransform="translate(-100 0)" patternUnits="userSpaceOnUse" width="200"
+                       x="50%" y="50%">
                 <path d="M.5 200V.5H200" fill="none"/>
               </pattern>
             </defs>
-            <svg x="50%" y="50%" class="overflow-visible fill-gray-50">
+            <svg class="overflow-visible fill-gray-50" x="50%" y="50%">
               <path d="M-300 0h201v201h-201Z M300 200h201v201h-201Z" stroke-width="0"/>
             </svg>
-            <rect width="100%" height="100%" stroke-width="0" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)"/>
+            <rect fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)" height="100%" stroke-width="0" width="100%"/>
           </svg>
         </div>
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -231,39 +232,39 @@ const team = [
           <div
               class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
             <img
-                class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="@/assets/img/partners/1.png"
                 alt="Transistor"
-                width="158"
+                class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
                 height="48"
+                src="@/assets/img/partners/1.png"
+                width="158"
             />
             <img
-                class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="@/assets/img/partners/2.png"
                 alt="Reform"
-                width="158"
-                height="48"
-            />
-            <img
                 class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
-                src="@/assets/img/partners/3.png"
+                height="48"
+                src="@/assets/img/partners/2.png"
+                width="158"
+            />
+            <img
                 alt="Tuple"
-                width="158"
+                class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
                 height="48"
+                src="@/assets/img/partners/3.png"
+                width="158"
             />
             <img
-                class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
-                src="@/assets/img/partners/4.png"
                 alt="SavvyCal"
-                width="158"
+                class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
                 height="48"
+                src="@/assets/img/partners/4.png"
+                width="158"
             />
             <img
-                class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
-                src="@/assets/img/partners/5.png"
                 alt="Statamic"
-                width="158"
+                class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
                 height="48"
+                src="@/assets/img/partners/5.png"
+                width="158"
             />
           </div>
         </div>
@@ -278,10 +279,10 @@ const team = [
             подходящих дворников, автоламп и аксуссуаров, учитывая марку и модель вашего автомобиля.
           </p>
         </div>
-        <ul role="list"
-            class="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6">
+        <ul class="mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
+            role="list">
           <li v-for="person in team" :key="person.name">
-            <img class="mx-auto h-24 w-24 rounded-full" :src="person.imageUrl" alt=""/>
+            <img :src="person.imageUrl" alt="" class="mx-auto h-24 w-24 rounded-full"/>
             <h3 class="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">{{ person.name }}</h3>
             <p class="text-sm leading-6 text-gray-600">{{ person.role }}</p>
           </li>

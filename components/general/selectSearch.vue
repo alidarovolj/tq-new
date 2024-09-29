@@ -1,12 +1,12 @@
 <template>
   <div ref="dropdownWrapper" class="dropdown w-full relative">
     <input
-        type="text"
         v-model="query"
-        @focus="handleFocus"
-        @blur="handleBlur"
         class="w-full rounded-md border border-gray-300 h-full text-xs md:text-sm"
         placeholder="Поиск продукта..."
+        type="text"
+        @blur="handleBlur"
+        @focus="handleFocus"
     />
     <div
         v-if="isOpen && filteredResults.length"
@@ -19,7 +19,7 @@
             class="px-3 py-1"
             @mousedown.prevent="selectResult(result)"
         >
-        {{ result }}
+          {{ result }}
         </li>
       </ul>
     </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
 
 const isOpen = ref(false);
 const query = ref('');

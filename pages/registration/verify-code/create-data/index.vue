@@ -1,7 +1,7 @@
 <script setup>
 import {vMaska} from "maska/vue"
 import {useVuelidate} from "@vuelidate/core"
-import {email, required} from "@vuelidate/validators"
+import {required} from "@vuelidate/validators"
 import {useNotificationStore} from "~/stores/notifications.js";
 import img1 from "@/assets/img/auth/1.jpg";
 import img2 from "@/assets/img/auth/2.jpg";
@@ -106,60 +106,60 @@ onMounted(async () => {
           <div class="mt-10">
             <div>
               <form
-                  @submit.prevent="registerUser"
                   action=""
-                  class="space-y-6">
+                  class="space-y-6"
+                  @submit.prevent="registerUser">
 
                 <div
                     :class="{ '!border !border-red-500' : v$.name.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="name" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="name">
                     {{ $t('forms.name.title') }}
                   </label>
                   <input
-                      v-model="form.name"
                       id="name"
+                      v-model="form.name"
+                      :placeholder="$t('forms.name.placeholder')"
+                      autocomplete="name"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       name="name"
                       type="text"
-                      autocomplete="name"
-                      :placeholder="$t('forms.name.placeholder')"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
 
                 <div
                     :class="{ '!border !border-red-500' : v$.phone.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="phone" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="phone">
                     {{ $t('forms.phone_number.title') }}
                   </label>
                   <input
-                      v-model="form.phone"
                       id="phone"
-                      name="phone"
-                      type="text"
-                      autocomplete="phone"
-                      disabled
+                      v-model="form.phone"
                       v-maska
-                      data-maska="+7 (###) ###-##-##"
-                      placeholder="+7 (___) ___-__-__"
+                      autocomplete="phone"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      data-maska="+7 (###) ###-##-##"
+                      disabled
+                      name="phone"
+                      placeholder="+7 (___) ___-__-__"
+                      type="text"
                   />
                 </div>
 
                 <div
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="email" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="email">
                     {{ $t('forms.email.title') }} <span class="text-gray-400">(необязательно)</span>
                   </label>
                   <input
-                      v-model="form.email"
                       id="email"
+                      v-model="form.email"
+                      :placeholder="$t('forms.email.placeholder')"
+                      autocomplete="email"
+                      class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       name="email"
                       type="text"
-                      autocomplete="email"
-                      :placeholder="$t('forms.email.placeholder')"
-                      class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   />
                 </div>
 
@@ -168,16 +168,16 @@ onMounted(async () => {
                     :class="{ '!border !border-red-500' : v$.city_id.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                   <label
-                      for="city"
-                      class="block text-xs font-medium text-gray-900">
+                      class="block text-xs font-medium text-gray-900"
+                      for="city">
                     {{ $t('addresses.create.city') }}
                   </label>
                   <select
+                      id="city"
                       v-model="form.city_id"
                       :class="{ 'border-red-500' : v$.city_id.$error }"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      name="city"
-                      id="city">
+                      name="city">
                     <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
                     <option
                         v-for="(city, index) of addresses.citiesList"
@@ -191,17 +191,17 @@ onMounted(async () => {
                 <div
                     :class="{ '!border !border-red-500' : v$.password.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="password" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="password">
                     {{ $t('forms.password.title') }}
                   </label>
                   <input
-                      v-model="form.password"
                       id="password"
-                      name="password"
-                      type="password"
+                      v-model="form.password"
                       autocomplete="password"
-                      placeholder="********"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      name="password"
+                      placeholder="********"
+                      type="password"
                   />
                 </div>
 
@@ -222,9 +222,9 @@ onMounted(async () => {
 
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
-                    <input id="remember-me" name="remember-me" type="checkbox"
-                           class="h-4 w-4 rounded border-gray-300 text-mainColor focus:ring-mainColor"/>
-                    <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-700">
+                    <input id="remember-me" class="h-4 w-4 rounded border-gray-300 text-mainColor focus:ring-mainColor" name="remember-me"
+                           type="checkbox"/>
+                    <label class="ml-3 block text-sm leading-6 text-gray-700" for="remember-me">
                       {{ $t('forms.remember_me') }}
                     </label>
                   </div>
@@ -239,8 +239,8 @@ onMounted(async () => {
                 </div>
 
                 <div>
-                  <button type="submit"
-                          class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor">
+                  <button class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                          type="submit">
                     {{ $t('forms.registration.button') }}
                   </button>
                 </div>
@@ -263,8 +263,8 @@ onMounted(async () => {
             >
               <img
                   :src="item"
-                  class="w-full h-full object-cover rounded-2xl"
                   alt=""
+                  class="w-full h-full object-cover rounded-2xl"
               />
             </my-carousel-slide>
             <template #addons>

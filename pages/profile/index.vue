@@ -2,7 +2,7 @@
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 import {useOrdersStore} from "~/stores/orders.js";
 import {useUserStore} from "~/stores/user.js";
-import {CubeIcon, ChevronDownIcon, ChevronUpIcon, TrashIcon, PlusIcon, TruckIcon} from "@heroicons/vue/24/outline";
+import {ChevronDownIcon, ChevronUpIcon, CubeIcon, TrashIcon, TruckIcon} from "@heroicons/vue/24/outline";
 import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
 import {formatDate} from "~/utils/formatDate.js";
 
@@ -88,11 +88,11 @@ onMounted(async () => {
           </div>
           <div class="flex flex-col gap-5">
             <Disclosure
-                as="div"
                 v-for="(item, index) in orders.ordersList.data"
                 :key="index"
-                class="px-4 py-3 border border-[#F0DFDF] rounded-xl w-full"
-                v-slot="{ open }">
+                v-slot="{ open }"
+                as="div"
+                class="px-4 py-3 border border-[#F0DFDF] rounded-xl w-full">
               <dt class="w-full">
                 <DisclosureButton class="w-full">
                   <div class="flex w-full items-start justify-between text-left text-gray-900">
@@ -120,13 +120,13 @@ onMounted(async () => {
                       v-if="!open"
                       class="text-xs text-[#2157E2] flex items-center justify-center gap-2">
                     <p>{{ $t('orders.order.show') }}</p>
-                    <ChevronDownIcon class="w-5 h-5" />
+                    <ChevronDownIcon class="w-5 h-5"/>
                   </div>
                   <div
                       v-else
                       class="text-xs text-[#2157E2] flex items-center justify-center gap-2">
                     <p>{{ $t('orders.order.hide') }}</p>
-                    <ChevronUpIcon class="w-5 h-5" />
+                    <ChevronUpIcon class="w-5 h-5"/>
                   </div>
                 </DisclosureButton>
               </dt>
@@ -189,7 +189,7 @@ onMounted(async () => {
       <div class="bg-white p-6 rounded-2xl set_shadow">
         <div class="flex justify-between items-center mb-4">
           <div class="flex gap-3 items-center">
-            <TruckIcon class="text-mainColor w-8 h-8" />
+            <TruckIcon class="text-mainColor w-8 h-8"/>
             <p class="text-xl font-medium">{{ $t('profile.my_addresses') }}</p>
           </div>
           <NuxtLink

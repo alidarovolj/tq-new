@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { useNotificationStore } from "@/stores/notifications.js";
-import { useAuthStore } from "~/stores/auth.js";
-import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
+import {useNotificationStore} from "@/stores/notifications.js";
+import {useAuthStore} from "~/stores/auth.js";
+import {useRouter} from 'vue-router';
+import {storeToRefs} from 'pinia';
 import {useUserStore} from "~/stores/user.js";
 
 export async function api(url, method, options = {}, query = {}) {
     const auth = useAuthStore();
     auth.initCookieToken();
-    const { token } = storeToRefs(auth);
+    const {token} = storeToRefs(auth);
     const user = useUserStore()
     const router = useRouter();
     const notifications = useNotificationStore();

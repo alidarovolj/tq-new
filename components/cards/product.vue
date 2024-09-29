@@ -21,15 +21,15 @@ const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.dat
       <div class="relative h-72 w-full overflow-hidden rounded-lg">
         <img
             v-if="product.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-            :src="product.icon"
             :alt="product.name"
+            :src="product.icon"
             class="h-full w-full object-contain object-center px-5"
         />
         <img
             v-else
-            src="@/assets/img/logos/mainVert.png"
             :alt="product.name"
             class="h-full w-full object-contain object-center px-5"
+            src="@/assets/img/logos/mainVert.png"
         />
       </div>
       <div class="relative mt-4">

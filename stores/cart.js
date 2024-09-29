@@ -12,7 +12,7 @@ export const useCartStore = defineStore("cart", () => {
     const notifications = useNotificationStore()
     const auth = useAuthStore()
     auth.initCookieToken()
-    const { token } = storeToRefs(auth)
+    const {token} = storeToRefs(auth)
     const tempCode = useCookie('temporary_code', {
         sameSite: true,
         maxAge: 60 * 60 * 24,
@@ -41,7 +41,7 @@ export const useCartStore = defineStore("cart", () => {
         },
         async addItem(product) {
             let body = null
-            if(token.value) {
+            if (token.value) {
                 body = product
             } else {
                 body = product
@@ -53,7 +53,7 @@ export const useCartStore = defineStore("cart", () => {
                 }, route.query);
                 removedItem.value = response;
                 notifications.showNotification("success", "Успешно", "Продукт успешно добавлен");
-                if(token.value) {
+                if (token.value) {
                     await this.getCart()
                 } else {
                     await this.getTemporaryCart()

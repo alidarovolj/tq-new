@@ -33,13 +33,13 @@ onMounted(async () => {
     </p>
     <div class="flex justify-end gap-3 mt-6">
       <button
-          @click="modals.showModal('removeAddress', false)"
-          class="px-6 py-2 text-mainColor border border-mainColor rounded-lg">
+          class="px-6 py-2 text-mainColor border border-mainColor rounded-lg"
+          @click="modals.showModal('removeAddress', false)">
         Отмена
       </button>
       <button
-          @click="removeAddressLocal"
-          class="px-6 py-2 bg-red-500 text-white rounded-lg">
+          class="px-6 py-2 bg-red-500 text-white rounded-lg"
+          @click="removeAddressLocal">
         Удалить
       </button>
     </div>

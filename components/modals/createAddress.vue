@@ -70,16 +70,16 @@ onMounted(async () => {
             v-if="addresses.citiesList"
             class="mb-4">
           <label
-              for="city"
-              class="block text-sm font-medium text-gray-700">
+              class="block text-sm font-medium text-gray-700"
+              for="city">
             {{ $t('addresses.create.city') }}
           </label>
           <select
+              id=""
               v-model="form.city_id"
               :class="{ 'border-red-500' : v$.city_id.$error }"
               class="py-2 px-4 border rounded-md w-full bg-white"
-              name=""
-              id="">
+              name="">
             <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
             <option
                 v-for="(city, index) of addresses.citiesList"
@@ -91,65 +91,65 @@ onMounted(async () => {
         </div>
         <div class="mb-4">
           <label
-              for="address"
-              class="block text-sm font-medium text-gray-700">
+              class="block text-sm font-medium text-gray-700"
+              for="address">
             {{ $t('addresses.create.address') }}
           </label>
           <input
-              :class="{ 'border-red-500' : v$.address.$error }"
-              v-model="form.address"
-              :placeholder="$t('addresses.create.address_placeholder')"
-              type="text"
-              name="address"
               id="address"
-              class="py-2 px-4 border rounded-md w-full bg-white ">
+              v-model="form.address"
+              :class="{ 'border-red-500' : v$.address.$error }"
+              :placeholder="$t('addresses.create.address_placeholder')"
+              class="py-2 px-4 border rounded-md w-full bg-white "
+              name="address"
+              type="text">
         </div>
         <div class="mb-4">
           <label
-              for="address"
-              class="block text-sm font-medium text-gray-700">
+              class="block text-sm font-medium text-gray-700"
+              for="address">
             {{ $t('addresses.create.entrance') }}
           </label>
           <input
+              id="address"
               v-model="form.entrance"
               :placeholder="$t('addresses.create.entrance_placeholder')"
-              type="text"
+              class="py-2 px-4 border rounded-md w-full bg-white "
               name="address"
-              id="address"
-              class="py-2 px-4 border rounded-md w-full bg-white ">
+              type="text">
         </div>
         <div class="mb-4">
           <label
-              for="address"
-              class="block text-sm font-medium text-gray-700">
+              class="block text-sm font-medium text-gray-700"
+              for="address">
             {{ $t('addresses.create.floor') }}
           </label>
           <input
+              id="address"
               v-model="form.floor"
               :placeholder="$t('addresses.create.floor_placeholder')"
-              type="text"
+              class="py-2 px-4 border rounded-md w-full bg-white "
               name="address"
-              id="address"
-              class="py-2 px-4 border rounded-md w-full bg-white ">
+              type="text">
         </div>
         <div class="mb-4">
           <label
-              for="address"
-              class="block text-sm font-medium text-gray-700">
+              class="block text-sm font-medium text-gray-700"
+              for="address">
             {{ $t('addresses.create.apartment') }}
           </label>
           <input
+              id="address"
               v-model="form.float"
               :placeholder="$t('addresses.create.apartment_placeholder')"
-              type="text"
+              class="py-2 px-4 border rounded-md w-full bg-white "
               name="address"
-              id="address"
-              class="py-2 px-4 border rounded-md w-full bg-white ">
+              type="text">
         </div>
       </div>
       <button
-          @submit.prevent="createAddress"
-          class="w-full">
+          class="w-full"
+          @submit.prevent="createAddress">
         <span v-if="loading" class="spinner"></span>
         <p
             v-else

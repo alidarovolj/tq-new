@@ -24,21 +24,21 @@ onMounted(async () => {
       <div
           class="grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-5">
         <NuxtLink
-            :to="{ path: `/products`, query: { category: item.id } }"
             v-for="(item, index) of catalogList.data"
             :key="index"
+            :to="{ path: `/products`, query: { category: item.id } }"
             class="bg-white p-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-2xl">
           <img
               v-if="item.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-              :src="item.icon"
               :alt="item.name"
+              :src="item.icon"
               class="h-3/4 w-full object-contain object-center px-5"
           />
           <img
               v-else
-              src="@/assets/img/logos/mainVert.png"
               :alt="item.name"
               class="h-3/4 w-full object-contain object-center px-5"
+              src="@/assets/img/logos/mainVert.png"
           />
           <h3 class="text-center text-xl font-bold mt-5">{{ item.name }}</h3>
         </NuxtLink>

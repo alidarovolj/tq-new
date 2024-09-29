@@ -1,5 +1,5 @@
 <script setup>
-import {StarIcon, PlusIcon, MinusIcon} from '@heroicons/vue/20/solid'
+import {MinusIcon, PlusIcon, StarIcon} from '@heroicons/vue/20/solid'
 import {Tab, TabGroup, TabList, TabPanel, TabPanels} from '@headlessui/vue'
 import {useProductsStore} from "~/stores/products.js";
 import {computed} from "vue";
@@ -95,15 +95,15 @@ const faqs = [
           <div class="h-[400px] w-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100">
             <img
                 v-if="detailProduct.data.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-                :src="detailProduct.data.icon"
                 :alt="detailProduct.data.name"
+                :src="detailProduct.data.icon"
                 class="h-full w-auto object-contain object-center px-5"
             />
             <img
                 v-else
-                src="@/assets/img/logos/mainVert.png"
                 :alt="detailProduct.data.name"
                 class="h-full w-full object-contain object-center px-5"
+                src="@/assets/img/logos/mainVert.png"
             />
           </div>
         </div>
@@ -130,8 +130,8 @@ const faqs = [
 
           <div class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
             <button
-                type="button"
-                class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50">
+                class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50"
+                type="button">
               {{ detailProduct.data.price }}₸ / шт.
             </button>
           </div>
@@ -161,9 +161,9 @@ const faqs = [
                 </div>
               </div>
               <button
-                  @click="cart.addItem(addToCart)"
+                  class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50"
                   type="button"
-                  class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50">
+                  @click="cart.addItem(addToCart)">
                 Добавить в корзину
               </button>
             </div>
@@ -189,13 +189,13 @@ const faqs = [
           <TabGroup as="div">
             <div class="border-b border-gray-200">
               <TabList class="-mb-px flex space-x-8">
-                <Tab as="template" v-slot="{ selected }">
+                <Tab v-slot="{ selected }" as="template">
                   <button
                       :class="[selected ? 'border-mainColor text-mainColor' : 'border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800', 'whitespace-nowrap border-b-2 py-6 text-sm font-medium']">
                     FAQ
                   </button>
                 </Tab>
-                <Tab as="template" v-slot="{ selected }">
+                <Tab v-slot="{ selected }" as="template">
                   <button
                       :class="[selected ? 'border-mainColor text-mainColor' : 'border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800', 'whitespace-nowrap border-b-2 py-6 text-sm font-medium']">
                     Отзывы пользователей

@@ -18,7 +18,7 @@ const {cur_lang} = storeToRefs(language);
 const router = useRouter()
 const auth = useAuthStore()
 auth.initCookieToken()
-const { token } = storeToRefs(auth)
+const {token} = storeToRefs(auth)
 
 const links = computed(() => [
   {title: t('breadcrumbs.home'), link: localePath('/')},
@@ -37,7 +37,7 @@ const editQuantity = async (id, quantity) => {
     return
   }
   await cart.editItem(id, editForm.value)
-  if(token.value) {
+  if (token.value) {
     await cart.getCart()
   } else {
     await cart.getTemporaryCart()
@@ -47,7 +47,7 @@ const editQuantity = async (id, quantity) => {
 
 const removeLocal = async (id) => {
   await cart.removeItem(id)
-  if(token.value) {
+  if (token.value) {
     await cart.getCart()
   } else {
     await cart.getTemporaryCart()
@@ -56,7 +56,7 @@ const removeLocal = async (id) => {
 
 const removeCartLocal = async () => {
   await cart.removeCart()
-  if(token.value) {
+  if (token.value) {
     await cart.getCart()
   } else {
     await cart.getTemporaryCart()
@@ -65,7 +65,7 @@ const removeCartLocal = async () => {
 
 onMounted(async () => {
   await nextTick()
-  if(auth.token) {
+  if (auth.token) {
     await cart.getCart()
   } else {
     await cart.getTemporaryCart()
@@ -85,8 +85,8 @@ onMounted(async () => {
           <div v-if="cartList">
             <div
                 v-if="cartList.data.length > 0"
-                @click="removeCartLocal"
-                class="flex items-center text-mainColor gap-2">
+                class="flex items-center text-mainColor gap-2"
+                @click="removeCartLocal">
               <TrashIcon class="w-7 h-7"/>
               <p class="font-semibold">
                 {{ t('cart.clear') }}
@@ -105,19 +105,19 @@ onMounted(async () => {
                   class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-[#FAFAFA]">
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left  font-semibold text-gray-900">
+                  <th class="py-3.5 pl-4 pr-3 text-left  font-semibold text-gray-900" scope="col">
                     {{ t('cart.table.product') }}
                   </th>
-                  <th scope="col" class="px-3 py-3.5 text-left  font-semibold text-gray-900">
+                  <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
                     {{ t('cart.table.quantity') }}
                   </th>
-                  <th scope="col" class="px-3 py-3.5 text-left  font-semibold text-gray-900">
+                  <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
                     {{ t('cart.table.price') }}
                   </th>
-                  <th scope="col" class="px-3 py-3.5 text-left  font-semibold text-gray-900">
+                  <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
                     {{ t('cart.table.total') }}
                   </th>
-                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+                  <th class="relative py-3.5 pl-3 pr-4 sm:pr-0" scope="col">
                   </th>
                 </tr>
                 </thead>
@@ -132,24 +132,24 @@ onMounted(async () => {
                       </div>
                     </div>
                   </td>
-<!--                  <td class="whitespace-nowrap px-3 py-5">-->
-<!--                    <div class="text-gray-900">-->
-<!--                      {{ item.product_variant.value }}{{ $t('products.details.kg') }}-->
-<!--                    </div>-->
-<!--                  </td>-->
+                  <!--                  <td class="whitespace-nowrap px-3 py-5">-->
+                  <!--                    <div class="text-gray-900">-->
+                  <!--                      {{ item.product_variant.value }}{{ $t('products.details.kg') }}-->
+                  <!--                    </div>-->
+                  <!--                  </td>-->
                   <td class="whitespace-nowrap px-3 py-5  ">
                     <div class="text-mainColor flex gap-7">
                       <button
-                          @click="editQuantity(item.id, item.quantity - 1)"
-                          class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all">
+                          class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                          @click="editQuantity(item.id, item.quantity - 1)">
                         <MinusIcon class="w-5 h-5"/>
                       </button>
                       <p class=" text-xl">
                         {{ item.quantity }}
                       </p>
                       <button
-                          @click="editQuantity(item.id, item.quantity + 1)"
-                          class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all">
+                          class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                          @click="editQuantity(item.id, item.quantity + 1)">
                         <PlusIcon class="w-5 h-5"/>
                       </button>
                     </div>
@@ -164,8 +164,8 @@ onMounted(async () => {
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 font-semibold ">
                     <TrashIcon
-                        @click="removeLocal(item.id)"
                         class="w-6 h-6 text-red-500 cursor-pointer"
+                        @click="removeLocal(item.id)"
                     />
                   </td>
                 </tr>
@@ -182,8 +182,8 @@ onMounted(async () => {
                 :key="index">
               <div class="flex justify-between mb-3 border p-2 rounded-lg gap-3">
                 <div
-                    class="skeleton w-10 h-4"
                     :class="{ 'bg-[#989898]' : index === 0 }"
+                    class="skeleton w-10 h-4"
                 ></div>
                 <div
                     :class="{ 'bg-[#989898]' : index === 0 }"
@@ -221,9 +221,9 @@ onMounted(async () => {
                 </p>
                 <div class="flex flex-col md:flex-row justify-between gap-5 mb-10 md:mb-0">
                   <input
-                      type="text"
                       :placeholder="$t('cart.checkout.coupon_placeholder')"
-                      class="w-full px-4 border-b border-[#F0DFDF] bg-[#FAFAFA]">
+                      class="w-full px-4 border-b border-[#F0DFDF] bg-[#FAFAFA]"
+                      type="text">
                   <button
                       class="w-full border border-mainColor text-mainColor px-6 py-2 rounded-lg text-lg font-semibold">
                     {{ $t('cart.checkout.coupon_button') }}

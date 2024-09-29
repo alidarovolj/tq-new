@@ -1,5 +1,5 @@
 <script setup>
-import { CheckIcon } from "@heroicons/vue/24/outline";
+import {CheckIcon} from "@heroicons/vue/24/outline";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 
 const localePath = useLocalePath();

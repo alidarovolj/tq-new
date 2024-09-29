@@ -4,9 +4,7 @@ import {
   ArrowLeftEndOnRectangleIcon,
   ChevronRightIcon,
   GlobeAmericasIcon,
-  HeartIcon,
-  UserIcon,
-  UsersIcon
+  UserIcon
 } from "@heroicons/vue/24/outline"
 import {useAuthStore} from "~/stores/auth.js";
 import {useNotificationStore} from "~/stores/notifications.js";

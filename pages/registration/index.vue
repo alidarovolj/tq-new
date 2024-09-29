@@ -1,7 +1,7 @@
 <script setup>
 import {vMaska} from "maska/vue"
 import {useVuelidate} from "@vuelidate/core"
-import {email, required} from "@vuelidate/validators"
+import {required} from "@vuelidate/validators"
 import {useNotificationStore} from "~/stores/notifications.js";
 import img1 from "@/assets/img/auth/1.jpg";
 import img2 from "@/assets/img/auth/2.jpg";
@@ -59,7 +59,7 @@ const registerUser = async () => {
     if (response.result) {
       notifications.showNotification("success", "Успешно", "Вы успешно отправили запрос на получение кода!");
       loading.value = false;
-      await router.push({ path: localePath('/registration/verify-code'), query: {phone: form.value.phone} });
+      await router.push({path: localePath('/registration/verify-code'), query: {phone: form.value.phone}});
     }
   } catch (e) {
     notifications.showNotification("error", "Произошла ошибка", e);
@@ -91,32 +91,32 @@ const registerUser = async () => {
           <div class="mt-10">
             <div>
               <form
-                  @submit.prevent="registerUser"
                   action=""
-                  class="space-y-6">
+                  class="space-y-6"
+                  @submit.prevent="registerUser">
 
                 <div
                     :class="{ '!border !border-red-500' : v$.phone.$error }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                  <label for="phone" class="block text-xs font-medium text-gray-900">
+                  <label class="block text-xs font-medium text-gray-900" for="phone">
                     {{ $t('forms.phone_number.title') }}
                   </label>
                   <input
-                      v-model="form.phone"
                       id="phone"
-                      name="phone"
-                      type="text"
-                      autocomplete="phone"
+                      v-model="form.phone"
                       v-maska
-                      data-maska="+7 (###) ###-##-##"
-                      placeholder="+7 (___) ___-__-__"
+                      autocomplete="phone"
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      data-maska="+7 (###) ###-##-##"
+                      name="phone"
+                      placeholder="+7 (___) ___-__-__"
+                      type="text"
                   />
                 </div>
 
                 <div>
-                  <button type="submit"
-                          class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor">
+                  <button class="flex w-full justify-center rounded-md bg-mainColor px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                          type="submit">
                     Отправить код
                   </button>
                 </div>
@@ -139,8 +139,8 @@ const registerUser = async () => {
             >
               <img
                   :src="item"
-                  class="w-full h-full object-cover rounded-2xl"
                   alt=""
+                  class="w-full h-full object-cover rounded-2xl"
               />
             </my-carousel-slide>
             <template #addons>

@@ -38,9 +38,9 @@ onMounted(async () => {
             :class="{ 'flex-col md:!flex-row-reverse' : index % 2 === 0 }"
             class="bg-white rounded-lg shadow-md flex flex-col md:flex-row items-center">
           <img
-              class="w-full md:w-1/2 min-w-[50%] h-[414px] object-cover rounded-t-lg"
               :src="news.image_url"
-              alt="">
+              alt=""
+              class="w-full md:w-1/2 min-w-[50%] h-[414px] object-cover rounded-t-lg">
           <div class="p-5 md:p-14">
             <h2 class="text-xl font-semibold mb-4">
               {{ news.title.ru }}

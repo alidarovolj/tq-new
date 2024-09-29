@@ -1,8 +1,8 @@
 <script setup>
-import { useNotificationStore } from '@/stores/notifications.js';
-import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline';
-import { XMarkIcon } from '@heroicons/vue/20/solid';
-import { ref, watch } from 'vue';
+import {useNotificationStore} from '@/stores/notifications.js';
+import {CheckCircleIcon, ExclamationCircleIcon} from '@heroicons/vue/24/outline';
+import {XMarkIcon} from '@heroicons/vue/20/solid';
+import {ref, watch} from 'vue';
 
 const store = useNotificationStore();
 const progress = ref(100);
@@ -45,9 +45,9 @@ watch(() => store.notification.show, (newVal) => {
           <div class="p-4">
             <div class="flex items-start">
               <div class="flex-shrink-0">
-                <CheckCircleIcon v-if="store.notification.type === 'success'" class="h-6 w-6 text-green-400"
-                                 aria-hidden="true"/>
-                <ExclamationCircleIcon v-else class="h-6 w-6 text-red-400" aria-hidden="true"/>
+                <CheckCircleIcon v-if="store.notification.type === 'success'" aria-hidden="true"
+                                 class="h-6 w-6 text-green-400"/>
+                <ExclamationCircleIcon v-else aria-hidden="true" class="h-6 w-6 text-red-400"/>
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
                 <p class="text-sm font-medium text-gray-900">{{ store.notification.title }}</p>
@@ -55,17 +55,17 @@ watch(() => store.notification.show, (newVal) => {
               </div>
               <div class="ml-4 flex flex-shrink-0">
                 <button
+                    class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     type="button"
-                    @click="store.notification.show = false"
-                    class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    @click="store.notification.show = false">
                   <span class="sr-only">Закрыть</span>
-                  <XMarkIcon class="h-5 w-5" aria-hidden="true"/>
+                  <XMarkIcon aria-hidden="true" class="h-5 w-5"/>
                 </button>
               </div>
             </div>
             <div class="mt-2 h-1 w-full bg-gray-200">
-              <div class="h-1 bg-blue-500 transition-all duration-[5000ms] ease-linear"
-                   :style="{ width: progress + '%' }"></div>
+              <div :style="{ width: progress + '%' }"
+                   class="h-1 bg-blue-500 transition-all duration-[5000ms] ease-linear"></div>
             </div>
           </div>
         </div>

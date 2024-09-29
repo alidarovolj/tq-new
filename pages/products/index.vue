@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import {computed, nextTick, onMounted, ref} from 'vue';
 import {useProductsStore} from '~/stores/products.js';
 import {storeToRefs} from 'pinia';
@@ -34,8 +34,14 @@ const setCategory = async (id) => {
   await productsStore.getProductsByCategory(id);
 }
 
+const setSubCategory = async (id) => {
+  await router.push({query: {...route.query, subCategory: id}});
+  await nextTick()
+  await productsStore.getProductsByCategory(id);
+}
+
 watch(() => route.query.category, async (category) => {
-  if(category) {
+  if (category) {
     await productsStore.getProductsByCategory(category);
   } else {
     await productsStore.getCategoryWithEightProducts();
@@ -46,7 +52,7 @@ onMounted(async () => {
   await nextTick();
   await productsStore.getCategoryWithEightProducts();
   await productsStore.getCatalog()
-  if(route.query.category) {
+  if (route.query.category) {
     await productsStore.getProductsByCategory(route.query.category);
   }
 });
@@ -71,23 +77,50 @@ onMounted(async () => {
               class="grid grid-cols-1 gap-y-2">
             <div
                 v-for="(item, index) of catalogList.data"
-                :key="index"
-                :class="{ 'bg-gray-100' : item.id === parseInt(route.query.category) }"
-                @click="setCategory(item.id)"
-                class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1">
-              <img
-                  v-if="item.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-                  :src="item.icon"
-                  :alt="item.name"
-                  class="h-10 w-10 object-contain object-center"
-              />
-              <img
-                  v-else
-                  src="@/assets/img/logos/mainVert.png"
-                  :alt="item.name"
-                  class="h-10 w-10 object-contain object-center"
-              />
-              <h3 class="text-center text-sm font-bold">{{ item.name }}</h3>
+                :key="index">
+              <div
+                  :class="{ 'bg-gray-100' : item.id === parseInt(route.query.category) }"
+                  class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
+                  @click="setCategory(item.id)">
+                <img
+                    v-if="item.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
+                    :alt="item.name"
+                    :src="item.icon"
+                    class="h-10 w-10 object-contain object-center"
+                />
+                <img
+                    v-else
+                    :alt="item.name"
+                    class="h-10 w-10 object-contain object-center"
+                    src="@/assets/img/logos/mainVert.png"
+                />
+                <h3 class="text-center text-sm font-bold">{{ item.name }}</h3>
+              </div>
+              <div
+                  v-if="item.id === parseInt(route.query.category)"
+                  class="pl-3 mt-2"
+              >
+                <div
+                    v-for="(subItem, ind) of item.sub_category"
+                    :key="ind"
+                    :class="{ 'bg-gray-100' : subItem.id === parseInt(route.query.subCategory) }"
+                    class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
+                    @click="setSubCategory(subItem.id)">
+                  <img
+                      v-if="subItem.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
+                      :alt="subItem.name"
+                      :src="subItem.icon"
+                      class="h-10 w-10 object-contain object-center"
+                  />
+                  <img
+                      v-else
+                      :alt="subItem.name"
+                      class="h-10 w-10 object-contain object-center"
+                      src="@/assets/img/logos/mainVert.png"
+                  />
+                  <h3 class="text-center text-sm font-bold">{{ subItem.name }}</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,8 +143,8 @@ onMounted(async () => {
           <div class="mt-8 flex justify-center">
             <button
                 v-if="itemsToShow < categoryWithProducts.data.length"
-                @click="showMoreItems"
                 class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+                @click="showMoreItems"
             >
               Показать больше
             </button>
@@ -139,7 +172,7 @@ onMounted(async () => {
             </div>
           </div>
         </div>
-        <ProductPreloader v-else />
+        <ProductPreloader v-else/>
       </div>
     </div>
   </div>

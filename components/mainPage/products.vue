@@ -2,7 +2,6 @@
 import {computed, nextTick, onMounted, ref} from 'vue';
 import {useProductsStore} from '~/stores/products.js';
 import {storeToRefs} from 'pinia';
-import Product from "~/components/cards/product.vue";
 
 const productsStore = useProductsStore();
 const {categoryWithProducts} = storeToRefs(productsStore);

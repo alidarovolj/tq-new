@@ -44,7 +44,7 @@
                     <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                       {{ post.title.ru }}
                     </h3>
-                    <p v-html="post.description.ru" class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"></p>
+                    <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600" v-html="post.description.ru"></p>
                   </div>
                 </div>
               </NuxtLink>
