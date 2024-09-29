@@ -72,11 +72,11 @@ useHead({
                   @click="modals.showModal('removeAddress', item)"/>
             </div>
           </div>
-          <div v-else>
-            <p class="text-gray-500 py-3">
-              {{ t('profile.no_addresses') }}
-            </p>
-          </div>
+          <p
+              v-else
+              class="text-center text-red-500">
+            Нет адресов
+          </p>
         </div>
         <div v-else class="spinner p-3"></div>
         <div

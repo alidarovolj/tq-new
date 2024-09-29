@@ -1,45 +1,57 @@
-<script setup></script>
+<script setup>
+const { t } = useI18n();
+
+useHead({
+  title: t("headers.delivery.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.delivery.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.delivery.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.delivery.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.delivery.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.delivery.canonical")}],
+});
+</script>
 
 <template>
   <div class="container mx-auto px-4 md:px-0 py-12">
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Оплата</h2>
-      <p class="text-gray-700 mb-4">
-        После оформления заказа на нашем сайте, с вами свяжется ваш региональный менеджер для уточнения деталей и
-        подтверждения заказа. Только после этого вы сможете произвести оплату любым удобным для вас способом:
-      </p>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $t('payment_section.title') }}</h2>
+      <p class="text-gray-700 mb-4">{{ $t('payment_section.description') }}</p>
       <ul class="list-disc list-inside text-gray-700 mb-4">
-        <li>Каспи QR — быстрый и удобный способ оплаты через приложение Kaspi.kz</li>
-        <li>Наличные — оплата наличными до отправки товара</li>
+        <li>{{ $t('payment_section.payment_methods.method1') }}</li>
+        <li>{{ $t('payment_section.payment_methods.method2') }}</li>
       </ul>
     </section>
 
     <section class="mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Доставка</h2>
-      <p class="text-gray-700 mb-4">
-        После оформления и подтверждения заказа нашим менеджером, ваш заказ будет отправлен любым удобным для вас
-        способом доставки. Мы предлагаем следующие варианты:
-      </p>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $t('delivery_section.title') }}</h2>
+      <p class="text-gray-700 mb-4">{{ $t('delivery_section.description') }}</p>
       <ul class="list-disc list-inside text-gray-700 mb-4">
-        <li>Авиа</li>
-        <li>Железнодорожный транспорт</li>
-        <li>Автобусы</li>
-        <li>И другие способы, удобные для вас</li>
+        <li>{{ $t('delivery_section.delivery_methods.method1') }}</li>
+        <li>{{ $t('delivery_section.delivery_methods.method2') }}</li>
+        <li>{{ $t('delivery_section.delivery_methods.method3') }}</li>
+        <li>{{ $t('delivery_section.delivery_methods.method4') }}</li>
       </ul>
-      <p class="text-gray-700">
-        Доставка по городу Алматы бесплатная. Мы делаем всё возможное, чтобы ваш заказ был доставлен быстро и комфортно.
-      </p>
+      <p class="text-gray-700">{{ $t('delivery_section.additional_info') }}</p>
     </section>
 
     <section>
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Гарантия</h2>
-      <p class="text-gray-700 mb-4">
-        Наша компания основывается на доверии и качестве. Мы предоставляем гарантию на всю нашу продукцию. Если у вас
-        возникли проблемы с товаром, пожалуйста, свяжитесь с нами, и мы с радостью заменим его.
-      </p>
-      <p class="text-gray-700">
-        Ваше удовлетворение — наш приоритет, и мы всегда готовы помочь решить любые вопросы.
-      </p>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">{{ $t('warranty_section.title') }}</h2>
+      <p class="text-gray-700 mb-4">{{ $t('warranty_section.description1') }}</p>
+      <p class="text-gray-700">{{ $t('warranty_section.description2') }}</p>
     </section>
   </div>
 </template>

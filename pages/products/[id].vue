@@ -9,6 +9,7 @@ const products = useProductsStore()
 const cart = useCartStore()
 const {detailProduct, sameProducts} = storeToRefs(products)
 const route = useRoute()
+const { t } = useI18n()
 
 const addToCart = ref({
   product_id: route.params.id,
@@ -40,9 +41,7 @@ const reviews = {
     {
       id: 1,
       rating: 5,
-      content: `
-        <p>Этот набор иконок - именно то, что мне нужно для моего последнего проекта. Здесь есть иконка практически для всего, что мне может понадобиться. Мне нравится игривый вид!</p>
-      `,
+      content: t('product_detail.reviews.featured_reviews[0].content'),
       date: '16 июля 2021',
       datetime: '2021-07-16',
       author: 'Эмили Селман',
@@ -52,9 +51,7 @@ const reviews = {
     {
       id: 2,
       rating: 5,
-      content: `
-        <p>Я потрясен, насколько качественным является этот набор иконок. Все выглядит так последовательно, и каждая SVG иконка оптимизирована изначально, так что я могу использовать их сразу с уверенностью. Мне бы потребовалось несколько часов, чтобы создать одну такую хорошую иконку, так что это настоящая находка по такой цене.</p>
-      `,
+      content: t('product_detail.reviews.featured_reviews[1].content'),
       date: '12 июля 2021',
       datetime: '2021-07-12',
       author: 'Гектор Гиббонс',
@@ -63,24 +60,50 @@ const reviews = {
     }
   ],
 }
+
 const faqs = [
   {
-    question: 'Какие способы оплаты вы принимаете?',
-    answer: 'Мы принимаем Visa, Mastercard и American Express. Вы также можете оплатить через наличными по прибытию вашего заказа.',
+    question: t('product_detail.faq.questions[0].question'),
+    answer: t('product_detail.faq.questions[0].answer')
   },
   {
-    question: 'Сколько времени занимает доставка?',
-    answer: 'Ваш заказ будет доставлен в течение 2-4 рабочих дней после его подтверждения.',
+    question: t('product_detail.faq.questions[1].question'),
+    answer: t('product_detail.faq.questions[1].answer')
   },
   {
-    question: 'Могу ли я вернуть товар?',
-    answer: 'Извините, но мы не принимаем возврат товаров, за исключением случаев, когда товар был поврежден.',
+    question: t('product_detail.faq.questions[2].question'),
+    answer: t('product_detail.faq.questions[2].answer')
   },
   {
-    question: 'Каки образом я могу оформить заказ?',
-    answer: 'Вы можете перейти на страницу продукта и нажать кнопку "Купить". После этого вы сможете оплатить ваш заказ в вашей корзине.',
-  },
+    question: t('product_detail.faq.questions[3].question'),
+    answer: t('product_detail.faq.questions[3].answer')
+  }
 ]
+
+const headData = computed(() => ({
+  title: detailProduct.value?.data?.name,
+  meta: [
+    {
+      property: "description",
+      content: t("headers.store.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.store.description"),
+    },
+    {
+      property: "og:title",
+      content: detailProduct.value?.data?.name,
+    },
+    {
+      property: "og:url",
+      content: t("headers.store.og_url"),
+    },
+  ],
+  link: [{ rel: "canonical", href: t("headers.store.canonical") }],
+}));
+
+useHead(headData);
 </script>
 
 <template>
@@ -111,20 +134,20 @@ const faqs = [
         <div class="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
           <div class="flex flex-col-reverse">
             <div class="mt-4">
-              <p class="text-gray-400">Категория: {{ detailProduct.data.category.name }}</p>
+              <p class="text-gray-400">{{ $t('product_detail.category') }}: {{ detailProduct.data.category.name }}</p>
               <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ detailProduct.data.name }}</h1>
 
               <h2 id="information-heading" class="sr-only">Информация о продукте</h2>
             </div>
 
             <div>
-              <h3 class="sr-only">Отзывы</h3>
+              <h3 class="sr-only">{{ $t('product_detail.reviews.title') }}</h3>
               <div class="flex items-center">
                 <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating"
                           :class="[reviews.average > rating ? 'text-yellow-400' : 'text-gray-300', 'h-5 w-5 flex-shrink-0']"
                           aria-hidden="true"/>
               </div>
-              <p class="sr-only">{{ reviews.average }} из 5 звезд</p>
+              <p class="sr-only">{{ reviews.average }} {{ $t('product_detail.reviews.average_rating') }}</p>
             </div>
           </div>
 
@@ -132,12 +155,12 @@ const faqs = [
             <button
                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50"
                 type="button">
-              {{ detailProduct.data.price }}₸ / шт.
+              {{ detailProduct.data.price }}{{ $t('product_detail.price_per_unit') }}
             </button>
           </div>
           <div>
             <p class="mb-2">
-              Количество
+              {{ $t('product_detail.quantity') }}
             </p>
             <div class="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-2">
               <div class="w-full">
@@ -164,7 +187,7 @@ const faqs = [
                   class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50"
                   type="button"
                   @click="cart.addItem(addToCart)">
-                Добавить в корзину
+                {{ $t('product_detail.add_to_cart') }}
               </button>
             </div>
           </div>
@@ -172,7 +195,7 @@ const faqs = [
           <p class="mt-6 text-gray-500">{{ detailProduct.data.description }}</p>
 
           <div class="mt-10 border-t border-gray-200 pt-10">
-            <h3 class="text-sm font-medium text-gray-900">Характеристики</h3>
+            <h3 class="text-sm font-medium text-gray-900">{{ $t('product_detail.characteristics') }}</h3>
             <div class="prose prose-sm mt-4 text-gray-500">
               <ul role="list">
                 <li
@@ -198,16 +221,14 @@ const faqs = [
                 <Tab v-slot="{ selected }" as="template">
                   <button
                       :class="[selected ? 'border-mainColor text-mainColor' : 'border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800', 'whitespace-nowrap border-b-2 py-6 text-sm font-medium']">
-                    Отзывы пользователей
+                    {{ $t('product_detail.reviews.title') }}
                   </button>
                 </Tab>
               </TabList>
             </div>
             <TabPanels as="template">
-
               <TabPanel class="text-sm text-gray-500">
-                <h3 class="sr-only">Часто задаваемые вопросы</h3>
-
+                <h3 class="sr-only">{{ $t('product_detail.faq.title') }}</h3>
                 <dl>
                   <template v-for="faq in faqs" :key="faq.question">
                     <dt class="mt-10 font-medium text-gray-900">{{ faq.question }}</dt>

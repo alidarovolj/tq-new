@@ -3,17 +3,18 @@ import {CheckIcon} from "@heroicons/vue/24/outline";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 
 const localePath = useLocalePath();
+const {t} = useI18n();
 
-const links = [
+const links = computed(() => [
   {
-    title: "Главная",
-    link: "/",
+    title: t('breadcrumbs.home'),
+    link: localePath("/"),
   },
   {
-    title: "Успешная оплата",
-    link: "/payment-success",
+    title: t('breadcrumbs.payment_success'),
+    link: localePath("/payment-success"),
   },
-];
+]);
 </script>
 
 <template>
@@ -26,16 +27,16 @@ const links = [
             <CheckIcon class="!text-green-500 w-10 h-10"/>
           </div>
           <h1 class="text-3xl font-bold text-gray-900">
-            Спасибо за ваш заказ!
+            {{ $t('payment_success.title') }}
           </h1>
           <p class="my-6 text-gray-700">
-            Ваш заказ успешно оформлен. Наш менеджер свяжется с вами в ближайшее время.
+            {{ $t('payment_success.description') }}
           </p>
           <NuxtLink
               :to="localePath('/')"
               class="border px-6 py-3 rounded-full bg-mainColor text-white"
           >
-            Вернуться на главную
+            {{ $t('payment_success.back_to_home') }}
           </NuxtLink>
         </div>
       </div>

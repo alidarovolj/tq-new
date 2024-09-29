@@ -3,7 +3,7 @@
     <input
         v-model="query"
         class="w-full rounded-md border border-gray-300 h-full text-xs md:text-sm"
-        placeholder="Поиск продукта..."
+        :placeholder="$t('navigation.input')"
         type="text"
         @blur="handleBlur"
         @focus="handleFocus"

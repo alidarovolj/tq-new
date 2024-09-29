@@ -69,8 +69,32 @@ const loginUser = async () => {
     loading.value = false;
     notifications.showNotification("error", "Произошла ошибка", e);
   }
-
 }
+
+const {t} = useI18n()
+
+useHead({
+  title: t("headers.login.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.login.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.login.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.login.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.login.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.login.canonical")}],
+});
 </script>
 
 <template>

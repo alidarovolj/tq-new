@@ -19,16 +19,15 @@
         </svg>
         <div class="flex flex-col md:flex-row items-center justify-between w-full">
           <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Широкий ассортимент.<br/>Качество</h2>
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl" v-html="$t('hero_section.title')"></h2>
             <p class="mt-6 text-lg leading-8 text-gray-300">
-              Мы предлагаем богатый выбор дворников и фар различных типов, размеров и моделей, чтобы удовлетворить
-              потребности всех автовладельцев.
+              {{ $t('hero_section.description') }}
             </p>
             <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
               <NuxtLink
                   class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   to="/products">
-                Перейти к товарам <span aria-hidden="true">→</span>
+                {{ $t('hero_section.button_text') }} <span aria-hidden="true">→</span>
               </NuxtLink>
             </div>
           </div>

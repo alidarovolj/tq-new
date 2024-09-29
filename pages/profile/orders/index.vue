@@ -12,7 +12,7 @@
               <p class="text-xl font-medium">{{ $t('orders.title') }}</p>
             </div>
           </div>
-          <div class="flex flex-col gap-5">
+          <div v-if="orders.ordersList.data.length > 0" class="flex flex-col gap-5">
             <Disclosure
                 v-for="(item, index) in orders.ordersList.data"
                 :key="index"
@@ -110,6 +110,11 @@
               </DisclosurePanel>
             </Disclosure>
           </div>
+          <p
+              v-else
+              class="text-center text-red-500">
+            Нет товаров в данной категории
+          </p>
         </div>
       </div>
     </NuxtLayout>
@@ -142,4 +147,27 @@ onMounted(async () => {
   await nextTick()
   await orders.getOrders()
 })
+
+useHead({
+  title: t("headers.orders.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.orders.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.orders.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.orders.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.orders.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.orders.canonical")}],
+});
 </script>

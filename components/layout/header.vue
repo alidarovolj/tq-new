@@ -15,6 +15,7 @@ import {ChevronDownIcon} from '@heroicons/vue/20/solid'
 import {useUserStore} from "~/stores/user.js";
 import {useNotificationStore} from "~/stores/notifications.js";
 import SelectSearch from "~/components/general/selectSearch.vue";
+import LocaleSwitcher from "~/components/general/localeSwitcher.vue";
 
 const loading = ref(false)
 const router = useRouter()
@@ -82,15 +83,16 @@ onMounted(async () => {
   <header class="bg-white">
     <div class="container mx-auto px-4 md:px-0 pt-3 flex items-center justify-between">
       <div class="flex flex-col md:flex-row gap-3 md:gap-5 items-start md:items-center">
+        <LocaleSwitcher/>
         <a
             class="flex items-center gap-2 hover:text-mainColor transition-all"
             href="https://2gis.kz/almaty/firm/70000001083914324">
           <MapIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor"/>
-          <p class="text-xs md:text-sm">г. Алматы, Улица Садовникова, 99</p>
+          <p class="text-xs md:text-sm">{{ $t('header.address.city') }}</p>
         </a>
         <div class="flex items-center gap-2">
           <ClockIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor"/>
-          <p class="text-xs md:text-sm">Ежедневно с 9:00 - 18:00</p>
+          <p class="text-xs md:text-sm">{{ $t('header.working_hours.time') }}</p>
         </div>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3 items-center">
@@ -137,7 +139,7 @@ onMounted(async () => {
                           class="flex gap-2"
                           to="profile/orders">
                         <ArchiveBoxIcon class="h-5 w-5"/>
-                        <p>Мои заказы</p>
+                        <p>{{ $t('profile.my_orders') }}</p>
                       </NuxtLink>
                     </div>
                   </MenuItem>
@@ -148,7 +150,7 @@ onMounted(async () => {
                           class="flex gap-2"
                           to="profile/addresses">
                         <MapPinIcon class="h-5 w-5"/>
-                        <p>Мои адреса</p>
+                        <p>{{ $t('profile.my_addresses') }}</p>
                       </NuxtLink>
                     </div>
                   </MenuItem>
@@ -159,7 +161,7 @@ onMounted(async () => {
                         to="profile">
 
                       <UserIcon class="h-5 w-5"/>
-                      <p>Мой профиль</p>
+                      <p>{{ $t('profile.my_profile') }}</p>
                     </NuxtLink>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
@@ -182,9 +184,6 @@ onMounted(async () => {
     <nav aria-label="Global" class="mx-auto flex container px-4 md:px-0 items-center justify-between py-6">
       <div class="flex lg:flex-1">
         <NuxtLink :to="localePath('/')" class="-m-1.5 p-1.5">
-          <span class="sr-only">
-            Your Company
-          </span>
           <img
               alt=""
               class="h-7 md:h-10 w-auto"
@@ -205,31 +204,25 @@ onMounted(async () => {
               :class="{ 'text-mainColor' : route.fullPath.includes('/delivery') }"
               class="text-sm font-semibold leading-6 text-gray-900"
               to="/delivery">
-            Оплата и доставка
+            {{ $t('navigation.payment_delivery') }}
           </NuxtLink>
           <NuxtLink
               :class="{ 'text-mainColor' : route.fullPath.includes('/products') }"
               class="text-sm font-semibold leading-6 text-gray-900"
               to="/products">
-            Продукты
+            {{ $t('navigation.products') }}
           </NuxtLink>
           <NuxtLink
               :class="{ 'text-mainColor' : route.fullPath.includes('/about') }"
               class="text-sm font-semibold leading-6 text-gray-900"
               to="/about">
-            О компании
+            {{ $t('navigation.about') }}
           </NuxtLink>
-          <!--          <NuxtLink-->
-          <!--              to="/news"-->
-          <!--              :class="{ 'text-mainColor' : route.fullPath.includes('/news') }"-->
-          <!--              class="text-sm font-semibold leading-6 text-gray-900">-->
-          <!--            Новости-->
-          <!--          </NuxtLink>-->
           <NuxtLink
               :class="{ 'text-mainColor' : route.fullPath.includes('/contacts') }"
               class="text-sm font-semibold leading-6 text-gray-900"
               to="/contacts">
-            Контакты
+            {{ $t('navigation.contacts') }}
           </NuxtLink>
         </PopoverGroup>
       </client-only>
@@ -242,7 +235,7 @@ onMounted(async () => {
               <MenuButton
                   class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-xs md:text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 items-center">
                 <Bars3Icon class="w-4 md:w-5 h-4 md:h-5"/>
-                <p>Каталог</p>
+                <p>{{ $t('navigation.catalog') }}</p>
                 <ChevronDownIcon aria-hidden="true" class="-mr-1 h-5 w-5 text-gray-400"/>
               </MenuButton>
             </div>
@@ -285,7 +278,7 @@ onMounted(async () => {
               <ShoppingBagIcon class="w-5 h-5 cursor-pointer"/>
             </div>
             <p class="hidden md:block text-sm">
-              Корзина
+              {{ $t('navigation.cart') }}
             </p>
           </NuxtLink>
         </div>
@@ -316,31 +309,25 @@ onMounted(async () => {
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   to="/delivery"
                   @click="mobileMenuOpen = false">
-                Оплата и доставка
+                {{ $t('navigation.payment_delivery') }}
               </NuxtLink>
               <NuxtLink
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   to="/products"
                   @click="mobileMenuOpen = false">
-                Продукты
+                {{ $t('navigation.products') }}
               </NuxtLink>
               <NuxtLink
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   to="/about"
                   @click="mobileMenuOpen = false">
-                О компании
+                {{ $t('navigation.about') }}
               </NuxtLink>
-              <!--              <NuxtLink-->
-              <!--                  @click="mobileMenuOpen = false"-->
-              <!--                  to="/news"-->
-              <!--                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">-->
-              <!--                Новости-->
-              <!--              </NuxtLink>-->
               <NuxtLink
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   to="/contacts"
                   @click="mobileMenuOpen = false">
-                Контакты
+                {{ $t('navigation.contacts') }}
               </NuxtLink>
             </div>
             <div class="flex lg:flex-1 lg:justify-end gap-3 items-center">

@@ -93,6 +93,31 @@ const passwordRequest = async () => {
   }
 
 }
+
+const {t} = useI18n()
+
+useHead({
+  title: t("headers.forgot_pass.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.forgot_pass.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.forgot_pass.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.forgot_pass.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.forgot_pass.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.forgot_pass.canonical")}],
+});
 </script>
 
 <template>

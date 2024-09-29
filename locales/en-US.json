@@ -1,142 +1,410 @@
 {
+  "headers": {
+    "payment_delivery": {
+      "title": "Delivery and payment - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/payment-delivery",
+      "canonical": "https://gazbas.kz/payment-delivery"
+    },
+    "projects": {
+      "title": "Projects - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/projects",
+      "canonical": "https://gazbas.kz/projects"
+    },
+    "delivery": {
+      "title": "Payment and delivery - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/delivery",
+      "canonical": "https://gazbas.kz/delivery"
+    },
+    "faq": {
+      "title": "FAQ - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/faq",
+      "canonical": "https://gazbas.kz/faq"
+    },
+    "mainPage": {
+      "title": "Home page - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz",
+      "canonical": "https://gazbas.kz"
+    },
+    "store": {
+      "title": "Store - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/store",
+      "canonical": "https://gazbas.kz/store"
+    },
+    "privacy": {
+      "title": "Privacy Policy - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/privacy-policy",
+      "canonical": "https://gazbas.kz/privacy-policy"
+    },
+    "colors": {
+      "title": "Paint - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/colors",
+      "canonical": "https://gazbas.kz/colors"
+    },
+    "ideas": {
+      "title": "Ideas - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/ideas",
+      "canonical": "https://gazbas.kz/ideas"
+    },
+    "about": {
+      "title": "About us - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/about",
+      "canonical": "https://gazbas.kz/about"
+    },
+    "news": {
+      "title": "News - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/news",
+      "canonical": "https://gazbas.kz/news"
+    },
+    "contacts": {
+      "title": "Contacts - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/contacts",
+      "canonical": "https://gazbas.kz/contacts"
+    },
+    "profile": {
+      "title": "Profile - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/profile",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "orders": {
+      "title": "Profile - Orders - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/profile/orders",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "addresses": {
+      "title": "Profile - Addresses - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/profile/addresses",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "login": {
+      "title": "Authorization - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/login",
+      "canonical": "https://gazbas.kz/login"
+    },
+    "registration": {
+      "title": "Registration - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/registration",
+      "canonical": "https://gazbas.kz/login"
+    },
+    "forgot_pass": {
+      "title": "Forgot your password - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/forgot-password",
+      "canonical": "https://gazbas.kz/forgot-password"
+    },
+    "cart": {
+      "title": "Cart - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/cart",
+      "canonical": "https://gazbas.kz/cart"
+    },
+    "checkout": {
+      "title": "Placing an order - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/cart/checkout",
+      "canonical": "https://gazbas.kz/cart/checkout"
+    }
+  },
+  "header": {
+    "address": {
+      "city": "Almaty, Sadovnikova Street, 99"
+    },
+    "working_hours": {
+      "time": "Every day from 9:00 to 18:00"
+    }
+  },
+  "navigation": {
+    "payment_delivery": "Payment and delivery",
+    "products": "Products",
+    "about": "About the company",
+    "contacts": "Contacts",
+    "catalog": "Catalog",
+    "input": "Search for products",
+    "cart": "Basket"
+  },
+  "catalog": {
+    "title": "Product catalog",
+    "description": "Explore our range of automotive lighting products.",
+    "categories": {
+      "title": "Categories"
+    },
+    "show_more": "Show more",
+    "no_products": "There are no products in this category"
+  },
+  "product_detail": {
+    "category": "Category",
+    "quantity": "Quantity",
+    "add_to_cart": "Add to cart",
+    "description": "Description",
+    "price_per_unit": "₸ / pcs.",
+    "characteristics": "Characteristics",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": [
+        {
+          "question": "What payment methods do you accept?",
+          "answer": "We accept Visa, Mastercard and American Express. "
+        },
+        {
+          "question": "How long does delivery take?",
+          "answer": "Your order will be delivered within 2-4 business days after it is confirmed."
+        },
+        {
+          "question": "Can I return an item?",
+          "answer": "Sorry, but we do not accept returns unless the item is damaged."
+        },
+        {
+          "question": "How can I place an order?",
+          "answer": "You can go to the product page and click the 'Buy' button. "
+        }
+      ]
+    },
+    "reviews": {
+      "title": "User reviews",
+      "average_rating": "out of 5 stars",
+      "featured_reviews": [
+        {
+          "id": 1,
+          "author": "Emily Selman",
+          "date": "July 16, 2021",
+          "content": "This icon set is exactly what I needed for my latest project. "
+        },
+        {
+          "id": 2,
+          "author": "Hector Gibbons",
+          "date": "July 12, 2021",
+          "content": "I'm shocked at how high quality this icon set is. "
+        }
+      ]
+    }
+  },
+  "addresses": {
+    "create": {
+      "title": "Add delivery address",
+      "provide_address": "Please provide your address",
+      "address_placeholder": "Enter address",
+      "city": "City",
+      "city_placeholder": "Select a city",
+      "address": "Address",
+      "entrance": "Entrance",
+      "entrance_placeholder": "Enter entrance",
+      "floor": "Floor",
+      "floor_placeholder": "Enter floor",
+      "apartment": "Apartment",
+      "apartment_placeholder": "Enter apartment",
+      "button": "Save"
+    }
+  },
+  "notification": {
+    "error_title": "Error",
+    "error_message": "Check that the information you entered is correct and try again.",
+    "success_title": "Success",
+    "success_message": "You have successfully placed your order"
+  },
+  "contacts": {
+    "title": "Our contacts",
+    "description": "You can contact us with any questions related to our activities. ",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "message": "Message",
+      "agreement": "By submitting an application, you accept the terms of the offer agreement and agree to the processing of your personal data in accordance with the privacy policy",
+      "submit": "Send message"
+    },
+    "notification": {
+      "error_title": "An error has occurred",
+      "error_message": "Check that the information you entered is correct and try again.",
+      "success_title": "Successfully",
+      "success_message": "You have successfully sent your message, we will contact you shortly."
+    },
+    "regions": {
+      "north": {
+        "title": "For cooperation issues:",
+        "regions": [
+          "Astana city",
+          "Akmola region",
+          "Ulytau region",
+          "Karaganda region",
+          "Pavlodar region",
+          "North Kazakhstan region",
+          "Kostanay region"
+        ],
+        "contact_name": "Ordabek Ayat",
+        "contact_phone": "+7 775 245-33-03"
+      },
+      "west": {
+        "title": "For cooperation issues:",
+        "regions": [
+          "Aktobe region",
+          "West Kazakhstan region",
+          "Atyrau region",
+          "Mangystau region"
+        ],
+        "contact_name": "Zhanbirov Damir Baurzhanovich",
+        "contact_phone": "+7 776 713-13-33"
+      },
+      "south": {
+        "title": "For cooperation issues:",
+        "regions": [
+          "East Kazakhstan region",
+          "Abay region",
+          "Almaty region",
+          "Zhambyl region",
+          "Turkestan region",
+          "Kyzylorda region",
+          "Zhetysu region",
+          "Almaty city",
+          "Shymkent city"
+        ],
+        "contact_name": "Nugman Daulet",
+        "contact_phone": "+7 707 111 97 81"
+      },
+      "car_city": {
+        "title": "For cooperation issues, shopping center \"Car City\" (2nd tier, 222 boutique) address: microdistrict. ",
+        "contact_name": "Kasymzhan Erbolsyn Daurenuly",
+        "contact_phone": "+7 747 237-79-75"
+      }
+    }
+  },
   "breadcrumbs": {
     "home": "Home",
-    "store": "Store",
+    "store": "Shop",
     "ideas": "Ideas",
     "news": "News",
-    "cart": "Cart",
-    "checkout": "Checkout",
+    "contacts": "Contacts",
+    "cart": "Basket",
+    "checkout": "Placing an order",
     "profile": "Profile",
     "addresses": "Addresses",
     "recipients": "Recipients",
     "orders": "Orders",
-    "favourites": "Favourites"
+    "favourites": "Favorites",
+    "payment_success": "Successful payment",
+    "about": "About the company"
+  },
+  "payment_success": {
+    "title": "Thank you for your order!",
+    "description": "Your order has been successfully completed. ",
+    "back_to_home": "Return to home"
+  },
+  "orders": {
+    "title": "My orders",
+    "statuses": {
+      "created": "Created",
+      "in_process": "In processing",
+      "ended": "Completed"
+    },
+    "order": {
+      "title": "Order",
+      "status": "Status",
+      "amount": "Order amount",
+      "show": "Show items in order",
+      "hide": "Hide products in order"
+    }
   },
   "profile": {
     "phone": "Phone number",
-    "logout": "Logout",
+    "my_orders": "My orders",
+    "my_profile": "My profile",
+    "logout": "Log out",
     "profile": "Profile",
     "recipients": "Recipients",
-    "no_recipients": "Unfortunately, you have no saved recipients, please add them.",
+    "no_recipients": "Sorry, you don't have any recipients saved. ",
     "add_recipient": "Add recipient",
-    "no_addresses": "Unfortunately, you have no saved addresses, please add them.",
+    "no_addresses": "Sorry, you don't have any addresses saved. ",
     "add_address": "Add address",
-    "my_addresses": "My addresses"
-  },
-  "addresses": {
-    "create": {
-      "title": "Add shipping address",
-      "provide_address": "Please provide the address",
-      "address_placeholder": "Enter the address",
-      "city": "City",
-      "city_placeholder": "Choose city",
-      "address": "Address",
-      "entrance": "Entrance",
-      "entrance_placeholder": "Enter the entrance",
-      "floor": "Floor",
-      "floor_placeholder": "Enter the floor",
-      "apartment": "Apartment",
-      "apartment_placeholder": "Enter the apartment",
-      "button": "Save"
-    }
+    "my_addresses": "My addresses",
+    "to_addresses": "Go to my addresses",
+    "entrance": "Entrance",
+    "floor": "Floor",
+    "apartment": "Apartment"
   },
   "no_results": {
-    "title": "Unfortunately, your search returned no results"
+    "title": "Sorry, your search did not return any results."
   },
   "about": {
-    "hero_title": "We’re a passionate group of people working from around the world to build the future of ecommerce.",
-    "hero_description": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    "timeline": [
-      {
-        "name": "Founded company",
-        "description": "Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.",
-        "date": "Aug 2021",
-        "dateTime": "2021-08"
-      },
-      {
-        "name": "Secured $65m in funding",
-        "description": "Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.",
-        "date": "Dec 2021",
-        "dateTime": "2021-12"
-      },
-      {
-        "name": "Released beta",
-        "description": "Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.",
-        "date": "Feb 2022",
-        "dateTime": "2022-02"
-      },
-      {
-        "name": "Global launch of product",
-        "description": "Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.",
-        "date": "Dec 2022",
-        "dateTime": "2022-12"
-      }
-    ],
-    "customers_love_us": "Our customers love us",
-    "customers_love_us_description": "Aliquip reprehenderit incididunt amet quis fugiat ut velit. Sit occaecat labore proident cillum in nisi adipisicing officia excepteur tempor deserunt.",
-    "stats_title": "We approach the workplace as something that adds to our lives and adds value to world.",
-    "stats_description": "Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras purus nibh cursus sit eu in id. Integer vel nibh.",
-    "stat1": {
-      "value": "250k",
-      "title": "Users on the platform",
-      "description": "Vel labore deleniti veniam consequuntur sunt nobis."
+    "hero": {
+      "title": "trust quality",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. "
     },
-    "stat2": {
-      "value": "$8.9 billion",
-      "title": "We’re proud that our customers have made over $8 billion in total revenue.",
-      "description": "Eu duis porta aliquam ornare. Elementum eget magna egestas."
+    "mission": {
+      "title": "Our mission",
+      "description1": "TrustQuality is a company that cares about the safety and comfort of car owners. ",
+      "description2": "We work only with trusted manufacturers to provide customers with access to the most reliable and modern car accessories. ",
+      "description3": "Our team of experts is always ready to provide professional advice on choosing the most suitable wipers, car lamps and accessories, taking into account the make and model of your car. "
     },
-    "stat3": {
-      "value": "401,093",
-      "title": "Transactions this year",
-      "description": "Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare."
+    "stats": {
+      "clients_satisfaction": "Clients satisfied with cooperation with us",
+      "products": "Products in our assortment"
     },
-    "people_title": "Our people",
-    "people_description1": "Quasi est quaerat. Sit molestiae et. Provident ad dolorem occaecati eos iste. Soluta rerum quidem minus ut molestiae velit error quod. Excepturi quidem expedita molestias quas.",
-    "people_description2": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.",
-    "join_us_title": "We’re always looking for awesome people to join us",
-    "join_us_description": "Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras purus nibh cursus sit eu in id.",
-    "view_all_openings": "View all openings"
+    "values": {
+      "title": "Our Key Advantages",
+      "subtitle": "We are proud to help motorists ensure safety and comfort on the roads.",
+      "assortment": "Wide range",
+      "assortment_description": "We offer a wide selection of windshield wipers and headlights in various types, sizes and models to suit the needs of all car owners.",
+      "quality": "Quality",
+      "quality_description": "TrustQuality works only with leading manufacturers known for their reliability and quality of products. ",
+      "consultation": "Professional advice",
+      "consultation_description": "Our experts are always ready to provide advice on choosing the most suitable wipers, car lamps and accessories, taking into account the make and model of your car.",
+      "delivery": "Delivery",
+      "delivery_description": "We provide convenient delivery options throughout Kazakhstan and the CIS to make the purchasing process as convenient as possible for customers.",
+      "pricing": "Prices and promotions",
+      "pricing_description": "We always have current prices and special offers for our clients. "
+    },
+    "team": {
+      "title": "Our team",
+      "description": "Our team of experts is always ready to provide professional advice on choosing the most suitable wipers, car lamps and accessories, taking into account the make and model of your car."
+    },
+    "partners": {
+      "title": "Our partners trust us"
+    }
   },
   "checkout": {
-    "title": "Checkout",
-    "items": "Items in cart",
-    "del_type": "Type of delivery",
-    "delivery_status": {
-      "pickup": "Pickup",
-      "delivery": "Delivery"
-    },
-    "to_pay": "Amount to be paid",
-    "address_delivery": "You can pick up your order at the address",
+    "payment_type": "Payment through the manager",
+    "title": "Placing an order",
     "first": {
-      "title": "Recipient Information",
-      "text": "To place an order, you need to add and select a recipient",
-      "placeholder": "Search for a recipient",
-      "physical": "Individual",
-      "legal": "Legal Entity",
-      "name": "Your Name",
-      "phone": "Phone Number"
+      "title": "Contact information",
+      "name": "Name",
+      "phone": "Telephone"
     },
     "second": {
-      "title": "Order Collection Method",
-      "pickup": "Pickup",
-      "delivery": "Delivery",
-      "address": "Delivery Address",
-      "placeholder": "Search for an address",
-      "add": "Add Delivery Address",
-      "text": "To place an order, you need to add and select a delivery address"
+      "title": "Delivery information",
+      "address": "Delivery address",
+      "delivery_type": "Delivery method",
+      "delivery_type_placeholder": "Specify delivery method"
     },
     "third": {
       "title": "Payment",
-      "phys": "Payment upon receipt",
-      "agreement": "Agree with return and claim conditions",
-      "online": "Online Payment",
-      "to_pay": "To Pay"
-    }
+      "to_pay": "For payment"
+    },
+    "items": "Your order",
+    "del_type": "Delivery type",
+    "delivery_status": {
+      "delivery": "Delivery"
+    },
+    "to_pay": "For payment"
   },
   "cart": {
-    "title": "Shopping basket",
-    "clear": "Clear cart",
+    "title": "Shopping cart",
+    "clear": "Empty Trash",
+    "empty": "Your cart is empty",
     "table": {
       "product": "Product name",
       "color": "Color",
@@ -146,21 +414,21 @@
       "quantity": "Quantity"
     },
     "checkout": {
-      "title": "Information about order",
-      "coupon_title": "Coupons and promo codes",
-      "coupon_text": "Enter the coupon code in the cart in the appropriate field and click \"Apply\" to have the discount reflected in the total order amount.",
-      "coupon_placeholder": "Enter the coupon code",
+      "title": "Order information",
+      "coupon_title": "Coupons and promotional codes",
+      "coupon_text": "Enter coupon code into cart and click ",
+      "coupon_placeholder": "Enter coupon code",
       "coupon_button": "Apply coupon",
-      "summary": "SUMMARY",
+      "summary": "RESULTS",
       "total": "Total",
-      "checkout_button": "Checkout"
+      "checkout_button": "Place an order"
     }
   },
   "forms": {
     "login": {
       "title": "Welcome!",
       "yet_account": "Don't have an account yet?",
-      "please_register": "Please register",
+      "please_register": "Register",
       "button": "Login"
     },
     "registration": {
@@ -169,30 +437,30 @@
       "login": "Login",
       "button": "Register",
       "rules": {
-        "first": "The password length must be at least 8 characters.",
-        "second": "Latin uppercase letters.",
-        "third": "Latin lowercase letters.",
+        "first": "The password must be at least 8 characters.",
+        "second": "Latin capital letters.",
+        "third": "Latin small letters.",
         "fourth": "Numbers 0-9."
       }
     },
     "forgot_password": {
-      "title": "Forgot password",
+      "title": "Forgot your password",
       "description": "Enter your phone number, we will send you a verification code.",
       "button": "Send code",
       "code_button": "Confirm"
     },
     "code": {
       "title": "Code",
-      "placeholder": "Enter the code"
+      "placeholder": "Enter code"
     },
-    "forgot_pass": "Forgot password?",
+    "forgot_pass": "Forgot your password?",
     "remember_me": "Remember me",
     "name": {
-      "title": "Name Surname",
+      "title": "First Name Last Name",
       "placeholder": "Enter your name"
     },
     "email": {
-      "title": "Email",
+      "title": "E-mail",
       "placeholder": "Enter your email"
     },
     "phone_number": {
@@ -202,12 +470,12 @@
       "title": "Password"
     },
     "confirm_password": {
-      "title": "Confirm password"
+      "title": "Confirm your password"
     }
   },
   "header_links": {
-    "store": "Store",
-    "choose_color": "Choose Color",
+    "store": "Shop",
+    "choose_color": "Select color",
     "ideas": "Ideas",
     "calculator": "Calculator",
     "about_us": "About Us",
@@ -220,17 +488,17 @@
     "more": "More details"
   },
   "products": {
-    "title": "Branded products",
-    "sec_title": "store",
-    "products_title": "Paint",
-    "found_products": "found products",
+    "title": "Branded Products",
+    "sec_title": "Shop",
+    "products_title": "Dye",
+    "found_products": "products found",
     "filters": "Filters",
     "details": {
       "article": "Article",
       "weight": "Weight",
       "kg": "kg",
       "quantity": "Quantity",
-      "paint_calculator": "Paint Calculator",
+      "paint_calculator": "Paint calculator",
       "calculate": "Calculate",
       "width": "Width",
       "height": "Height",
@@ -251,59 +519,105 @@
   },
   "pagination": {
     "show_by": {
-      "text": "Showing only",
+      "text": "Show by",
       "items": "results"
     },
     "prev": "Previous",
     "next": "Next"
   },
   "footer_links": {
-    "about_text": "LLP 'K-COLOR' with the trademark 'REMALUX' is a leader in the production of paints and coatings, located in the Republic of Kazakhstan.",
-    "remalux": {
-      "title": "Remalux",
-      "about_us": "About Us",
-      "news": "News",
-      "projects": "Projects",
-      "contacts": "Contacts"
+    "first": "All rights to materials published on the site belong to Trust Quality © 2023",
+    "second": "The user is notified that any materials posted on the site are objects of intellectual property\n            ",
+    "third": "Any information presented on this site is for informational purposes only and under no circumstances\n            "
+  },
+  "testimonial_section": {
+    "company_offer": "TQ company offers a wide range of headlights from Kolesa Group, making them a reliable choice for car owners. ",
+    "author": "Dmitriy Botanov",
+    "author_position": "CEO of Kolesa Group"
+  },
+  "catalog_section": {
+    "title": "Product catalog",
+    "description": "Explore our range of automotive lighting products."
+  },
+  "payment_section": {
+    "title": "Payment",
+    "description": "After placing an order on our website, your regional manager will contact you to clarify details and confirm the order. ",
+    "payment_methods": {
+      "method1": "Kaspi QR - a fast and convenient method of payment through the Kaspi.kz application",
+      "method2": "Cash - payment in cash before the goods are shipped"
+    }
+  },
+  "delivery_section": {
+    "title": "Delivery",
+    "description": "After placing and confirming the order by our manager, your order will be sent by any delivery method convenient for you. ",
+    "delivery_methods": {
+      "method1": "Air",
+      "method2": "Rail transport",
+      "method3": "Buses",
+      "method4": "And other methods convenient for you"
     },
-    "store": {
-      "title": "Store",
-      "products": "Products",
-      "payment_and_delivery": "Payment and Delivery",
-      "calculator": "Calculator",
-      "choose_color": "Choose Color",
-      "public_offer": "Public Offer"
+    "additional_info": "Delivery within the city of Almaty is free. "
+  },
+  "warranty_section": {
+    "title": "Guarantee",
+    "description1": "Our company is based on trust and quality. ",
+    "description2": "Your satisfaction is our priority and we are always ready to help resolve any issues."
+  },
+  "hero_section": {
+    "title": "Wide range. ",
+    "description": "We offer a wide selection of windshield wipers and headlights in various types, sizes and models to suit the needs of all car owners.",
+    "button_text": "Go to products"
+  },
+  "contact_form": {
+    "title": "Contact us",
+    "description": "Write to us and we will answer you as soon as possible. ",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "message": "Message",
+      "agreement": "By submitting an application, you accept the terms of the offer agreement and agree to the processing of your personal data in accordance with the privacy policy."
     },
-    "contacts": {
-      "title": "Contacts",
-      "address": "Almaty, Tole bi St., 300/2"
+    "placeholders": {
+      "name": "Ivan Ivanov",
+      "email": "Enter email",
+      "phone": "+7 (___) ___-__-__",
+      "message": "Your message..."
     },
-    "privacy_policy": "Privacy Policy"
+    "address": "Almaty, Kazakhstan, Sadovnikov 99",
+    "phone": "Telephone",
+    "email": "Email",
+    "submit": "Send message",
+    "icons": {
+      "address": "Address",
+      "phone": "Telephone",
+      "email": "Email"
+    }
   },
   "ideas": {
     "page_title": {
       "first": "From idea to reality",
-      "second": "with"
+      "second": "With"
     },
-    "direction": "Choose the direction of the idea",
-    "select_room": "Select a room"
+    "direction": "Choose the direction of your idea",
+    "select_room": "Choose a room"
   },
   "news": {
     "page_title": {
-      "first": "Stay up to date",
-      "second": "with all the news"
+      "first": "Stay informed",
+      "second": "all news"
     },
     "read_more": "Read more"
   },
   "mainPage": {
     "hero": {
-      "title": "High European Quality at an Affordable Price",
-      "choose_paint": "Choose Paint",
-      "choose_color": "Choose Color"
+      "title": "High European quality at an affordable price",
+      "choose_paint": "Choose paint",
+      "choose_color": "Select color"
     },
     "choose_type": {
       "paint": {
-        "title": "Brand Paint",
+        "title": "Brand paint",
         "description": "For all types of surfaces"
       },
       "coating": {
@@ -324,24 +638,24 @@
       }
     },
     "ideas": {
-      "title": "Ready-made Solutions for Your Home",
-      "link": "More Ideas"
+      "title": "Ready-made solutions for your home",
+      "link": "More ideas"
     },
     "popular_products": {
       "title": "Popular Products",
-      "link": "More Products"
+      "link": "More products"
     },
     "download_remalux": {
       "title": "Remalux",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lectus risus, finibus ornare vestibulum et, feugiat quis dui. Vivamus sit amet dolor et magna facilisis rhoncus. Curabitur maximus est sed porta scelerisque. Sed suscipit, arcu volutpat feugiat posuere, eros nisi tristique nibh, mollis vehicula lectus tortor eu purus. Donec ut tortor blandit, sagittis diam eget, suscipit eros."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     "news": {
-      "title": "Latest News",
-      "link": "All News"
+      "title": "Latest news",
+      "link": "All news"
     },
     "about_us": {
-      "title": "About Us Remalux",
-      "description": "LLP 'K-COLOR' with the trademark 'REMALUX' is a leader in the production of paints and coatings, located in the Republic of Kazakhstan. We offer consumers a wide range of high-quality paints, made under a British license from raw materials by renowned French, Belgian, German, Dutch, and American manufacturers."
+      "title": "About us Remalux",
+      "description": "K-TsVET LLP with the REMALUX trademark is a leader in the production of paints and coatings in the Republic of Kazakhstan."
     }
   }
 }

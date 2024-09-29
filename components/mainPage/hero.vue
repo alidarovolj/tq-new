@@ -16,33 +16,6 @@ const settings = {
   snapAlign: "center",
 };
 
-const result = ref([
-  {
-    id: "1",
-    img: bg1,
-    title: `<h1>${t("mainPage.hero.slide.first.title.order")}</h1>`,
-    content: t("mainPage.hero.slide.first.content"),
-    button: {
-      text: t("mainPage.hero.slide.buttons.browse"),
-      link: localePath("/artworks"),
-    },
-    secButton: {
-      text: t("mainPage.hero.slide.buttons.explore"),
-      link: localePath("/artists"),
-    },
-  },
-  {
-    id: "1",
-    img: bg,
-    title: `<h1><span class='font-bold'>${t("mainPage.hero.slide.second.title.buy")}</span><br> <span class='italic'>${t("mainPage.hero.slide.second.title.reallyMade")}</span></h1>`,
-    content: t("mainPage.hero.slide.second.content"),
-    button: {
-      text: t("mainPage.hero.slide.buttons.order"),
-      link: localePath("/commission"),
-    },
-  },
-]);
-
 onMounted(async () => {
   await nextTick()
   await products.getCatalog()

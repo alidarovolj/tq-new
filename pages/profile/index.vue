@@ -86,7 +86,7 @@ onMounted(async () => {
               <p class="text-xl font-medium">{{ $t('orders.title') }}</p>
             </div>
           </div>
-          <div class="flex flex-col gap-5">
+          <div v-if="orders.ordersList.data.length > 0" class="flex flex-col gap-5">
             <Disclosure
                 v-for="(item, index) in orders.ordersList.data"
                 :key="index"
@@ -184,6 +184,11 @@ onMounted(async () => {
               </DisclosurePanel>
             </Disclosure>
           </div>
+          <p
+              v-else
+              class="text-center text-red-500">
+            Нет товаров в данной категории
+          </p>
         </div>
       </div>
       <div class="bg-white p-6 rounded-2xl set_shadow">
@@ -213,11 +218,11 @@ onMounted(async () => {
                   @click="modals.showModal('removeAddress', item)"/>
             </div>
           </div>
-          <div v-else>
-            <p class="text-gray-500 py-3">
-              {{ t('profile.no_addresses') }}
-            </p>
-          </div>
+          <p
+              v-else
+              class="text-center text-red-500">
+            Нет адресов
+          </p>
         </div>
         <div v-else class="spinner p-3"></div>
       </div>

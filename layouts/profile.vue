@@ -75,8 +75,8 @@ const logoutUser = async () => {
           <ChevronRightIcon class="w-6 h-6"/>
         </div>
         <div
-            class="bg-white shadow flex flex-col gap-3 rounded-lg mt-4 set_shadow px-6 py-4 w-full transition-all"
-            @click="logoutUser">
+            v-if="user.userProfile?.employee"
+            class="bg-white shadow flex flex-col gap-3 rounded-lg mt-4 set_shadow px-6 py-4 w-full transition-all">
           <div>
             <p class="text-sm text-gray-500">Ваш менеджер</p>
             <p class="font-semibold">{{ user.userProfile?.employee?.name }}</p>

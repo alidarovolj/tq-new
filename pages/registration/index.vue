@@ -66,6 +66,31 @@ const registerUser = async () => {
   }
   loading.value = false;
 }
+
+const {t} = useI18n()
+
+useHead({
+  title: t("headers.registration.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.registration.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.registration.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.registration.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.registration.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.registration.canonical")}],
+});
 </script>
 
 <template>

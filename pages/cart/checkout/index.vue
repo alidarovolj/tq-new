@@ -62,7 +62,7 @@ const v$ = useVuelidate({
 const editQuantity = async (id, quantity) => {
   editForm.value.quantity = quantity
   if (editForm.value.quantity === 0) {
-    notifications.showNotification('error', 'Редактирование не удалось', 'Кол-во не может ровняться 0 или меньше')
+    notifications.showNotification('error', t('notification.error_title'), t('notification.error_message'))
     editForm.value.quantity = null
     return
   }
@@ -89,15 +89,6 @@ const links = computed(() => [
 const isDisabled = computed(() => !!user.userProfile && !!user.userProfile.data && !!user.userProfile.data.name);
 const isDisabledPhone = computed(() => !!user.userProfile && !!user.userProfile.data && !!user.userProfile.data.phone);
 
-const generateRandomString = () => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < 6; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-};
-
 const makeCheckout = async () => {
   if (!token.value) {
     form.value.temporary_code = tempCode.value.toString()
@@ -108,7 +99,7 @@ const makeCheckout = async () => {
   await v$.value.$validate();
 
   if (v$.value.$error) {
-    notifications.showNotification("error", "Данные не заполнены", "Проверьте правильность введенных данных и попробуйте снова.");
+    notifications.showNotification("error", t('notification.error_title'), t('notification.error_message'));
     loading.value = false;
     return;
   }
@@ -118,7 +109,7 @@ const makeCheckout = async () => {
       body: JSON.stringify(form.value)
     }, route.query);
 
-    notifications.showNotification("success", "Успешно", "Вы успешно оформили заказ");
+    notifications.showNotification("success", t('notification.success_title'), t('notification.success_message'));
     await nextTick()
     if (token.value) {
       await user.getProfile()
@@ -131,7 +122,7 @@ const makeCheckout = async () => {
     await router.push(localePath('/payment-success'))
   } catch (e) {
     loading.value = false;
-    notifications.showNotification("error", "Произошла ошибка", e);
+    notifications.showNotification("error", t('notification.error_title'), e);
   }
 
 }
@@ -149,6 +140,29 @@ onMounted(async () => {
     await cart.getTemporaryCart()
   }
 })
+
+useHead({
+  title: t("headers.checkout.title"),
+  meta: [
+    {
+      property: "description",
+      content: t("headers.checkout.description"),
+    },
+    {
+      property: "og:description",
+      content: t("headers.checkout.description"),
+    },
+    {
+      property: "og:title",
+      content: t("headers.checkout.title"),
+    },
+    {
+      property: "og:url",
+      content: t("headers.checkout.og_url"),
+    },
+  ],
+  link: [{rel: "canonical", href: t("headers.checkout.canonical")}],
+});
 </script>
 
 <template>
@@ -170,7 +184,7 @@ onMounted(async () => {
                   1
                 </div>
                 <p class="text-base md:text-2xl font-semibold">
-                  Информация о получателе
+                  {{ $t('checkout.first.title') }}
                 </p>
               </div>
 
@@ -191,11 +205,12 @@ onMounted(async () => {
                       :placeholder="$t('checkout.first.phone')"
                       class="w-full px-4 border-b border-[#F0DFDF] rounded-lg py-3"
                       data-maska="+7 (###) ###-##-##"
-                      placeholder="+7 (___) ___-__-__"
                       type="text">
                 </div>
               </div>
             </div>
+
+            <!-- Delivery Information -->
             <div class="w-full">
               <div class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3">
                 <div
@@ -215,7 +230,7 @@ onMounted(async () => {
                     <label
                         class="block text-sm font-medium text-gray-700"
                         for="address">
-                      Способ доставки
+                      {{ $t('checkout.second.delivery_type') }}
                     </label>
                     <input
                         id="address"
@@ -223,102 +238,91 @@ onMounted(async () => {
                         :class="{ 'border-red-500' : v$.delivery_type.$error }"
                         class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
                         name="address"
-                        placeholder="Укажите способ"
+                        :placeholder="$t('checkout.second.delivery_type_placeholder')"
                         type="text">
                   </div>
-                  <div>
-                    <YandexMap
-                        @send_data="(data) => form.delivery_address = data.address"
-                    />
-                    <div>
-                      <div class="grid grid-cols-1 grid-y-2 sm:gap-y-4 sm:grid-cols-2 gap-x-4 xl:grid-cols-3">
-                        <div
-                            v-if="addresses.citiesList"
-                            class="mb-4">
-                          <label
-                              class="block text-sm font-medium text-gray-700"
-                              for="city">
-                            {{ $t('addresses.create.city') }}
-                          </label>
-                          <select
-                              id=""
-                              v-model="form.city_id"
-                              :class="{ 'border-red-500' : v$.city_id.$error }"
-                              :disabled="closeCity"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
-                              name="">
-                            <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
-                            <option
-                                v-for="(city, index) of addresses.citiesList"
-                                :key="index"
-                                :value="city.id">
-                              {{ city.name }}
-                            </option>
-                          </select>
-                        </div>
-                        <div class="mb-4">
-                          <label
-                              class="block text-sm font-medium text-gray-700"
-                              for="address">
-                            {{ $t('addresses.create.address') }}
-                          </label>
-                          <input
-                              id="address"
-                              v-model="form.delivery_address"
-                              :class="{ 'border-red-500' : v$.delivery_address.$error }"
-                              :placeholder="$t('addresses.create.address_placeholder')"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
-                              name="address"
-                              type="text">
-                        </div>
-                        <div class="mb-4">
-                          <label
-                              class="block text-sm font-medium text-gray-700"
-                              for="address">
-                            {{ $t('addresses.create.entrance') }} <span class="text-gray-400">(необязательно)</span>
-                          </label>
-                          <input
-                              id="address"
-                              v-model="formAddress.entrance"
-                              :placeholder="$t('addresses.create.entrance_placeholder')"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
-                              name="address"
-                              type="text">
-                        </div>
-                        <div class="mb-4">
-                          <label
-                              class="block text-sm font-medium text-gray-700"
-                              for="address">
-                            {{ $t('addresses.create.floor') }} <span class="text-gray-400">(необязательно)</span>
-                          </label>
-                          <input
-                              id="address"
-                              v-model="formAddress.floor"
-                              :placeholder="$t('addresses.create.floor_placeholder')"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
-                              name="address"
-                              type="text">
-                        </div>
-                        <div class="mb-4">
-                          <label
-                              class="block text-sm font-medium text-gray-700"
-                              for="address">
-                            {{ $t('addresses.create.apartment') }} <span class="text-gray-400">(необязательно)</span>
-                          </label>
-                          <input
-                              id="address"
-                              v-model="formAddress.float"
-                              :placeholder="$t('addresses.create.apartment_placeholder')"
-                              class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white "
-                              name="address"
-                              type="text">
-                        </div>
-                      </div>
+
+                  <YandexMap
+                      @send_data="(data) => form.delivery_address = data.address"
+                  />
+
+                  <!-- City and Address Inputs -->
+                  <div class="grid grid-cols-1 sm:gap-y-4 sm:grid-cols-2 gap-x-4 xl:grid-cols-3">
+                    <div v-if="addresses.citiesList" class="mb-4">
+                      <label class="block text-sm font-medium text-gray-700" for="city">
+                        {{ $t('addresses.create.city') }}
+                      </label>
+                      <select
+                          id="city"
+                          v-model="form.city_id"
+                          :class="{ 'border-red-500' : v$.city_id.$error }"
+                          :disabled="closeCity"
+                          class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white">
+                        <option :value="null">{{ $t('addresses.create.city_placeholder') }}</option>
+                        <option v-for="(city, index) of addresses.citiesList" :key="index" :value="city.id">
+                          {{ city.name }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="mb-4">
+                      <label class="block text-sm font-medium text-gray-700" for="address">
+                        {{ $t('addresses.create.address') }}
+                      </label>
+                      <input
+                          id="address"
+                          v-model="form.delivery_address"
+                          :class="{ 'border-red-500' : v$.delivery_address.$error }"
+                          :placeholder="$t('addresses.create.address_placeholder')"
+                          class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
+                          name="address"
+                          type="text">
+                    </div>
+
+                    <div class="mb-4">
+                      <label class="block text-sm font-medium text-gray-700" for="entrance">
+                        {{ $t('addresses.create.entrance') }} <span class="text-gray-400">(необязательно)</span>
+                      </label>
+                      <input
+                          id="entrance"
+                          v-model="formAddress.entrance"
+                          :placeholder="$t('addresses.create.entrance_placeholder')"
+                          class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
+                          name="entrance"
+                          type="text">
+                    </div>
+
+                    <div class="mb-4">
+                      <label class="block text-sm font-medium text-gray-700" for="floor">
+                        {{ $t('addresses.create.floor') }} <span class="text-gray-400">(необязательно)</span>
+                      </label>
+                      <input
+                          id="floor"
+                          v-model="formAddress.floor"
+                          :placeholder="$t('addresses.create.floor_placeholder')"
+                          class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
+                          name="floor"
+                          type="text">
+                    </div>
+
+                    <div class="mb-4">
+                      <label class="block text-sm font-medium text-gray-700" for="apartment">
+                        {{ $t('addresses.create.apartment') }} <span class="text-gray-400">(необязательно)</span>
+                      </label>
+                      <input
+                          id="apartment"
+                          v-model="formAddress.float"
+                          :placeholder="$t('addresses.create.apartment_placeholder')"
+                          class="py-2 px-4 border border-[#F0DFDF] rounded-lg w-full bg-white"
+                          name="apartment"
+                          type="text">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- Payment Information -->
             <div class="w-full">
               <div class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3">
                 <div
@@ -335,7 +339,7 @@ onMounted(async () => {
                     class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"
                     @click="deliveryType = 1">
                   <CreditCardIcon class="w-5 h-5"/>
-                  <p>Оплата через менеджера</p>
+                  <p>{{ $t('checkout.payment_type') }}</p>
                 </div>
               </div>
               <p class="font-bold mb-4">
@@ -348,6 +352,8 @@ onMounted(async () => {
               </p>
             </div>
           </div>
+
+          <!-- Order Summary -->
           <div class="w-full md:w-1/3 bg-[#FAFAFA] py-5 px-4 rounded-lg">
             <div class="flex gap-6 mb-4 border-b border-[#F0DFDF] pb-3">
               <p class="text-xl font-semibold">
@@ -356,32 +362,26 @@ onMounted(async () => {
             </div>
 
             <div class="flow-root">
-              <div
-                  v-if="cartList"
-                  class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div
-                    v-if="cartList.data.length > 0"
-                    class="inline-block min-w-full align-middle sm:px-6 lg:px-8 overflow-x-auto">
-                  <table
-                      class="min-w-full divide-y divide-gray-300 text-xs">
+              <div v-if="cartList" class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div v-if="cartList.data.length > 0"
+                     class="inline-block min-w-full align-middle sm:px-6 lg:px-8 overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-300 text-xs">
                     <thead class="bg-[#FAFAFA]">
                     <tr>
-                      <th class="py-3.5 pr-3 text-left  font-semibold text-gray-900" scope="col">
+                      <th class="py-3.5 pr-3 text-left font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.product') }}
                       </th>
-                      <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
+                      <th class="px-3 py-3.5 text-left font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.quantity') }}
                       </th>
-                      <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
+                      <th class="px-3 py-3.5 text-left font-semibold text-gray-900" scope="col">
                         {{ t('cart.table.total') }}
                       </th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                    <tr
-                        v-for="(item, index) in cartList.data"
-                        :key="index">
-                      <td class="whitespace-nowrap py-5 pl-4 pr-3  sm:pl-0">
+                    <tr v-for="(item, index) in cartList.data" :key="index">
+                      <td class="whitespace-nowrap py-5 pl-4 pr-3 sm:pl-0">
                         <div class="font-medium text-gray-900">{{ item.product.name }}</div>
                       </td>
                       <td class="whitespace-nowrap px-3 py-5">
@@ -391,9 +391,7 @@ onMounted(async () => {
                               @click="editQuantity(item.id, item.quantity - 1)">
                             <MinusIcon class="w-5 h-5"/>
                           </button>
-                          <p class=" text-xs">
-                            {{ item.quantity }}
-                          </p>
+                          <p class="text-xs">{{ item.quantity }}</p>
                           <button
                               class="border border-[#F0DFDF] rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
                               @click="editQuantity(item.id, item.quantity + 1)">
@@ -401,7 +399,7 @@ onMounted(async () => {
                           </button>
                         </div>
                       </td>
-                      <td class="whitespace-nowrap px-3 py-5 font-semibold ">
+                      <td class="whitespace-nowrap px-3 py-5 font-semibold">
                         {{ item.price }}₸
                       </td>
                     </tr>
@@ -410,34 +408,8 @@ onMounted(async () => {
                 </div>
                 <NoResults v-else/>
               </div>
-              <div
-                  v-else
-                  class="border rounded-lg p-2">
-                <div
-                    v-for="(_, index) of 10"
-                    :key="index">
-                  <div class="flex justify-between mb-3 border p-2 rounded-lg gap-3">
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-10 h-4"
-                    ></div>
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-20 h-4"></div>
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-32 h-4"></div>
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-1/2 h-4"></div>
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-1/2 h-4"></div>
-                    <div
-                        :class="{ 'bg-[#989898]' : index === 0 }"
-                        class="skeleton w-20 h-4"></div>
-                  </div>
-                </div>
+              <div v-else class="border rounded-lg p-2">
+                <!-- Skeleton for Loading State -->
               </div>
               <div class="font-bold text-sm">
                 <div class="flex items-center justify-between py-3">

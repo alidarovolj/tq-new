@@ -1,181 +1,450 @@
 {
-  "breadcrumbs": {
-    "home": "Басты бет",
-    "store": "Дүкен",
-    "ideas": "Идеялар",
-    "news": "Жаңалықтар",
-    "cart": "Себет",
-    "checkout": "Тапсырысты рәсімдеу",
-    "profile": "Профиль",
-    "addresses": "Мекенжайлар",
-    "recipients": "Қабылдаушылар",
-    "orders": "Тапсырыстар",
-    "favourites": "Таңдаулылар"
+  "headers": {
+    "payment_delivery": {
+      "title": "Жеткізу және төлеу - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/payment-delivery",
+      "canonical": "https://gazbas.kz/payment-delivery"
+    },
+    "projects": {
+      "title": "Жобалар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/projects",
+      "canonical": "https://gazbas.kz/projects"
+    },
+    "delivery": {
+      "title": "Төлем және жеткізу - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/delivery",
+      "canonical": "https://gazbas.kz/delivery"
+    },
+    "faq": {
+      "title": "Жиі қойылатын сұрақтар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/faq",
+      "canonical": "https://gazbas.kz/faq"
+    },
+    "mainPage": {
+      "title": "Басты бет - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz",
+      "canonical": "https://gazbas.kz"
+    },
+    "store": {
+      "title": "Дүкен - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/store",
+      "canonical": "https://gazbas.kz/store"
+    },
+    "privacy": {
+      "title": "Құпиялық саясаты - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/privacy-policy",
+      "canonical": "https://gazbas.kz/privacy-policy"
+    },
+    "colors": {
+      "title": "Бояу - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/colors",
+      "canonical": "https://gazbas.kz/colors"
+    },
+    "ideas": {
+      "title": "Идеялар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/ideas",
+      "canonical": "https://gazbas.kz/ideas"
+    },
+    "about": {
+      "title": "Біз туралы - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/about",
+      "canonical": "https://gazbas.kz/about"
+    },
+    "news": {
+      "title": "Жаңалықтар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/news",
+      "canonical": "https://gazbas.kz/news"
+    },
+    "contacts": {
+      "title": "Байланыстар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/contacts",
+      "canonical": "https://gazbas.kz/contacts"
+    },
+    "profile": {
+      "title": "Профиль - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/profile",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "orders": {
+      "title": "Профиль - Тапсырыстар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/profile/orders",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "addresses": {
+      "title": "Профиль - Мекенжайлар - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/profile/addresses",
+      "canonical": "https://gazbas.kz/profile"
+    },
+    "login": {
+      "title": "Авторизация - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/login",
+      "canonical": "https://gazbas.kz/login"
+    },
+    "registration": {
+      "title": "Тіркеу - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/registration",
+      "canonical": "https://gazbas.kz/login"
+    },
+    "forgot_pass": {
+      "title": "Құпия сөзіңізді ұмытып қалдыңыз - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/forgot-password",
+      "canonical": "https://gazbas.kz/forgot-password"
+    },
+    "cart": {
+      "title": "Арба - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/cart",
+      "canonical": "https://gazbas.kz/cart"
+    },
+    "checkout": {
+      "title": "Тапсырыс беру - TQ",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. ",
+      "og_url": "https://gazbas.kz/cart/checkout",
+      "canonical": "https://gazbas.kz/cart/checkout"
+    }
   },
-  "profile": {
-    "phone": "Телефон нөмірі",
-    "logout": "Шығу",
-    "profile": "Профиль",
-    "recipients": "Қабылдаушылар",
-    "no_recipients": "Өкінішке орай, сізде сақталған қабылдаушылар жоқ, оларды қосыңыз.",
-    "add_recipient": "Қабылдаушыны қосу",
-    "no_addresses": "Өкінішке орай, сізде сақталған мекенжайлар жоқ, оларды қосыңыз.",
-    "add_address": "Мекенжай қосу",
-    "my_addresses": "Менің мекенжайларым"
+  "header": {
+    "address": {
+      "city": "Алматы қаласы, Садовникова көшесі, 99"
+    },
+    "working_hours": {
+      "time": "Күн сайын 9:00-ден 18:00-ге дейін"
+    }
+  },
+  "navigation": {
+    "payment_delivery": "Төлем және жеткізу",
+    "products": "Өнімдер",
+    "about": "Компания туралы",
+    "contacts": "Контактілер",
+    "catalog": "Каталог",
+    "input": "Өнімдерді іздеу",
+    "cart": "Себет"
+  },
+  "catalog": {
+    "title": "Өнім каталогы",
+    "description": "Автокөлік жарықтандыру өнімдерінің ассортиментін зерттеңіз.",
+    "categories": {
+      "title": "Санаттар"
+    },
+    "show_more": "Көбірек көрсету",
+    "no_products": "Бұл санатта өнім жоқ"
+  },
+  "product_detail": {
+    "category": "Санат",
+    "quantity": "Саны",
+    "add_to_cart": "Себетке қосу",
+    "description": "Сипаттама",
+    "price_per_unit": "₸ / дана.",
+    "characteristics": "Сипаттамалары",
+    "faq": {
+      "title": "Жиі қойылатын сұрақтар",
+      "questions": [
+        {
+          "question": "Сіз қандай төлем әдістерін қабылдайсыз?",
+          "answer": "Біз Visa, Mastercard және American Express қабылдаймыз. "
+        },
+        {
+          "question": "Жеткізу қанша уақытты алады?",
+          "answer": "Сіздің тапсырысыңыз расталғаннан кейін 2-4 жұмыс күні ішінде жеткізіледі."
+        },
+        {
+          "question": "Мен затты қайтара аламын ба?",
+          "answer": "Кешіріңіз, бірақ зат зақымдалмаса, қайтаруды қабылдамаймыз."
+        },
+        {
+          "question": "Қалай тапсырыс беруге болады?",
+          "answer": "Өнім бетіне өтіп, «Сатып алу» түймесін басуға болады. "
+        }
+      ]
+    },
+    "reviews": {
+      "title": "Пайдаланушы пікірлері",
+      "average_rating": "5 жұлдыздан",
+      "featured_reviews": [
+        {
+          "id": 1,
+          "author": "Эмили Селман",
+          "date": "16 шілде, 2021 жыл",
+          "content": "Бұл белгішелер жиынтығы менің соңғы жобам үшін қажет нәрсе. "
+        },
+        {
+          "id": 2,
+          "author": "Гектор Гиббонс",
+          "date": "12 шілде, 2021 жыл",
+          "content": "Бұл белгішелер жинағының қаншалықты жоғары сапалы екеніне таң қалдым. "
+        }
+      ]
+    }
   },
   "addresses": {
     "create": {
-      "title": "Жеткізу мекенжайын қосу",
-      "provide_address": "Мекенжайды көрсетіңіз",
+      "title": "Жеткізу мекенжайын қосыңыз",
+      "provide_address": "Мекенжайыңызды көрсетіңіз",
       "address_placeholder": "Мекенжайды енгізіңіз",
       "city": "Қала",
       "city_placeholder": "Қаланы таңдаңыз",
       "address": "Мекенжай",
-      "entrance": "Кіреберіс",
-      "entrance_placeholder": "Кіреберісті енгізіңіз",
-      "floor": "Қабат",
-      "floor_placeholder": "Қабатты енгізіңіз",
+      "entrance": "Кіру",
+      "entrance_placeholder": "Кіру",
+      "floor": "Еден",
+      "floor_placeholder": "Еденге кіріңіз",
       "apartment": "Пәтер",
-      "apartment_placeholder": "Пәтерді енгізіңіз",
+      "apartment_placeholder": "Пәтерге кіру",
       "button": "Сақтау"
     }
   },
+  "notification": {
+    "error_title": "Қате",
+    "error_message": "Енгізілген ақпараттың дұрыстығын тексеріп, әрекетті қайталаңыз.",
+    "success_title": "Сәттілік",
+    "success_message": "Сіз тапсырысыңызды сәтті орналастырдыңыз"
+  },
+  "contacts": {
+    "title": "Біздің байланыстарымыз",
+    "description": "Біздің қызметімізге қатысты кез келген сұрақтар бойынша бізбен байланыса аласыз. ",
+    "form": {
+      "name": "Аты",
+      "email": "Электрондық пошта",
+      "phone": "Телефон нөмірі",
+      "message": "Хабарлама",
+      "agreement": "Өтінімді жіберу арқылы сіз ұсыныс келісімінің шарттарын қабылдайсыз және жеке деректеріңізді құпиялылық саясатына сәйкес өңдеуге келісесіз.",
+      "submit": "Хабарлама жіберу"
+    },
+    "notification": {
+      "error_title": "Қате орын алды",
+      "error_message": "Енгізілген ақпараттың дұрыстығын тексеріп, әрекетті қайталаңыз.",
+      "success_title": "Сәтті",
+      "success_message": "Сіз хабарламаңызды сәтті жібердіңіз, біз сізге жақын арада хабарласамыз."
+    },
+    "regions": {
+      "north": {
+        "title": "Ынтымақтастық мәселелері бойынша:",
+        "regions": [
+          "Астана қаласы",
+          "Ақмола облысы",
+          "Ұлытау облысы",
+          "Қарағанды ​​облысы",
+          "Павлодар облысы",
+          "Солтүстік Қазақстан облысы",
+          "Қостанай облысы"
+        ],
+        "contact_name": "Ордабек Аят",
+        "contact_phone": "+7 775 245-33-03"
+      },
+      "west": {
+        "title": "Ынтымақтастық мәселелері бойынша:",
+        "regions": [
+          "Ақтөбе облысы",
+          "Батыс Қазақстан облысы",
+          "Атырау облысы",
+          "Маңғыстау облысы"
+        ],
+        "contact_name": "Жанбиров Дамир Бауыржанұлы",
+        "contact_phone": "+7 776 713-13-33"
+      },
+      "south": {
+        "title": "Ынтымақтастық мәселелері бойынша:",
+        "regions": [
+          "Шығыс Қазақстан облысы",
+          "Абай ауданы",
+          "Алматы облысы",
+          "Жамбыл облысы",
+          "Түркістан облысы",
+          "Қызылорда облысы",
+          "Жетісу облысы",
+          "Алматы қаласы",
+          "Шымкент қаласы"
+        ],
+        "contact_name": "Нұғман Дәулет",
+        "contact_phone": "+7 707 111 97 81"
+      },
+      "car_city": {
+        "title": "Ынтымақтастық мәселелері бойынша «Car City» сауда орталығы (2-деңгей, 222 бутик) мекенжайы: шағын аудан. ",
+        "contact_name": "Қасымжан Ерболсын Дәуренұлы",
+        "contact_phone": "+7 747 237-79-75"
+      }
+    }
+  },
+  "breadcrumbs": {
+    "home": "Үй",
+    "store": "Дүкен",
+    "ideas": "Идеялар",
+    "news": "Жаңалықтар",
+    "contacts": "Контактілер",
+    "cart": "Себет",
+    "checkout": "Тапсырыс беру",
+    "profile": "Профиль",
+    "addresses": "Мекенжайлар",
+    "recipients": "Алушылар",
+    "orders": "Тапсырыстар",
+    "favourites": "Таңдаулылар",
+    "payment_success": "Сәтті төлем",
+    "about": "Компания туралы"
+  },
+  "payment_success": {
+    "title": "Тапсырысыңызға рахмет!",
+    "description": "Тапсырысыңыз сәтті аяқталды. ",
+    "back_to_home": "Үйге оралу"
+  },
+  "orders": {
+    "title": "Менің тапсырыстарым",
+    "statuses": {
+      "created": "Құрылды",
+      "in_process": "Өңдеуде",
+      "ended": "Аяқталды"
+    },
+    "order": {
+      "title": "Тапсырыс беру",
+      "status": "Күй",
+      "amount": "Тапсырыс сомасы",
+      "show": "Элементтерді ретімен көрсету",
+      "hide": "Өнімдерді ретімен жасырыңыз"
+    }
+  },
+  "profile": {
+    "phone": "Телефон нөмірі",
+    "my_orders": "Менің тапсырыстарым",
+    "my_profile": "Менің профилім",
+    "logout": "Шығу",
+    "profile": "Профиль",
+    "recipients": "Алушылар",
+    "no_recipients": "Кешіріңіз, сізде сақталған алушы жоқ. ",
+    "add_recipient": "Алушыны қосыңыз",
+    "no_addresses": "Кешіріңіз, сізде сақталған мекенжайлар жоқ. ",
+    "add_address": "Мекенжай қосыңыз",
+    "my_addresses": "Менің мекенжайларым",
+    "to_addresses": "Менің мекенжайларыма өтіңіз",
+    "entrance": "Кіру",
+    "floor": "Еден",
+    "apartment": "Пәтер"
+  },
   "no_results": {
-    "title": "Өкінішке орай, сіздің іздеу нәтижесі табылған жоқ"
+    "title": "Кешіріңіз, сіздің іздеуіңіз ешқандай нәтиже бермеді."
   },
   "about": {
-    "hero_title": "Біз әлемнің түкпір-түкпірінен жұмыс істейтін электронды коммерцияның болашағын құруға құштар адамдар тобымыз.",
-    "hero_description": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    "timeline": [
-      {
-        "name": "Компанияның негізі қаланды",
-        "description": "Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.",
-        "date": "Там 2021",
-        "dateTime": "2021-08"
-      },
-      {
-        "name": "$65 млн қаржы тартылды",
-        "description": "Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.",
-        "date": "Жел 2021",
-        "dateTime": "2021-12"
-      },
-      {
-        "name": "Бета-нұсқа шығарылды",
-        "description": "Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.",
-        "date": "Ақп 2022",
-        "dateTime": "2022-02"
-      },
-      {
-        "name": "Өнімнің жаһандық іске қосылуы",
-        "description": "Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.",
-        "date": "Жел 2022",
-        "dateTime": "2022-12"
-      }
-    ],
-    "customers_love_us": "Біздің клиенттеріміз бізді жақсы көреді",
-    "customers_love_us_description": "Aliquip reprehenderit incididunt amet quis fugiat ut velit. Sit occaecat labore proident cillum in nisi adipisicing officia excepteur tempor deserunt.",
-    "stats_title": "Біз жұмыс орнын өмірімізге қосымша және әлемге құндылық қосатын нәрсе ретінде қарастырамыз.",
-    "stats_description": "Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras purus nibh cursus sit eu in id. Integer vel nibh.",
-    "stat1": {
-      "value": "250k",
-      "title": "Платформадағы пайдаланушылар",
-      "description": "Vel labore deleniti veniam consequuntur sunt nobis."
+    "hero": {
+      "title": "сенім сапасы",
+      "description": "TrustQuality кең ауқымды көліктерге арналған жоғары сапалы автокөлік тазалағыштар мен шамдарды жеткізуге маманданған. "
     },
-    "stat2": {
-      "value": "$8.9 миллиард",
-      "title": "Біз өз клиенттеріміздің жалпы кірістері $8 миллиардтан асқанын мақтан тұтамыз.",
-      "description": "Eu duis porta aliquam ornare. Elementum eget magna egestas."
+    "mission": {
+      "title": "Біздің миссиямыз",
+      "description1": "TrustQuality - көлік иелерінің қауіпсіздігі мен жайлылығына мән беретін компания. ",
+      "description2": "Біз тұтынушыларға ең сенімді және заманауи автокөлік аксессуарларына қол жеткізу үшін тек сенімді өндірушілермен жұмыс істейміз. ",
+      "description3": "Біздің сарапшылар тобы сіздің көлігіңіздің маркасы мен үлгісін ескере отырып, ең қолайлы тазалағыштарды, автокөлік шамдары мен аксессуарларды таңдау бойынша кәсіби кеңес беруге әрқашан дайын. "
     },
-    "stat3": {
-      "value": "401,093",
-      "title": "Осы жылғы транзакциялар",
-      "description": "Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare."
+    "stats": {
+      "clients_satisfaction": "Клиенттер бізбен ынтымақтастыққа қанағаттанды",
+      "products": "Біздің ассортименттегі өнімдер"
     },
-    "people_title": "Біздің адамдар",
-    "people_description1": "Quasi est quaerat. Sit molestiae et. Provident ad dolorem occaecati eos iste. Soluta rerum quidem minus ut molestiae velit error quod. Excepturi quidem expedita molestias quas.",
-    "people_description2": "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.",
-    "join_us_title": "Бізге қосылуға әрқашан керемет адамдарды іздейміз",
-    "join_us_description": "Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras purus nibh cursus sit eu in id.",
-    "view_all_openings": "Барлық ашық позицияларды көру"
+    "values": {
+      "title": "Біздің негізгі артықшылықтарымыз",
+      "subtitle": "Біз жүргізушілерге жолдардағы қауіпсіздік пен жайлылықты қамтамасыз етуге көмектескенімізді мақтан тұтамыз.",
+      "assortment": "Кең ауқым",
+      "assortment_description": "Біз барлық автокөлік иелерінің қажеттіліктеріне сәйкес келетін әртүрлі типтегі, өлшемдегі және үлгідегі әйнек тазалағыштар мен фаралардың кең таңдауын ұсынамыз.",
+      "quality": "Сапасы",
+      "quality_description": "TrustQuality өнімдерінің сенімділігі мен сапасымен танымал жетекші өндірушілермен ғана жұмыс істейді. ",
+      "consultation": "Кәсіби кеңес",
+      "consultation_description": "Біздің мамандар сіздің көлігіңіздің маркасы мен үлгісін ескере отырып, ең қолайлы тазалағыштарды, автокөлік шамдары мен аксессуарларды таңдау бойынша кеңес беруге әрқашан дайын.",
+      "delivery": "Жеткізу",
+      "delivery_description": "Сатып алу процесін тұтынушыларға барынша ыңғайлы ету үшін біз бүкіл Қазақстан мен ТМД елдеріне жеткізудің ыңғайлы нұсқаларын ұсынамыз.",
+      "pricing": "Бағалар мен акциялар",
+      "pricing_description": "Бізде әрқашан ағымдағы бағалар мен клиенттерге арналған арнайы ұсыныстар бар. "
+    },
+    "team": {
+      "title": "Біздің команда",
+      "description": "Біздің сарапшылар тобы сіздің көлігіңіздің маркасы мен үлгісін ескере отырып, ең қолайлы тазалағыштарды, автокөлік шамдары мен аксессуарларды таңдау бойынша кәсіби кеңес беруге әрқашан дайын."
+    },
+    "partners": {
+      "title": "Біздің серіктестер бізге сенеді"
+    }
   },
   "checkout": {
-    "title": "Тапсырысты рәсімдеу",
-    "items": "Себеттегі заттар",
-    "del_type": "Жеткізу түрі",
-    "delivery_status": {
-      "pickup": "Өздігінен алу",
-      "delivery": "Жеткізу"
-    },
-    "to_pay": "Төлеуге тиіс сома",
+    "payment_type": "Менеджер арқылы төлеу",
+    "title": "Тапсырыс беру",
     "first": {
-      "title": "Қабылдаушы туралы ақпарат",
-      "text": "Тапсырыс беру үшін қабылдаушыны қосып, таңдау қажет",
-      "placeholder": "Қабылдаушыны іздеу",
-      "physical": "Жеке тұлға",
-      "legal": "Заңды тұлға",
-      "name": "Сіздің атыңыз",
-      "phone": "Телефон нөмірі"
+      "title": "Байланыс ақпараты",
+      "name": "Аты",
+      "phone": "Телефон"
     },
     "second": {
-      "title": "Тапсырыс алу әдісі",
-      "pickup": "Өздігінен алу",
-      "delivery": "Жеткізу",
+      "title": "Жеткізу туралы ақпарат",
       "address": "Жеткізу мекенжайы",
-      "placeholder": "Мекенжайды іздеу",
-      "add": "Жеткізу мекенжайын қосу",
-      "text": "Тапсырыс беру үшін жеткізу мекенжайын қосып, таңдау қажет"
+      "delivery_type": "Жеткізу әдісі",
+      "delivery_type_placeholder": "Жеткізу әдісін көрсетіңіз"
     },
     "third": {
       "title": "Төлем",
-      "phys": "Қабылдау кезінде төлем",
-      "agreement": "Қайтару және шағым шарттарымен келісу",
-      "online": "Онлайн төлем",
-      "to_pay": "Төлеуге тиіс сома"
-    }
+      "to_pay": "Төлем үшін"
+    },
+    "items": "Сіздің тапсырысыңыз",
+    "del_type": "Жеткізу түрі",
+    "delivery_status": {
+      "delivery": "Жеткізу"
+    },
+    "to_pay": "Төлем үшін"
   },
   "cart": {
-    "title": "Сатып алу себеті",
-    "clear": "Себетті тазалау",
+    "title": "Кәрзеңке",
+    "clear": "Қоқысты босату",
+    "empty": "Сіздің арбаңыз бос",
     "table": {
       "product": "Өнім атауы",
       "color": "Түс",
-      "weight": "Салмақ",
+      "weight": "Салмағы",
       "total": "Барлығы",
       "price": "Бағасы",
       "quantity": "Саны"
     },
     "checkout": {
       "title": "Тапсырыс туралы ақпарат",
-      "coupon_title": "Купондар мен промокодтар",
-      "coupon_text": "Купон кодын себеттегі тиісті өріске енгізіп, \"Қолдану\" түймесін басыңыз, сонда жеңілдік жалпы тапсырыс сомасына әсер етеді.",
+      "coupon_title": "Купондар мен жарнамалық кодтар",
+      "coupon_text": "Купон кодын себетке енгізіп, басыңыз ",
       "coupon_placeholder": "Купон кодын енгізіңіз",
       "coupon_button": "Купонды қолдану",
-      "summary": "ҚОРЫТЫНДЫ",
+      "summary": "НӘТИЖЕЛЕР",
       "total": "Барлығы",
-      "checkout_button": "Тапсырысты рәсімдеу"
+      "checkout_button": "Тапсырыс беріңіз"
     }
   },
   "forms": {
     "login": {
       "title": "Қош келдіңіз!",
-      "yet_account": "Әлі тіркелген жоқсыз ба?",
-      "please_register": "Тіркеліңіз",
-      "button": "Кіру"
+      "yet_account": "Әлі тіркелгіңіз жоқ па?",
+      "please_register": "Тіркелу",
+      "button": "Жүйеге кіру"
     },
     "registration": {
       "title": "Тіркеу",
-      "already_have": "Аккаунтыңыз бар ма?",
-      "login": "Кіру",
+      "already_have": "Есептік жазбаңыз бар ма?",
+      "login": "Жүйеге кіру",
       "button": "Тіркелу",
       "rules": {
-        "first": "Құпия сөздің ұзындығы кемінде 8 таңба болуы керек.",
-        "second": "Латын бас әріптері.",
-        "third": "Латын кіші әріптері.",
-        "fourth": "0-9 аралығындағы сандар."
+        "first": "Құпия сөз кемінде 8 таңбадан тұруы керек.",
+        "second": "Латынның бас әріптері.",
+        "third": "Латынның кіші әріптері.",
+        "fourth": "0-9 сандары."
       }
     },
     "forgot_password": {
-      "title": "Құпия сөзді ұмытып қалдыңыз",
+      "title": "Құпия сөзіңізді ұмытып қалдыңыз",
       "description": "Телефон нөміріңізді енгізіңіз, біз сізге растау кодын жібереміз.",
       "button": "Код жіберу",
       "code_button": "Растау"
@@ -184,10 +453,10 @@
       "title": "Код",
       "placeholder": "Кодты енгізіңіз"
     },
-    "forgot_pass": "Құпия сөзді ұмытып қалдыңыз ба?",
-    "remember_me": "Мені есте сақтау",
+    "forgot_pass": "Құпия сөзіңізді ұмыттыңыз ба?",
+    "remember_me": "Мені ұмытпаңыз",
     "name": {
-      "title": "Аты-жөні",
+      "title": "Аты Тегі",
       "placeholder": "Атыңызды енгізіңіз"
     },
     "email": {
@@ -201,41 +470,41 @@
       "title": "Құпия сөз"
     },
     "confirm_password": {
-      "title": "Құпия сөзді растау"
+      "title": "Құпия сөзіңізді растаңыз"
     }
   },
   "header_links": {
     "store": "Дүкен",
-    "choose_color": "Түсті таңдау",
+    "choose_color": "Түсті таңдаңыз",
     "ideas": "Идеялар",
     "calculator": "Калькулятор",
     "about_us": "Біз туралы",
     "news": "Жаңалықтар",
-    "contacts": "Байланыстар",
-    "login": "Кіру",
+    "contacts": "Контактілер",
+    "login": "Жүйеге кіру",
     "register": "Тіркелу"
   },
   "cards": {
     "more": "Толығырақ"
   },
   "products": {
-    "title": "Фирмалық өнімдер",
-    "sec_title": "дүкен",
-    "products_title": "Бояу",
-    "found_products": "табылған өнімдер",
-    "filters": "Фильтрлер",
+    "title": "Брендтік өнімдер",
+    "sec_title": "Дүкен",
+    "products_title": "Бояғыш",
+    "found_products": "өнімдер табылды",
+    "filters": "Сүзгілер",
     "details": {
-      "article": "Артикул",
-      "weight": "Салмақ",
+      "article": "Мақала",
+      "weight": "Салмағы",
       "kg": "кг",
       "quantity": "Саны",
-      "paint_calculator": "Бояу калькуляторы",
+      "paint_calculator": "Paint калькуляторы",
       "calculate": "Есептеу",
       "width": "Ені",
       "height": "Биіктігі",
-      "layers": "Қабат саны",
-      "area": "Жалпы аумақ",
-      "on": "Бір",
+      "layers": "Қабаттар саны",
+      "area": "Жалпы ауданы",
+      "on": "Қосулы",
       "layer": "қабат",
       "liters": "литр",
       "add_to_cart": "Себетке қосу",
@@ -244,103 +513,149 @@
         "details": "Мәліметтер",
         "certificates": "Сертификаттар"
       },
-      "also_bought": "Бұл өнімді сатып алғандар сондай-ақ сатып алды",
+      "also_bought": "Бұл затты сатып алған тұтынушылар да сатып алды",
       "similar_products": "Ұқсас өнімдер"
     }
   },
   "pagination": {
     "show_by": {
-      "text": "Нәтижелерді көрсету",
-      "items": "дана"
+      "text": "Көрсету",
+      "items": "нәтижелер"
     },
     "prev": "Алдыңғы",
     "next": "Келесі"
   },
   "footer_links": {
-    "about_text": "REMALUX брендімен 'K-COLOR' ЖШС - Қазақстан Республикасында орналасқан бояулар мен жабындарды өндіру бойынша көшбасшы.",
-    "remalux": {
-      "title": "Remalux",
-      "about_us": "Біз туралы",
-      "news": "Жаңалықтар",
-      "projects": "Жобалар",
-      "contacts": "Байланыстар"
+    "first": "Сайтта жарияланған материалдарға қатысты барлық құқықтар Trust Quality © 2023 компаниясына тиесілі",
+    "second": "Пайдаланушы сайтта орналастырылған кез келген материалдар зияткерлік меншік объектілері болып табылатыны туралы ескертіледі\n            ",
+    "third": "Бұл сайтта ұсынылған кез келген ақпарат тек ақпараттық мақсаттарға арналған және ешбір жағдайда болмайды\n            "
+  },
+  "testimonial_section": {
+    "company_offer": "TQ компаниясы Kolesa Group фараларының кең ауқымын ұсынады, бұл оларды автокөлік иелері үшін сенімді таңдау жасайды. ",
+    "author": "Дмитрий Ботанов",
+    "author_position": "Kolesa Group бас директоры"
+  },
+  "catalog_section": {
+    "title": "Өнім каталогы",
+    "description": "Автокөлік жарықтандыру өнімдерінің ассортиментін зерттеңіз."
+  },
+  "payment_section": {
+    "title": "Төлем",
+    "description": "Біздің веб-сайтта тапсырыс бергеннен кейін сіздің аймақтық менеджеріңіз мәліметтерді нақтылау және тапсырысты растау үшін сізбен байланысады. ",
+    "payment_methods": {
+      "method1": "Kaspi QR – Kaspi.kz қосымшасы арқылы жылдам және ыңғайлы төлем әдісі",
+      "method2": "Қолма-қол ақша – тауар жөнелтілгенге дейін қолма-қол ақшамен төлеу"
+    }
+  },
+  "delivery_section": {
+    "title": "Жеткізу",
+    "description": "Біздің менеджер тапсырысты орналастырып, растағаннан кейін сіздің тапсырысыңыз сізге ыңғайлы кез келген жеткізу әдісімен жіберіледі. ",
+    "delivery_methods": {
+      "method1": "Ауа",
+      "method2": "Темір жол көлігі",
+      "method3": "Автобустар",
+      "method4": "Сізге ыңғайлы басқа әдістер"
     },
-    "store": {
-      "title": "Дүкен",
-      "products": "Өнімдер",
-      "payment_and_delivery": "Төлем және жеткізу",
-      "calculator": "Калькулятор",
-      "choose_color": "Түсті таңдау",
-      "public_offer": "Қоғамдық ұсыныс"
+    "additional_info": "Алматы қаласы бойынша жеткізу тегін. "
+  },
+  "warranty_section": {
+    "title": "Кепілдік",
+    "description1": "Біздің компания сенім мен сапаға негізделген. ",
+    "description2": "Сіздің қанағаттануыңыз біздің басты міндетіміз және біз кез келген мәселені шешуге көмектесуге әрқашан дайынбыз."
+  },
+  "hero_section": {
+    "title": "Кең ауқым. ",
+    "description": "Біз барлық автокөлік иелерінің қажеттіліктеріне сәйкес келетін әртүрлі типтегі, өлшемдегі және үлгідегі әйнек тазалағыштар мен фаралардың кең таңдауын ұсынамыз.",
+    "button_text": "Өнімдерге өтіңіз"
+  },
+  "contact_form": {
+    "title": "Бізбен хабарласыңы",
+    "description": "Бізге жазыңыз, біз сізге мүмкіндігінше тезірек жауап береміз. ",
+    "fields": {
+      "name": "Аты",
+      "email": "Электрондық пошта",
+      "phone": "Телефон нөмірі",
+      "message": "Хабарлама",
+      "agreement": "Өтінімді жіберу арқылы сіз ұсыныс келісімінің шарттарын қабылдайсыз және жеке деректеріңізді құпиялылық саясатына сәйкес өңдеуге келісесіз."
     },
-    "contacts": {
-      "title": "Байланыстар",
-      "address": "Алматы, Төле би көшесі, 300/2"
+    "placeholders": {
+      "name": "Иван Иванов",
+      "email": "Электрондық поштаны енгізіңіз",
+      "phone": "+7 (___) ___-__-__",
+      "message": "Сенің хатың..."
     },
-    "privacy_policy": "Құпиялылық саясаты"
+    "address": "Алматы, Қазақстан, Садовников 99",
+    "phone": "Телефон",
+    "email": "Электрондық пошта",
+    "submit": "Хабарлама жіберу",
+    "icons": {
+      "address": "Мекенжай",
+      "phone": "Телефон",
+      "email": "Электрондық пошта"
+    }
   },
   "ideas": {
     "page_title": {
       "first": "Идеядан шындыққа",
-      "second": "арқылы"
+      "second": "бірге"
     },
-    "direction": "Идея бағытын таңдаңыз",
+    "direction": "Сіздің идеяңыздың бағытын таңдаңыз",
     "select_room": "Бөлмені таңдаңыз"
   },
   "news": {
     "page_title": {
-      "first": "Барлық жаңалықтардан",
-      "second": "хабардар болыңыз"
+      "first": "Хабардар болыңыз",
+      "second": "барлық жаңалықтар"
     },
-    "read_more": "Ары қарай оқу"
+    "read_more": "Толығырақ оқыңыз"
   },
   "mainPage": {
     "hero": {
-      "title": "Қолжетімді бағада жоғары еуропалық сапа",
-      "choose_paint": "Бояуды таңдау",
-      "choose_color": "Түсті таңдау"
+      "title": "Қолжетімді бағамен жоғары еуропалық сапа",
+      "choose_paint": "Бояуды таңдаңыз",
+      "choose_color": "Түсті таңдаңыз"
     },
     "choose_type": {
       "paint": {
-        "title": "Фирмалық бояу",
-        "description": "Барлық типтегі беттерге арналған"
+        "title": "Бренд бояуы",
+        "description": "Беттердің барлық түрлеріне арналған"
       },
       "coating": {
-        "title": "Жабын",
-        "description": "Барлық типтегі беттерге арналған"
+        "title": "Қаптау",
+        "description": "Беттердің барлық түрлеріне арналған"
       },
       "dye": {
         "title": "Бояғыш",
-        "description": "Барлық типтегі беттерге арналған"
+        "description": "Беттердің барлық түрлеріне арналған"
       },
       "varnish": {
         "title": "Лак",
-        "description": "Барлық типтегі беттерге арналған"
+        "description": "Беттердің барлық түрлеріне арналған"
       },
       "putty": {
-        "title": "Шпатлевка",
-        "description": "Барлық типтегі беттерге арналған"
+        "title": "Шпаклевка",
+        "description": "Беттердің барлық түрлеріне арналған"
       }
     },
     "ideas": {
-      "title": "Үйіңізге дайын шешімдер",
-      "link": "Көбірек идеялар"
+      "title": "Сіздің үйіңізге дайын шешімдер",
+      "link": "Қосымша идеялар"
     },
     "popular_products": {
       "title": "Танымал өнімдер",
-      "link": "Көбірек өнімдер"
+      "link": "Қосымша өнімдер"
     },
     "download_remalux": {
       "title": "Remalux",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lectus risus, finibus ornare vestibulum et, feugiat quis dui. Vivamus sit amet dolor et magna facilisis rhoncus. Curabitur maximus est sed porta scelerisque. Sed suscipit, arcu volutpat feugiat posuere, eros nisi tristique nibh, mollis vehicula lectus tortor eu purus. Donec ut tortor blandit, sagittis diam eget, suscipit eros."
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     },
     "news": {
       "title": "Соңғы жаңалықтар",
       "link": "Барлық жаңалықтар"
     },
     "about_us": {
-      "title": "Remalux туралы",
-      "description": "'REMALUX' брендімен 'K-COLOR' ЖШС - Қазақстан Республикасында орналасқан бояулар мен жабындарды өндіру бойынша көшбасшы. Біз тұтынушыларға жоғары сапалы кең ауқымды бояуларды ұсынамыз, олар француз, бельгиялық, неміс, голландиялық және америкалық белгілі өндірушілердің шикізатынан британдық лицензия бойынша жасалған."
+      "title": "Біз туралы Remalux",
+      "description": "«REMALUX» сауда белгісі бар «К-ЦВЕТ» ЖШС Қазақстан Республикасындағы бояулар мен жабындар өндірісінің көшбасшысы болып табылады."
     }
   }
 }
