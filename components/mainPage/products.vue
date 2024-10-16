@@ -1,10 +1,10 @@
 <script setup>
-import {computed, nextTick, onMounted, ref} from 'vue';
-import {useProductsStore} from '~/stores/products.js';
-import {storeToRefs} from 'pinia';
+import { computed, nextTick, onMounted, ref } from "vue";
+import { useProductsStore } from "~/stores/products.js";
+import { storeToRefs } from "pinia";
 
 const productsStore = useProductsStore();
-const {categoryWithProducts} = storeToRefs(productsStore);
+const { categoryWithProducts } = storeToRefs(productsStore);
 
 const itemsToShow = ref(2);
 
@@ -22,6 +22,4 @@ onMounted(async () => {
 });
 </script>
 
-<template>
-
-</template>
+<template></template>

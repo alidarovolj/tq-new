@@ -7,6 +7,7 @@ export const useProductsStore = defineStore("products", () => {
     const catalogList = ref(null);
     const productsByCategory = ref(null);
     const sameProducts = ref(null);
+    const allProducts = ref(null);
     const route = useRoute()
     const notifications = useNotificationStore()
 
@@ -16,6 +17,7 @@ export const useProductsStore = defineStore("products", () => {
         catalogList,
         productsByCategory,
         sameProducts,
+        allProducts,
         async getCatalog() {
             try {
                 const response = await api(`/catalog`, "GET", {}, route.query);
@@ -54,6 +56,14 @@ export const useProductsStore = defineStore("products", () => {
             try {
                 const response = await api(`/products/same-products/${id}`, "GET", {}, route.query);
                 sameProducts.value = response;
+            } catch (e) {
+                notifications.showNotification("error", "Произошла ошибка", e);
+            }
+        },
+        async getAllProducts(id) {
+            try {
+                const response = await api(`/products`, "GET", {}, route.query);
+                allProducts.value = response;
             } catch (e) {
                 notifications.showNotification("error", "Произошла ошибка", e);
             }

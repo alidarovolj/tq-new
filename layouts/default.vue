@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Header/>
-    <NuxtPage/>
-    <Footer/>
+  <div class="flex flex-col justify-between min-h-screen">
+    <Header />
+    <NuxtPage />
+    <Footer />
   </div>
 </template>
 

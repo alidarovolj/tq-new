@@ -1,51 +1,80 @@
 <template>
-  <div ref="dropdownWrapper" class="dropdown w-full relative">
-    <input
-        v-model="query"
-        class="w-full rounded-md border border-gray-300 h-full text-xs md:text-sm"
-        :placeholder="$t('navigation.input')"
-        type="text"
-        @blur="handleBlur"
-        @focus="handleFocus"
-    />
-    <div
-        v-if="isOpen && filteredResults.length"
-        class="dropdown-content absolute top-full left-0 h-max bg-white w-full z-30 rounded-md"
-    >
-      <ul>
-        <li
-            v-for="(result, index) in filteredResults"
-            :key="index"
-            class="px-3 py-1"
-            @mousedown.prevent="selectResult(result)"
-        >
-          {{ result }}
-        </li>
-      </ul>
-    </div>
+  <div
+    class="bg-white dark:text-darkText dark:bg-darkElBg rounded-md px-0 md:px-5 h-full"
+  >
+    <form @submit.prevent="searchByFilter" class="w-full relative text-xs">
+      <div class="w-full">
+        <div class="flex gap-2 md:gap-5">
+          <!-- Search Input with Element Filtering -->
+          <div class="relative w-full">
+            <input
+              v-model="form.name"
+              class="py-2 px-4 border border-gray-300 mb-0 rounded-md w-full bg-white dark:bg-darkInp dark:text-darkText text-sm"
+              placeholder="Поиск..."
+              type="text"
+              @input="filterElements"
+              @focus="handleFocus"
+              @blur="handleBlur"
+            />
+            <div
+              v-if="isOpen && filteredElements.length"
+              class="absolute top-full left-0 w-full bg-white dark:bg-darkElBg border z-30 rounded-md"
+            >
+              <ul>
+                <li
+                  v-for="(element, index) in filteredElements"
+                  :key="index"
+                  class="px-3 py-1 hover:bg-gray-200 dark:hover:bg-darkInp cursor-pointer"
+                  @click="router.push('/products/' + element.id)"
+                >
+                  {{ element.name }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Search Button -->
+          <div
+            class="flex h-full w-max px-3 md:px-10 py-2 bg-mainColor text-white text-center rounded-md text-sm"
+          >
+            <MagnifyingGlassIcon class="w-5 h-5" />
+            <button class="w-full hidden md:block" type="submit">Поиск</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
 <script setup>
-import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
+import { useRoute, useRouter } from "vue-router";
 
 const isOpen = ref(false);
-const query = ref('');
-const results = ref(['Apple', 'Banana', 'Orange', 'Grape', 'Watermelon', 'Mango']);
+const form = ref({ name: "" });
+const filteredElements = ref([]);
 const dropdownWrapper = ref(null);
+const route = useRoute();
+const router = useRouter();
+const products = useProductsStore();
 
-// Filtered results based on query
-const filteredResults = computed(() => {
-  if (!query.value) return [];
-  return results.value.filter(item => item.toLowerCase().includes(query.value.toLowerCase()));
-});
-
-const selectResult = (result) => {
-  query.value = result;
+const selectElement = (element) => {
+  form.value.name = element;
   isOpen.value = false;
 };
 
-// Handle focus and blur with a small delay for better UX
+const filterElements = async () => {
+  const searchQuery = form.value.name.toLowerCase();
+  filteredElements.value = products.allProducts?.data.filter((el) =>
+    el.name.toLowerCase().includes(searchQuery)
+  );
+  await router.push({
+    query: { ...route.query, page: 1, search: form.value.name },
+  });
+  await products.getAllProducts();
+};
+
 const handleFocus = () => {
   isOpen.value = true;
 };
@@ -53,21 +82,47 @@ const handleFocus = () => {
 const handleBlur = () => {
   setTimeout(() => {
     isOpen.value = false;
-  }, 200); // Small delay to allow click events inside dropdown
+  }, 200);
 };
 
-// Handle clicks outside the dropdown
 const handleClickOutside = (event) => {
   if (dropdownWrapper.value && !dropdownWrapper.value.contains(event.target)) {
     isOpen.value = false;
   }
 };
 
+const searchByFilter = () => {
+  const queryFilters = {};
+  Object.keys(form.value).forEach((key) => {
+    const value = form.value[key];
+    if (value) {
+      queryFilters[`fields[${key}]`] = value.trim();
+    }
+  });
+  router.push({ query: { ...route.query, ...queryFilters, page: 1 } });
+};
+
 onMounted(() => {
-  document.addEventListener('mousedown', handleClickOutside);
+  document.addEventListener("mousedown", handleClickOutside);
+  populateFormFromQuery();
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener('mousedown', handleClickOutside);
+  document.removeEventListener("mousedown", handleClickOutside);
 });
+
+const populateFormFromQuery = async () => {
+  await products.getAllProducts();
+  await nextTick();
+  Object.keys(form.value).forEach((key) => {
+    const queryFilter = `fields[${key}]`;
+    if (route.query[queryFilter]) {
+      form.value[key] = route.query[queryFilter];
+    }
+  });
+};
 </script>
+
+<style scoped>
+/* Add any required styling here */
+</style>

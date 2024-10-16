@@ -4,23 +4,43 @@
   <div class="bg-white pb-16 pt-24 sm:pb-24 sm:pt-32 xl:pb-32">
     <div class="bg-gray-900 pb-20 sm:pb-24 xl:pb-0">
       <div
-          class="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
+        class="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch"
+      >
         <div class="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-          <div class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto">
-            <img alt="" class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-center shadow-2xl" src="@/assets/img/kolesa.png"/>
+          <div
+            class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto"
+          >
+            <img
+              alt=""
+              class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover object-center shadow-2xl"
+              src="@/assets/img/kolesa.png"
+            />
           </div>
         </div>
-        <div class="w-full max-w-2xl xl:max-w-none xl:flex-auto xl:px-16 xl:py-24">
+        <div
+          class="w-full max-w-2xl xl:max-w-none xl:flex-auto xl:px-16 xl:py-24"
+        >
           <figure class="relative isolate pt-6 sm:pt-12">
-            <svg aria-hidden="true" class="absolute left-0 top-0 -z-10 h-32 stroke-white/20" fill="none" viewBox="0 0 162 128">
+            <svg
+              aria-hidden="true"
+              class="absolute left-0 top-0 -z-10 h-32 stroke-white/20"
+              fill="none"
+              viewBox="0 0 162 128"
+            >
               <!-- SVG paths omitted for brevity -->
             </svg>
-            <blockquote class="text-xl font-semibold leading-8 text-white sm:text-2xl sm:leading-9">
-              <p>{{ $t('testimonial_section.company_offer') }}</p>
+            <blockquote
+              class="text-xl font-semibold leading-8 text-white sm:text-2xl sm:leading-9"
+            >
+              <p>{{ $t("testimonial_section.company_offer") }}</p>
             </blockquote>
             <figcaption class="mt-8 text-base">
-              <div class="font-semibold text-white">{{ $t('testimonial_section.author') }}</div>
-              <div class="mt-1 text-gray-400">{{ $t('testimonial_section.author_position') }}</div>
+              <div class="font-semibold text-white">
+                {{ $t("testimonial_section.author") }}
+              </div>
+              <div class="mt-1 text-gray-400">
+                {{ $t("testimonial_section.author_position") }}
+              </div>
             </figcaption>
           </figure>
         </div>

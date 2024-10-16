@@ -4,6 +4,7 @@ import Cta from "~/components/mainPage/cta.vue";
 import ContactForm from "~/components/mainPage/contactForm.vue";
 import Testimonials from "~/components/mainPage/testimonials.vue";
 import Catalog from "~/components/mainPage/catalog.vue";
+import InfoGrid from "~/components/mainPage/infoGrid.vue";
 
 const { t } = useI18n();
 
@@ -27,18 +28,19 @@ useHead({
       content: t("headers.mainPage.og_url"),
     },
   ],
-  link: [{rel: "canonical", href: t("headers.mainPage.canonical")}],
+  link: [{ rel: "canonical", href: t("headers.mainPage.canonical") }],
 });
 </script>
 
 <template>
   <div>
-    <Hero/>
-    <Cta/>
-    <Catalog/>
+    <Hero />
+    <InfoGrid />
+    <Cta />
+    <Catalog />
     <!--    <Products />-->
-    <Testimonials/>
+    <!-- <Testimonials /> -->
     <!--    <News />-->
-    <ContactForm/>
+    <ContactForm />
   </div>
 </template>
