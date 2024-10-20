@@ -5,7 +5,6 @@
     <form @submit.prevent="searchByFilter" class="w-full relative text-xs">
       <div class="w-full">
         <div class="flex gap-2 md:gap-5">
-          <!-- Search Input with Element Filtering -->
           <div class="relative w-full">
             <input
               v-model="form.name"
@@ -17,23 +16,35 @@
               @blur="handleBlur"
             />
             <div
-              v-if="isOpen && filteredElements.length"
+              v-if="isOpen && products.searchedProducts?.data.length"
               class="absolute top-full left-0 w-full bg-white dark:bg-darkElBg border z-30 rounded-md"
             >
               <ul>
                 <li
-                  v-for="(element, index) in filteredElements"
+                  v-for="(element, index) in products.searchedProducts?.data"
                   :key="index"
-                  class="px-3 py-1 hover:bg-gray-200 dark:hover:bg-darkInp cursor-pointer"
-                  @click="router.push('/products/' + element.id)"
+                  class="px-3 py-1 hover:bg-gray-200 dark:hover:bg-darkInp cursor-pointer flex items-center justify-between"
+                  @click="router.push('/products/' + element.product_id)"
                 >
-                  {{ element.name }}
+                  <div class="flex items-center gap-2">
+                    <img
+                      v-if="element.product_icon"
+                      :src="element.product_icon"
+                      class="w-8 h-8 object-cover rounded-md"
+                    />
+                    <img
+                      v-else
+                      src="@/assets/img/logos/mainVert.png"
+                      class="w-8 h-8 object-cover rounded-md"
+                    />
+                    <p>{{ element.product_name }}</p>
+                  </div>
+                  <p class="text-gray-400">{{ element.category_name }}</p>
                 </li>
               </ul>
             </div>
           </div>
 
-          <!-- Search Button -->
           <div
             class="flex h-full w-max px-3 md:px-10 py-2 bg-mainColor text-white text-center rounded-md text-sm"
           >
@@ -59,20 +70,11 @@ const route = useRoute();
 const router = useRouter();
 const products = useProductsStore();
 
-const selectElement = (element) => {
-  form.value.name = element;
-  isOpen.value = false;
-};
-
 const filterElements = async () => {
-  const searchQuery = form.value.name.toLowerCase();
-  filteredElements.value = products.allProducts?.data.filter((el) =>
-    el.name.toLowerCase().includes(searchQuery)
-  );
   await router.push({
-    query: { ...route.query, page: 1, search: form.value.name },
+    query: { ...route.query, page: 1, keyword: form.value.name },
   });
-  await products.getAllProducts();
+  await products.productsSearch();
 };
 
 const handleFocus = () => {
@@ -112,7 +114,9 @@ onBeforeUnmount(() => {
 });
 
 const populateFormFromQuery = async () => {
-  await products.getAllProducts();
+  if (route.query.keyword) {
+    await products.productsSearch();
+  }
   await nextTick();
   Object.keys(form.value).forEach((key) => {
     const queryFilter = `fields[${key}]`;

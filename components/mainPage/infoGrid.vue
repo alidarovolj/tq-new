@@ -122,7 +122,7 @@
             </div>
             <div class="relative h-44 md:h-10 w-full grow">
               <img
-                class="object-contain md:object-cover rounded-md w-full h-full object-bottom"
+                class="object-contain rounded-md w-full h-full object-bottom"
                 src="@/assets/img/mainPage/3.jpg"
                 alt="TrustQuality Wipers"
               />

@@ -9,6 +9,7 @@ export const useProductsStore = defineStore("products", () => {
     const sameProducts = ref(null);
     const allProducts = ref(null);
     const route = useRoute()
+    const searchedProducts = ref(null);
     const notifications = useNotificationStore()
 
     return {
@@ -18,6 +19,7 @@ export const useProductsStore = defineStore("products", () => {
         productsByCategory,
         sameProducts,
         allProducts,
+        searchedProducts,
         async getCatalog() {
             try {
                 const response = await api(`/catalog`, "GET", {}, route.query);
@@ -64,6 +66,14 @@ export const useProductsStore = defineStore("products", () => {
             try {
                 const response = await api(`/products`, "GET", {}, route.query);
                 allProducts.value = response;
+            } catch (e) {
+                notifications.showNotification("error", "Произошла ошибка", e);
+            }
+        },
+        async productsSearch(keyword) {
+            try {
+                const response = await api(`/search`, "GET", {}, route.query);
+                searchedProducts.value = response;
             } catch (e) {
                 notifications.showNotification("error", "Произошла ошибка", e);
             }

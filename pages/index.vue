@@ -5,6 +5,7 @@ import ContactForm from "~/components/mainPage/contactForm.vue";
 import Testimonials from "~/components/mainPage/testimonials.vue";
 import Catalog from "~/components/mainPage/catalog.vue";
 import InfoGrid from "~/components/mainPage/infoGrid.vue";
+import Timeline from "~/components/mainPage/timeline.vue";
 
 const { t } = useI18n();
 
@@ -36,6 +37,7 @@ useHead({
   <div>
     <Hero />
     <InfoGrid />
+    <Timeline />
     <Cta />
     <Catalog />
     <!--    <Products />-->
