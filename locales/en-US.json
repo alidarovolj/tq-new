@@ -12,6 +12,18 @@
       "og_url": "https://gazbas.kz/projects",
       "canonical": "https://gazbas.kz/projects"
     },
+    "return": {
+      "title": "Warranty and Returns - TQ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/return",
+      "canonical": "https://gazbas.kz/return"
+    },
+    "where-to-buy": {
+      "title": "Where to buy? ",
+      "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
+      "og_url": "https://gazbas.kz/where-to-buy",
+      "canonical": "https://gazbas.kz/where-to-buy"
+    },
     "delivery": {
       "title": "Payment and delivery - TQ",
       "description": "TrustQuality specializes in supplying high quality car wipers and lamps for a wide range of vehicles. ",
@@ -136,7 +148,16 @@
     "contacts": "Contacts",
     "catalog": "Catalog",
     "input": "Search for products",
-    "cart": "Basket"
+    "cart": "Basket",
+    "return": "Warranty and Returns",
+    "where_to_buy": "Where to buy?"
+  },
+  "where-to-buy": {
+    "title": "Where can you buy our product?",
+    "wholesale": "Wholesale",
+    "retail": "Retail",
+    "first": "TQ, head office",
+    "marketplace": "Online store"
   },
   "catalog": {
     "title": "Product catalog",
@@ -158,20 +179,20 @@
       "title": "Frequently Asked Questions",
       "questions": [
         {
-          "question": "What payment methods do you accept?",
-          "answer": "We accept Visa, Mastercard and American Express. "
+          "question": "What payment methods are available?",
+          "answer": "Currently, purchase is only available through an application on the website. "
         },
         {
           "question": "How long does delivery take?",
-          "answer": "Your order will be delivered within 2-4 business days after it is confirmed."
+          "answer": "Order delivery is carried out within 2-4 working days after confirmation."
         },
         {
-          "question": "Can I return an item?",
-          "answer": "Sorry, but we do not accept returns unless the item is damaged."
+          "question": "Is it possible to return an item?",
+          "answer": "Yes, you can request a return by leaving a request in the 'Warranty and Returns' tab or through your order profile."
         },
         {
-          "question": "How can I place an order?",
-          "answer": "You can go to the product page and click the 'Buy' button. "
+          "question": "Guarantee",
+          "answer": "Our products are guaranteed for a period of one year, depending on the product category."
         }
       ]
     },
@@ -278,7 +299,7 @@
       },
       "car_city": {
         "title": "For cooperation issues, shopping center \"Car City\" (2nd tier, 222 boutique) address: microdistrict. ",
-        "contact_name": "Kasymzhan Erbolsyn Daurenuly",
+        "contact_name": "Kasimzhan Erbolsyn Daurenuly",
         "contact_phone": "+7 747 237-79-75"
       }
     }
@@ -306,10 +327,16 @@
   },
   "orders": {
     "title": "My orders",
+    "return": "Issue a return",
+    "empty": "There are no products in this order",
     "statuses": {
       "created": "Created",
-      "in_process": "In processing",
-      "ended": "Completed"
+      "pending": "Waiting",
+      "delivery": "In delivery",
+      "payed": "Paid",
+      "delivered": "Delivered",
+      "canceled": "Canceled",
+      "return_process": "Returned"
     },
     "order": {
       "title": "Order",
@@ -366,7 +393,7 @@
       "delivery": "Delivery",
       "delivery_description": "We provide convenient delivery options throughout Kazakhstan and the CIS to make the purchasing process as convenient as possible for customers.",
       "pricing": "Prices and promotions",
-      "pricing_description": "We always have current prices and special offers for our clients. "
+      "pricing_description": "We always have current prices and special offers for our customers. "
     },
     "team": {
       "title": "Our team",
@@ -436,6 +463,10 @@
       "already_have": "Already have an account?",
       "login": "Login",
       "button": "Register",
+      "send": "Send code",
+      "verify_code": "Confirm your phone number",
+      "code": "Code",
+      "verify": "Confirm number",
       "rules": {
         "first": "The password must be at least 8 characters.",
         "second": "Latin capital letters.",
@@ -549,6 +580,7 @@
   },
   "delivery_section": {
     "title": "Delivery",
+    "title_full": "Delivery and payment",
     "description": "After placing and confirming the order by our manager, your order will be sent by any delivery method convenient for you. ",
     "delivery_methods": {
       "method1": "Air",
@@ -562,6 +594,11 @@
     "title": "Guarantee",
     "description1": "Our company is based on trust and quality. ",
     "description2": "Your satisfaction is our priority and we are always ready to help resolve any issues."
+  },
+  "return": {
+    "title": "Return",
+    "description1": "If you don't like the product or change your mind, you can return it within 14 days of purchase. ",
+    "description2": "Please ensure that the item is unused and in perfect condition. "
   },
   "hero_section": {
     "title": "Wide range. ",
@@ -633,7 +670,7 @@
         "description": "For all types of surfaces"
       },
       "putty": {
-        "title": "Putty",
+        "title": "putty",
         "description": "For all types of surfaces"
       }
     },
