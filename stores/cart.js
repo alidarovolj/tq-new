@@ -101,7 +101,7 @@ export const useCartStore = defineStore("cart", () => {
         async getTemporaryCart() {
             try {
                 const response = await api(`/carts/`, "GET", {}, {
-                    temporary_code: tempCode.value
+                    temporary_code: temporaryCode.value.temporary_code
                 });
                 temporaryCode.value = response;
                 if (response && response.data) {

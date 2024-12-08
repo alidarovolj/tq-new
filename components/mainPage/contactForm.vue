@@ -134,8 +134,8 @@ const sendForm = async () => {
                 />
               </dt>
               <dd>
-                <a class="hover:text-gray-900" href="mailto:support@tq.kz"
-                  >{{ $t("contact_form.email") }}: support@tq.kz</a
+                <a class="hover:text-gray-900" href="mailto:tq.gazbas@gmail.com"
+                  >{{ $t("contact_form.email") }}: tq.gazbas@gmail.com</a
                 >
               </dd>
             </div>

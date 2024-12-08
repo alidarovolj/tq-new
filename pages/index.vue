@@ -36,10 +36,10 @@ useHead({
 <template>
   <div>
     <Hero />
-    <InfoGrid />
-    <Timeline />
-    <Cta />
+    <!-- <InfoGrid /> -->
     <Catalog />
+    <Timeline />
+    <!-- <Cta /> -->
     <!--    <Products />-->
     <!-- <Testimonials /> -->
     <!--    <News />-->

@@ -36,8 +36,18 @@ const { token } = useAuthStore();
 const notifications = useNotificationStore();
 const cart = useCartStore();
 const productsStore = useProductsStore();
-const catalogOpen = ref(false);
+const isDropdownOpen = ref(false);
 const mobileMenuOpen = ref(false);
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
+
+// Функция для перехода по категории
+const goToCategory = (categoryId) => {
+  router.push({ path: "/products", query: { category: categoryId } });
+  isDropdownOpen.value = false;
+};
 
 const logoutUser = async () => {
   loading.value = true;
@@ -78,11 +88,8 @@ onMounted(async () => {
     await user.getProfile();
     await cart.getCart();
   } else {
-    if (!tempCode.value) {
-      await cart.getTemporaryCode();
-      tempCode.value = cart.temporaryCode.temporary_code;
-      await nextTick();
-    }
+    await cart.getTemporaryCode();
+    tempCode.value = cart.temporaryCode.temporary_code;
     await cart.getTemporaryCart();
     user.userProfile = false;
   }
@@ -273,13 +280,6 @@ onMounted(async () => {
             {{ $t("navigation.payment_delivery") }}
           </NuxtLink>
           <NuxtLink
-            :class="{ 'text-mainColor': route.fullPath.includes('/products') }"
-            class="text-sm font-semibold leading-6 text-gray-900"
-            to="/products"
-          >
-            {{ $t("navigation.products") }}
-          </NuxtLink>
-          <NuxtLink
             :class="{ 'text-mainColor': route.fullPath.includes('/about') }"
             class="text-sm font-semibold leading-6 text-gray-900"
             to="/about"
@@ -298,60 +298,42 @@ onMounted(async () => {
     </nav>
     <div class="container mx-auto px-4 md:px-0">
       <div class="flex mb-2 pb-3 w-full gap-3">
-        <client-only>
-          <Menu
-            v-if="productsStore.catalogList"
-            as="div"
-            class="relative inline-block text-left"
+        <div class="relative inline-block text-left">
+          <button
+            class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-xs md:text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 items-center"
+            @click="toggleDropdown"
           >
-            <div>
-              <MenuButton
-                @click="catalogOpen = !catalogOpen"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-xs md:text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 items-center"
-              >
-                <Bars3Icon class="w-4 md:w-5 h-4 md:h-5" />
-                <p>{{ $t("navigation.catalog") }}</p>
-                <ChevronDownIcon
-                  aria-hidden="true"
-                  class="-mr-1 h-5 w-5 text-gray-400"
-                />
-              </MenuButton>
-            </div>
+            <Bars3Icon class="w-4 md:w-5 h-4 md:h-5" />
+            <p>{{ $t("navigation.catalog") }}</p>
+            <ChevronDownIcon
+              aria-hidden="true"
+              class="-mr-1 h-5 w-5 text-gray-400"
+            />
+          </button>
 
-            <transition
-              enter-active-class="transition ease-out duration-100"
-              enter-from-class="transform opacity-0 scale-95"
-              enter-to-class="transform opacity-100 scale-100"
-              leave-active-class="transition ease-in duration-75"
-              leave-from-class="transform opacity-100 scale-100"
-              leave-to-class="transform opacity-0 scale-95"
+          <transition
+            name="fade"
+            @before-enter="isDropdownOpen = true"
+            @after-leave="isDropdownOpen = false"
+          >
+            <div
+              v-if="isDropdownOpen"
+              class="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
-              <MenuItems
-                v-show="catalogOpen"
-                class="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div class="py-1">
-                  <MenuItem
-                    v-for="(item, index) of productsStore.catalogList.data"
-                    :key="index"
-                    v-slot="{ active }"
-                  >
-                    <NuxtLink
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm',
-                      ]"
-                      :to="{ path: `/products`, query: { category: item.id } }"
-                      @click="catalogOpen = false"
-                    >
-                      {{ item.name }}
-                    </NuxtLink>
-                  </MenuItem>
+              <div class="py-1">
+                <div
+                  v-for="(item, index) in productsStore.catalogList.data"
+                  :key="index"
+                  class="block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+                  @click="goToCategory(item.id)"
+                >
+                  {{ item.name }}
                 </div>
-              </MenuItems>
-            </transition>
-          </Menu>
-        </client-only>
+              </div>
+            </div>
+          </transition>
+        </div>
+
         <SelectSearch class="w-full" />
         <div v-if="cart.cartList">
           <NuxtLink
