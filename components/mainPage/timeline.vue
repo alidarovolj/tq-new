@@ -1,31 +1,27 @@
 <script setup>
 const timeline = [
   {
-    name: "Founded company",
-    description:
-      "Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.",
-    date: "Aug 2021",
+    name: "mainPage.timeline.founded.name",
+    description: "mainPage.timeline.founded.description",
+    date: "mainPage.timeline.founded.date",
     dateTime: "2021-08",
   },
   {
-    name: "Secured $65m in funding",
-    description:
-      "Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.",
-    date: "Dec 2021",
+    name: "mainPage.timeline.secured.name",
+    description: "mainPage.timeline.secured.description",
+    date: "mainPage.timeline.secured.date",
     dateTime: "2021-12",
   },
   {
-    name: "Released beta",
-    description:
-      "Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.",
-    date: "Feb 2022",
+    name: "mainPage.timeline.released.name",
+    description: "mainPage.timeline.released.description",
+    date: "mainPage.timeline.released.date",
     dateTime: "2022-02",
   },
   {
-    name: "Global launch of product",
-    description:
-      "Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.",
-    date: "Dec 2022",
+    name: "mainPage.timeline.globalLaunch.name",
+    description: "mainPage.timeline.globalLaunch.description",
+    date: "mainPage.timeline.globalLaunch.date",
     dateTime: "2022-12",
   },
 ];
@@ -33,7 +29,7 @@ const timeline = [
 
 <template>
   <div class="bg-white py-24 sm:py-32">
-    <div class="mx-auto container px-0 lg:px-4">
+    <div class="mx-auto container px-6">
       <p
         class="mx-auto mt-2 max-w-xl text-pretty text-center text-2xl md:text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl mb-10"
       >
@@ -54,7 +50,7 @@ const timeline = [
             >
               <circle cx="2" cy="2" r="2" fill="currentColor" />
             </svg>
-            {{ item.date }}
+            {{ $t(item.date) }}
             <div
               class="absolute -ml-2 h-px w-screen -translate-x-full bg-gray-900/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"
               aria-hidden="true"
@@ -63,10 +59,10 @@ const timeline = [
           <p
             class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900"
           >
-            {{ item.name }}
+            {{ $t(item.name) }}
           </p>
           <p class="mt-1 text-base leading-7 text-gray-600">
-            {{ item.description }}
+            {{ $t(item.description) }}
           </p>
         </div>
       </div>
