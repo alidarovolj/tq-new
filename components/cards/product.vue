@@ -34,7 +34,7 @@ const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.dat
       </div>
       <div class="relative mt-4">
         <h3 class="text-sm font-medium text-gray-900 h-10 flex items-center">{{ product.name }}</h3>
-<!--        <p class="text-lg font-semibold my-1">{{ product.price }}₸</p>-->
+        <p class="text-lg font-semibold my-1">{{ product?.price }}₸</p>
         <p class="text-gray-500 text-xs">Вы можете указать кол-во товара в корзине</p>
       </div>
       <!--      <div class="absolute inset-x-0 top-0 left-0 flex w-full h-72 items-end justify-end overflow-hidden rounded-lg p-4">-->
