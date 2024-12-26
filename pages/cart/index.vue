@@ -179,11 +179,11 @@ useHead({
                   </td>
                   <td class="whitespace-nowrap px-3 py-5  ">
                     <div class="text-gray-900">
-                      {{ item.price }}₸
+                      {{ Intl.NumberFormat().format(item.price)}}₸
                     </div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 font-semibold ">
-                    {{ item.price }}₸
+                    {{ Intl.NumberFormat().format(item.price) }}₸
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 font-semibold ">
                     <TrashIcon
@@ -248,7 +248,7 @@ useHead({
                       class="w-full px-4 border-b border-[#F0DFDF] bg-[#FAFAFA]"
                       type="text">
                   <button
-                      class="w-full border border-mainColor text-mainColor px-6 py-2 rounded-lg text-lg font-semibold">
+                      class="w-full whitespace-nowrap border border-mainColor text-mainColor px-6 py-2 rounded-lg text-lg font-semibold">
                     {{ $t('cart.checkout.coupon_button') }}
                   </button>
                 </div>
@@ -256,11 +256,11 @@ useHead({
               <div class="w-full md:w-1/3 flex flex-col justify-between">
                 <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
                   <p>{{ $t('cart.checkout.summary') }}</p>
-                  <p>{{ cartPrice }} ₸</p>
+                  <p>{{ Intl.NumberFormat().format(cartPrice)}} ₸</p>
                 </div>
                 <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
                   <p>{{ $t('cart.checkout.total') }}</p>
-                  <p class="text-xl font-bold">{{ cartPrice }} ₸</p>
+                  <p class="text-xl font-bold">{{ Intl.NumberFormat().format(cartPrice) }} ₸</p>
                 </div>
                 <NuxtLink
                     :to="localePath('/cart/checkout')"
