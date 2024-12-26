@@ -185,15 +185,8 @@ useHead(headData);
           </div>
 
           <div
-            class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2"
-          >
-<!--            <button-->
-<!--              class="flex w-full items-center justify-center rounded-md border border-transparent bg-mainColor px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-mainColor focus:ring-offset-2 focus:ring-offset-gray-50"-->
-<!--              type="button"-->
-<!--            >-->
-<!--              {{ detailProduct.data.price-->
-<!--              }}{{ $t("product_detail.price_per_unit") }}-->
-<!--            </button>-->
+            class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 font-bold">
+              {{ Intl.NumberFormat().format(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
           </div>
           <div>
             <p class="mb-2">
