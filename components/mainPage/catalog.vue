@@ -1,13 +1,14 @@
 <script setup>
+import errorImg from '@/assets/img/logos/mainVert.png'
 import { useProductsStore } from "~/stores/products.js";
 
 const products = useProductsStore();
 const { catalogList } = storeToRefs(products);
 
-onMounted(async () => {
-  await nextTick();
-  await products.getCatalog();
-});
+const onError = e => {
+ e.target.setAttribute('src', errorImg || '')
+}
+
 </script>
 
 <template>
@@ -35,14 +36,15 @@ onMounted(async () => {
             "
             :alt="item.name"
             :src="item.icon"
+            @error="onError"
             class="h-3/4 w-full object-cover md:object-contain object-center px-2 md:px-5"
           />
-          <img
-            v-else
-            :alt="item.name"
-            class="h-3/4 w-full object-contain object-center px-5"
-            src="@/assets/img/logos/mainVert.png"
-          />
+           <img
+             v-else
+             :alt="item.name"
+             class="h-3/4 w-full object-contain object-center px-5"
+             src="@/assets/img/logos/mainVert.png"
+           />
           <h3 class="text-center text-xl font-bold mt-5">{{ item.name }}</h3>
         </NuxtLink>
       </div>

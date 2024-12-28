@@ -1,7 +1,5 @@
 <script setup>
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/24/outline";
-import bg from "@/assets/img/auth/1.jpg";
-import bg1 from "@/assets/img/auth/2.jpg";
 import { useUserStore } from "~/stores/user.js";
 
 const localePath = useLocalePath();
@@ -16,10 +14,21 @@ const settings = {
   snapAlign: "center",
 };
 
+const banners = ref()
+
+const getBanners = async () => {
+
+  const { data } =  await useApi('/banners')
+
+  banners.value = data.value
+}
+
+await getBanners()
+
 onMounted(async () => {
   await nextTick();
-  await products.getCatalog();
-  await user.getBanners();
+ // await products.getCatalog();
+  // await user.getBanners();
 });
 </script>
 
@@ -39,16 +48,25 @@ onMounted(async () => {
             class="flex flex-col justify-between h-full relative rounded-xl"
           >
             <my-carousel-slide
-              v-for="(slide, index) in user.bannersList"
-              :key="index"
+              v-for="(slide, index) in banners"
+              :key="slide.id || index"
               class="flex items-center justify-center h-full rounded-xl relative"
             >
+<!--             <picture class="w-full h-full absolute left-0 top-0 object-cover rounded-xl">-->
+<!--              <source media="(min-width: 768px)" :srcset="slide.url">-->
+<!--              <source media="(max-width: 767px)" :srcset="slide.mobile_url">-->
+<!--              <img-->
+<!--                :src="slide.url"-->
+<!--                alt=""-->
+<!--                class="w-full h-full object-cover rounded-xl"-->
+<!--              />-->
+<!--             </picture>-->
               <img
                 :src="slide.url"
+                v-memo="[slide.url]"
+                loading="lazy"
                 alt=""
                 class="w-full h-full absolute left-0 top-0 object-cover rounded-xl"
-                height="672"
-                width="1000"
               />
               <div
                 class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-20"

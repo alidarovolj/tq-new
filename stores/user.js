@@ -5,7 +5,6 @@ export const useUserStore = defineStore("user", () => {
     const userProfile = ref(null);
     const bannersList = ref(null);
     const route = useRoute()
-    const notifications = useNotificationStore()
 
     return {
         userProfile,

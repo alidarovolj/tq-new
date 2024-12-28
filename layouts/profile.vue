@@ -8,6 +8,7 @@ import {
 } from "@heroicons/vue/24/outline"
 import {useAuthStore} from "~/stores/auth.js";
 import {useNotificationStore} from "~/stores/notifications.js";
+import {useUserStore} from "~/stores/user.js";
 
 const localePath = useLocalePath()
 const route = useRoute()
@@ -18,6 +19,10 @@ const auth = useAuthStore()
 auth.initCookieToken()
 const user = useUserStore()
 const notifications = useNotificationStore()
+
+if(auth.token) {
+ user.getProfile()
+}
 
 const links = computed(() => [
   {title: t('breadcrumbs.profile'), icon: UserIcon, link: localePath('/profile')},
@@ -36,7 +41,6 @@ const logoutUser = async () => {
     notifications.showNotification("success", "Успешно", "Вы успешно вышли из аккаунта");
     loading.value = false;
     await router.push(localePath('/'));
-    await user.getProfile()
   } catch (e) {
     notifications.showNotification("error", "Произошла ошибка", e);
   }

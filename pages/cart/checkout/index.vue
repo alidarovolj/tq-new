@@ -142,7 +142,6 @@ const makeCheckout = async () => {
     );
     await nextTick();
     if (token.value) {
-      await user.getProfile();
       await cart.getCart();
     } else {
       await cart.getTemporaryCart();
@@ -158,7 +157,6 @@ onMounted(async () => {
   await nextTick();
   await addresses.getCities();
   if (token.value) {
-    await user.getProfile();
     form.value.phone = user.userProfile.phone;
     form.value.name = user.userProfile.name;
     form.value.city_id = user.userProfile.city.id;
@@ -403,28 +401,28 @@ useHead({
 
             <!-- Payment Information -->
             <div class="w-full">
-              <div
-                class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3"
-              >
-                <div
-                  class="w-8 h-8 rounded-full bg-mainColor flex items-center justify-center text-white text-xl font-semibold"
-                >
-                  3
-                </div>
-                <p class="text-base md:text-2xl font-semibold">
-                  {{ $t("checkout.third.title") }}
-                </p>
-              </div>
-              <div class="flex flex-col md:flex-row gap-5 mb-6">
-                <div
-                  :class="{ 'bg-[#F0DFDF]': deliveryType === 1 }"
-                  class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"
-                  @click="deliveryType = 1"
-                >
-                  <CreditCardIcon class="w-5 h-5" />
-                  <p>{{ $t("checkout.payment_type") }}</p>
-                </div>
-              </div>
+<!--              <div-->
+<!--                class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="w-8 h-8 rounded-full bg-mainColor flex items-center justify-center text-white text-xl font-semibold"-->
+<!--                >-->
+<!--                  3-->
+<!--                </div>-->
+<!--                <p class="text-base md:text-2xl font-semibold">-->
+<!--                  {{ $t("checkout.third.title") }}-->
+<!--                </p>-->
+<!--              </div>-->
+<!--              <div class="flex flex-col md:flex-row gap-5 mb-6">-->
+<!--                <div-->
+<!--                  :class="{ 'bg-[#F0DFDF]': deliveryType === 1 }"-->
+<!--                  class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"-->
+<!--                  @click="deliveryType = 1"-->
+<!--                >-->
+<!--                  <CreditCardIcon class="w-5 h-5" />-->
+<!--                  <p>{{ $t("checkout.payment_type") }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
               <p class="font-bold mb-4">
                 {{ $t("checkout.third.to_pay") }}: {{ cartPrice }} ₸
               </p>

@@ -6,8 +6,15 @@ import Testimonials from "~/components/mainPage/testimonials.vue";
 import Catalog from "~/components/mainPage/catalog.vue";
 import InfoGrid from "~/components/mainPage/infoGrid.vue";
 import Timeline from "~/components/mainPage/timeline.vue";
+import {useProductsStore} from "~/stores/products";
 
 const { t } = useI18n();
+const products = useProductsStore();
+
+onMounted(async () => {
+ await nextTick();
+ await products.getCatalog();
+});
 
 useHead({
   title: t("headers.mainPage.title"),

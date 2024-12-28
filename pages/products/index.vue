@@ -1,10 +1,11 @@
-<script lang="ts" setup>
+<script setup>
 import { computed, nextTick, onMounted, ref } from "vue";
 import { useProductsStore } from "~/stores/products.js";
 import { storeToRefs } from "pinia";
 import Product from "~/components/cards/product.vue";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 import ProductPreloader from "~/components/general/productPreloader.vue";
+import errorImg from '@/assets/img/logos/mainVert.png'
 
 const route = useRoute();
 const router = useRouter();
@@ -60,6 +61,10 @@ onMounted(async () => {
     await productsStore.getProductsByCategory(route.query.category);
   }
 });
+
+const onError = e => {
+ e.target.setAttribute('src', errorImg || '')
+}
 
 useHead({
   title: t("headers.store.title"),
@@ -118,13 +123,12 @@ useHead({
                     item.icon !==
                     'https://static.thenounproject.com/png/5191452-200.png'
                   "
-                  :alt="item.name"
                   :src="item.icon"
+                  @error="onError"
                   class="h-10 w-10 object-contain object-center"
                 />
                 <img
                   v-else
-                  :alt="item.name"
                   class="h-10 w-10 object-contain object-center"
                   src="@/assets/img/logos/mainVert.png"
                 />
@@ -145,19 +149,9 @@ useHead({
                   @click="setSubCategory(subItem.id)"
                 >
                   <img
-                    v-if="
-                      subItem.icon !==
-                      'https://static.thenounproject.com/png/5191452-200.png'
-                    "
-                    :alt="subItem.name"
                     :src="subItem.icon"
+                    @error="onError"
                     class="h-10 w-10 object-contain object-center"
-                  />
-                  <img
-                    v-else
-                    :alt="subItem.name"
-                    class="h-10 w-10 object-contain object-center"
-                    src="@/assets/img/logos/mainVert.png"
                   />
                   <h3 class="text-center text-sm font-bold">
                     {{ subItem.name }}

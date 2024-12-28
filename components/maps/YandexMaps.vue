@@ -120,7 +120,7 @@ export default {
       const state = addressDetails.Components.find(component => component.kind === 'province')?.name || '';
       const zipcode = addressDetails.postal_code || firstGeoObject.properties.get('metaDataProperty').GeocoderMetaData.AddressDetails.Country.AdministrativeArea.SubAdministrativeArea?.Locality?.Thoroughfare?.Premise?.PostalCode?.PostalCodeNumber || '';
 
-      console.log({city, country, state, zipcode});
+      // console.log({city, country, state, zipcode});
       this.$emit('send_data', {
         city: city,
         country: country,
@@ -130,13 +130,13 @@ export default {
     },
     updateSuggestions() {
       if (this.searchQuery) {
-        console.log('Updating suggestions for:', this.searchQuery);
+        // console.log('Updating suggestions for:', this.searchQuery);
         ymaps.geocode(this.searchQuery, {
           boundedBy: this.map.getBounds()
         })
             .then((res) => {
               const geoObjects = res.geoObjects.toArray();
-              console.log('GeoObjects received:', geoObjects);
+              // console.log('GeoObjects received:', geoObjects);
               this.suggestions = geoObjects.map(obj => ({
                 displayName: obj.getAddressLine(),
                 coords: obj.geometry.getCoordinates()

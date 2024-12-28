@@ -1,17 +1,13 @@
 import axios from 'axios';
-import {useNotificationStore} from "@/stores/notifications.js";
 import {useAuthStore} from "~/stores/auth.js";
-import {useRouter} from 'vue-router';
 import {storeToRefs} from 'pinia';
 import {useUserStore} from "~/stores/user.js";
 
 export async function api(url, method, options = {}, query = {}) {
     const auth = useAuthStore();
-    auth.initCookieToken();
+    await auth.initCookieToken();
     const {token} = storeToRefs(auth);
     const user = useUserStore()
-    const router = useRouter();
-    const notifications = useNotificationStore();
 
     const defaultPage = query.page || 1;
     const defaultPerPage = query.perPage || 10;
@@ -48,13 +44,12 @@ export async function api(url, method, options = {}, query = {}) {
 
         return response.data;
     } catch (error) {
-        if (error.response && error.response.status === 401 || error.response.status === 500) {
+        if (error.response && error.response.status === 401) {
             const authCookie = useCookie('token')
             authCookie.value = null
             user.userProfile = false
-            router.push('/');
+            window.location.replace('/')
         } else {
-            console.error(error);
             throw new Error(error.response?.data?.message || 'Request failed');
         }
     }

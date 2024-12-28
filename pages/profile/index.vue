@@ -51,7 +51,6 @@ useHead({
 
 onMounted(async () => {
   await nextTick();
-  await user.getProfile();
   await orders.getOrders();
   await addresses.getAddresses();
 });
