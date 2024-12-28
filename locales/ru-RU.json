@@ -173,7 +173,7 @@
     "quantity": "Количество",
     "add_to_cart": "Добавить в корзину",
     "description": "Описание",
-    "price_per_unit": "₸ / шт.",
+    "price_per_unit": "/шт.",
     "characteristics": "Характеристики",
     "faq": {
       "title": "Часто задаваемые вопросы",

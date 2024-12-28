@@ -173,7 +173,7 @@
     "quantity": "Quantity",
     "add_to_cart": "Add to cart",
     "description": "Description",
-    "price_per_unit": "₸ / pcs.",
+    "price_per_unit": "/pcs.",
     "characteristics": "Characteristics",
     "faq": {
       "title": "Frequently Asked Questions",

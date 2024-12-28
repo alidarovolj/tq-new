@@ -11,6 +11,7 @@ import YandexMap from "~/components/maps/YandexMaps.vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { vMaska } from "maska/vue";
+import intl from "@/utils/intl.js";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -202,8 +203,8 @@ useHead({
         </h1>
 
         <div class="flex flex-col-reverse md:flex-row items-start gap-5">
-          <div class="w-full md:w-2/3 flex flex-col gap-12">
-            <div class="w-full">
+          <div class="w-full md:w-2/3 flex flex-col">
+            <div class="w-full mb-12">
               <div
                 class="flex gap-6 mb-4 border-b border-[#F0DFDF] pb-3 items-center"
               >
@@ -403,30 +404,30 @@ useHead({
 
             <!-- Payment Information -->
             <div class="w-full">
-              <div
-                class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3"
-              >
-                <div
-                  class="w-8 h-8 rounded-full bg-mainColor flex items-center justify-center text-white text-xl font-semibold"
-                >
-                  3
-                </div>
-                <p class="text-base md:text-2xl font-semibold">
-                  {{ $t("checkout.third.title") }}
-                </p>
-              </div>
-              <div class="flex flex-col md:flex-row gap-5 mb-6">
-                <div
-                  :class="{ 'bg-[#F0DFDF]': deliveryType === 1 }"
-                  class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"
-                  @click="deliveryType = 1"
-                >
-                  <CreditCardIcon class="w-5 h-5" />
-                  <p>{{ $t("checkout.payment_type") }}</p>
-                </div>
-              </div>
+<!--              <div-->
+<!--                class="flex items-center gap-6 mb-4 border-b border-[#F0DFDF] pb-3"-->
+<!--              >-->
+<!--                <div-->
+<!--                  class="w-8 h-8 rounded-full bg-mainColor flex items-center justify-center text-white text-xl font-semibold"-->
+<!--                >-->
+<!--                  3-->
+<!--                </div>-->
+<!--                <p class="text-base md:text-2xl font-semibold">-->
+<!--                  {{ $t("checkout.third.title") }}-->
+<!--                </p>-->
+<!--              </div>-->
+<!--              <div class="flex flex-col md:flex-row gap-5 mb-6">-->
+<!--                <div-->
+<!--                  :class="{ 'bg-[#F0DFDF]': deliveryType === 1 }"-->
+<!--                  class="transition-all cursor-pointer rounded-lg py-3 w-full text-mainColor border border-[#F0DFDF] flex items-center justify-center gap-2"-->
+<!--                  @click="deliveryType = 1"-->
+<!--                >-->
+<!--                  <CreditCardIcon class="w-5 h-5" />-->
+<!--                  <p>{{ $t("checkout.payment_type") }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
               <p class="font-bold mb-4">
-                {{ $t("checkout.third.to_pay") }}: {{ cartPrice }} ₸
+                {{ $t("checkout.third.to_pay") }}: {{ intl(cartPrice) }}
               </p>
               <p
                 class="w-full md:w-1/3 bg-mainColor cursor-pointer text-white py-3 rounded-lg text-lg font-semibold text-center"
@@ -502,7 +503,7 @@ useHead({
                           </div>
                         </td>
                         <td class="whitespace-nowrap px-3 py-5 font-semibold">
-                          {{ item.price }}₸
+                          {{ intl(item.price) }}
                         </td>
                       </tr>
                     </tbody>
@@ -520,7 +521,7 @@ useHead({
                 </div>
                 <div class="flex items-center justify-between pt-3">
                   <p>{{ $t("checkout.to_pay") }}:</p>
-                  <p>{{ cartPrice }} ₸</p>
+                  <p>{{ intl(cartPrice)  }}</p>
                 </div>
               </div>
             </div>

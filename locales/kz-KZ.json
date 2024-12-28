@@ -173,7 +173,7 @@
     "quantity": "Саны",
     "add_to_cart": "Себетке қосу",
     "description": "Сипаттама",
-    "price_per_unit": "₸ / дана.",
+    "price_per_unit": "/дана.",
     "characteristics": "Сипаттамалары",
     "faq": {
       "title": "Жиі қойылатын сұрақтар",

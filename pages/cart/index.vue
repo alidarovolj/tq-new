@@ -3,18 +3,16 @@ import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 import {useCartStore} from "~/stores/cart.js";
 import {storeToRefs} from "pinia";
 import {PlusIcon} from "@heroicons/vue/24/outline"
-import {useLanguagesStore} from "~/stores/languages.js";
 import {MinusIcon, TrashIcon} from "@heroicons/vue/24/outline/index.js";
 import NoResults from "~/components/general/noResults.vue";
 import {useNotificationStore} from "~/stores/notifications.js";
+import intl from "@/utils/intl.js";
 
 const {t} = useI18n();
 const localePath = useLocalePath();
 const notifications = useNotificationStore()
 const cart = useCartStore()
 const {cartList, cartPrice} = storeToRefs(cart);
-const language = useLanguagesStore()
-const {cur_lang} = storeToRefs(language);
 const router = useRouter()
 const auth = useAuthStore()
 auth.initCookieToken()
@@ -179,11 +177,11 @@ useHead({
                   </td>
                   <td class="whitespace-nowrap px-3 py-5  ">
                     <div class="text-gray-900">
-                      {{ Intl.NumberFormat().format(item.price)}}₸
+                      {{ intl(item.price)}}
                     </div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 font-semibold ">
-                    {{ Intl.NumberFormat().format(item.price) }}₸
+                    {{ intl(item.price) }}
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 font-semibold ">
                     <TrashIcon
@@ -256,11 +254,11 @@ useHead({
               <div class="w-full md:w-1/3 flex flex-col justify-between">
                 <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
                   <p>{{ $t('cart.checkout.summary') }}</p>
-                  <p>{{ Intl.NumberFormat().format(cartPrice)}} ₸</p>
+                  <p>{{ intl(cartPrice)}}</p>
                 </div>
                 <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
                   <p>{{ $t('cart.checkout.total') }}</p>
-                  <p class="text-xl font-bold">{{ Intl.NumberFormat().format(cartPrice) }} ₸</p>
+                  <p class="text-xl font-bold">{{ intl(cartPrice) }}</p>
                 </div>
                 <NuxtLink
                     :to="localePath('/cart/checkout')"

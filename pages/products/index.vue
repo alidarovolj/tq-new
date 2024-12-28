@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
 import { computed, nextTick, onMounted, ref } from "vue";
 import { useProductsStore } from "~/stores/products.js";
 import { storeToRefs } from "pinia";

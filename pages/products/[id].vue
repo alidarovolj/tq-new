@@ -4,6 +4,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
 import { useProductsStore } from "~/stores/products.js";
 import { computed } from "vue";
 import ProductPreloader from "~/components/general/productPreloader.vue";
+import intl from "@/utils/intl.js";
 
 const products = useProductsStore();
 const cart = useCartStore();
@@ -186,7 +187,7 @@ useHead(headData);
 
           <div
             class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 font-bold">
-              {{ Intl.NumberFormat().format(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
+              {{ intl(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
           </div>
           <div>
             <p class="mb-2">
