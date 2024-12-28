@@ -18,6 +18,8 @@ const auth = useAuthStore()
 const user = useUserStore()
 const cart = useCartStore()
 
+const isLoginError = ref(false)
+
 const form = ref({
   phone: '',
   password: '',
@@ -25,7 +27,7 @@ const form = ref({
 
 const v$ = useVuelidate({
   phone: {required, minLength: 11},
-  password: {required}
+  password: {required, minLength: 8}
 }, form);
 
 const carousel = ref([
@@ -44,31 +46,35 @@ const breakpoints = ref({
 })
 
 const loginUser = async () => {
-  loading.value = true;
-  await v$.value.$validate();
+ loading.value = true;
+ isLoginError.value = false
+ await v$.value.$validate();
 
-  if (v$.value.$error) {
-    notifications.showNotification("error", "Данные не заполнены", "Проверьте правильность введенных данных и попробуйте снова.");
-    loading.value = false;
-    return;
-  }
+ if (v$.value.$error) {
+  notifications.showNotification("error", "Данные не заполнены", "Проверьте правильность введенных данных и попробуйте снова.");
+  loading.value = false;
+  return;
+ }
 
-  try {
-    const response = await api(`/auth/login`, "POST", {
-      body: JSON.stringify(form.value)
-    }, route.query);
+ const {data, error} = await useApi('/auth/login', {
+  method: 'POST',
+  body: form.value,
+ })
 
-    await auth.initCookieToken(response.data.token);
-    auth.token = response.data.token;
-    notifications.showNotification("success", "Успешно", "Вы успешно авторизовались");
-    await nextTick()
-    await user.getProfile()
-    await router.push(localePath('/'))
-    await cart.getCart()
-  } catch (e) {
-    loading.value = false;
-    notifications.showNotification("error", "Произошла ошибка", e);
-  }
+ if (error.value) {
+  console.log(route)
+  isLoginError.value = true
+  notifications.showNotification("error", "Ошибка", "Неверный логин или пароль");
+  return
+ }
+ await auth.initCookieToken(data.value.data.token);
+ auth.token = data.value.data.token;
+ notifications.showNotification("success", "Успешно", "Вы успешно авторизовались");
+ await nextTick()
+ await user.getProfile()
+ await router.push(localePath('/'))
+ await cart.getCart()
+
 }
 
 const {t} = useI18n()
@@ -125,7 +131,7 @@ useHead({
                   @submit.prevent="loginUser">
 
                 <div
-                    :class="{ '!border !border-red-500': v$.phone.$error }"
+                    :class="{ '!border !border-red-500': v$.phone.$error || isLoginError  }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                   <label class="block text-xs font-medium text-gray-900" for="name">
                     {{ $t('forms.phone_number.title') }}
@@ -140,11 +146,12 @@ useHead({
                       name="phone"
                       placeholder="+7 (___) ___-__-__"
                       type="text"
+                      @input="isLoginError = false"
                   />
                 </div>
 
                 <div
-                    :class="{ '!border !border-red-500': v$.password.$error }"
+                    :class="{ '!border !border-red-500': v$.password.$error || isLoginError  }"
                     class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                   <label class="block text-xs font-medium text-gray-900" for="password">
                     {{ $t('forms.password.title') }}
@@ -157,8 +164,13 @@ useHead({
                       name="password"
                       placeholder="********"
                       type="password"
+                      @input="isLoginError = false"
                   />
                 </div>
+
+               <span v-if="isLoginError" class="text-red-500 text-sm">
+                Неверный логин или пароль
+               </span>
 
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
