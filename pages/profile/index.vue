@@ -12,6 +12,7 @@ import {
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { formatDate } from "~/utils/formatDate.js";
 import { differenceInDays } from "date-fns";
+import intl from "@/utils/intl.js";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -241,7 +242,7 @@ onMounted(async () => {
                         </div>
                       </td>
                       <td class="whitespace-nowrap px-3">
-                        <div class="text-gray-900">{{ it.price }}₸</div>
+                        <div class="text-gray-900">{{ intl(it.price) }}</div>
                       </td>
                     </tr>
                   </tbody>

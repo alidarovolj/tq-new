@@ -173,7 +173,7 @@ onMounted(async () => {
                           'block w-full px-4 py-2 text-left text-sm',
                         ]"
                         class="flex gap-2"
-                        to="profile/orders"
+                        :to="localePath('/profile/orders')"
                       >
                         <ArchiveBoxIcon class="h-5 w-5" />
                         <p>{{ $t("profile.my_orders") }}</p>
@@ -190,7 +190,7 @@ onMounted(async () => {
                           'block w-full px-4 py-2 text-left text-sm',
                         ]"
                         class="flex gap-2"
-                        to="profile/addresses"
+                        :to="localePath('/profile/addresses')"
                       >
                         <MapPinIcon class="h-5 w-5" />
                         <p>{{ $t("profile.my_addresses") }}</p>
@@ -204,7 +204,7 @@ onMounted(async () => {
                         'block w-full px-4 py-2 text-left text-sm',
                       ]"
                       class="flex gap-2"
-                      to="profile"
+                      :to="localePath('profile')"
                     >
                       <UserIcon class="h-5 w-5" />
                       <p>{{ $t("profile.my_profile") }}</p>
@@ -261,35 +261,35 @@ onMounted(async () => {
               'text-mainColor': route.fullPath.includes('/where-to-buy'),
             }"
             class="text-sm font-semibold leading-6 text-gray-900"
-            to="/where-to-buy"
+            :to="localePath('/where-to-buy')"
           >
             {{ $t("navigation.where_to_buy") }}
           </NuxtLink>
           <NuxtLink
             :class="{ 'text-mainColor': route.fullPath.includes('/return') }"
             class="text-sm font-semibold leading-6 text-gray-900"
-            to="/return"
+            :to="localePath('/return')"
           >
             {{ $t("navigation.return") }}
           </NuxtLink>
           <NuxtLink
             :class="{ 'text-mainColor': route.fullPath.includes('/delivery') }"
             class="text-sm font-semibold leading-6 text-gray-900"
-            to="/delivery"
+            :to="localePath('/delivery')"
           >
             {{ $t("navigation.payment_delivery") }}
           </NuxtLink>
           <NuxtLink
             :class="{ 'text-mainColor': route.fullPath.includes('/about') }"
             class="text-sm font-semibold leading-6 text-gray-900"
-            to="/about"
+            :to="localePath('/about')"
           >
             {{ $t("navigation.about") }}
           </NuxtLink>
           <NuxtLink
             :class="{ 'text-mainColor': route.fullPath.includes('/contacts') }"
             class="text-sm font-semibold leading-6 text-gray-900"
-            to="/contacts"
+            :to="localePath('/contacts')"
           >
             {{ $t("navigation.contacts") }}
           </NuxtLink>
@@ -384,42 +384,42 @@ onMounted(async () => {
             <div class="space-y-2 py-6">
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/return"
+                :to="localePath('/return')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.return") }}
               </NuxtLink>
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/where-to-buy"
+                :to="localePath('/where-to-buy')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.where_to_buy") }}
               </NuxtLink>
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/delivery"
+                :to="localePath('/delivery')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.payment_delivery") }}
               </NuxtLink>
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/products"
+                :to="localePath('/products')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.products") }}
               </NuxtLink>
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/about"
+                :to="localePath('/about')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.about") }}
               </NuxtLink>
               <NuxtLink
                 class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                to="/contacts"
+                :to="localePath('/contacts')"
                 @click="mobileMenuOpen = false"
               >
                 {{ $t("navigation.contacts") }}

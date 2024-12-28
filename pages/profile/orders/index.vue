@@ -158,7 +158,7 @@
                         </div>
                       </td>
                       <td class="whitespace-nowrap px-3">
-                        <div class="text-gray-900">{{ it.price }}₸</div>
+                        <div class="text-gray-900">{{ intl(it.price)}}</div>
                       </td>
                     </tr>
                   </tbody>
@@ -177,24 +177,17 @@
 
 <script lang="ts" setup>
 import { formatDate } from "~/utils/formatDate";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  CubeIcon,
-} from "@heroicons/vue/24/outline";
+import { ChevronDownIcon, ChevronUpIcon, CubeIcon} from "@heroicons/vue/24/outline";
 import { useOrdersStore } from "~/stores/orders";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 import { useLocalePath } from "#i18n";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { useLanguagesStore } from "~/stores/languages";
-import { storeToRefs } from "pinia";
 import { differenceInDays } from "date-fns";
+import intl from "@/utils/intl";
 
 const orders = useOrdersStore();
 const localePath = useLocalePath();
 const { t } = useI18n();
-const language = useLanguagesStore();
-const { cur_lang } = storeToRefs(language);
 const modals = useModalsStore();
 
 const links = computed(() => [
