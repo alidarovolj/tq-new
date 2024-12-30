@@ -51,14 +51,10 @@ const isInCart = computed(() => cart.cartList && Array.isArray(cart.cartList.dat
       >
         Добавить в корзину
       </div>
-      <div
-          v-else
-          :class="[
-  'relative flex transition-all bg-mainColor items-center cursor-pointer justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium',
-  isInCart ? '!bg-green-500 text-white' : 'bg-green-500 text-white'
-]"
-          v-bind="isInCart ? {} : { 'onClick': () => cart.addItem(addToCart) }"
-      >
+      <div v-else
+           :class="['relative flex transition-all bg-mainColor items-center cursor-pointer justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium',
+           isInCart ? '!bg-green-500 text-white' : 'bg-green-500 text-white']"
+           v-bind="isInCart ? {} : { 'onClick': () => cart.addItem(addToCart) }">
         {{ isInCart ? 'В корзине' : `Добавить в корзину` }}
       </div>
     </div>

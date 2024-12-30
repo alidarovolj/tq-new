@@ -12,6 +12,13 @@ export default {
         extend: {
             colors: {
                 mainColor: "#d62d2d"
+            },
+            width: {
+              sixth: '15.5%',
+              third: '32%',
+              fourth: '24%',
+              fifth: '19%',
+              half: '49%'
             }
         },
     },
