@@ -1,84 +1,65 @@
 <script setup>
-import ProductPreloader from "~/components/general/productPreloader.vue";
-import ProductPaginated from "~/components/cards/ProductPaginated.vue";
+import { computed, nextTick, onMounted, ref } from "vue";
+import { useProductsStore } from "~/stores/products.js";
+import { storeToRefs } from "pinia";
+import Product from "~/components/cards/product.vue";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
-import errorImg from '@/assets/img/logos/mainVert.png'
-
-const {t} = useI18n();
-const localePath = useLocalePath();
-
-const links = computed(() => [
- {title: t("breadcrumbs.home"), link: localePath("/")},
- {title: t("breadcrumbs.store"), link: localePath("/products")},
-]);
+import ProductPreloader from "~/components/general/productPreloader.vue";
 
 const route = useRoute();
 const router = useRouter();
-
 const productsStore = useProductsStore();
-const {catalogList} = storeToRefs(productsStore);
+const { categoryWithProducts, catalogList } = storeToRefs(productsStore);
+const { t } = useI18n();
 
-const products = ref([])
+const itemsToShow = ref(2);
 
-const currentPage = ref(1)
-const isLoadingMore = ref(false)
+const displayedItems = computed(() => {
+ return categoryWithProducts.value?.data.slice(0, itemsToShow.value) || [];
+});
 
-const getProducts = async (id, page = 1) => {
- const { data } = await useApi(`/products/paginated/${id}`, {
-  params: {
-   ...route.query,
-   page,
-   perPage: 24,
-  },
- });
-
- if (page === 1) {
-  products.value = data.value
- } else {
-  products.value.data.push(...data.value.data)
- }
- currentPage.value = data.value.meta?.current_page
+const showMoreItems = () => {
+ itemsToShow.value += 2;
 };
 
+const localePath = useLocalePath();
 
-const showMoreItems = async () => {
- if (!isLoadingMore.value) {
-  isLoadingMore.value = true
-  await getProducts(route.query.subCategory || route.query.category, currentPage.value + 1);
-  isLoadingMore.value = false
- }
-};
-
-productsStore.getCatalog()
+const links = computed(() => [
+ { title: t("breadcrumbs.home"), link: localePath("/") },
+ { title: t("breadcrumbs.store"), link: localePath("/products") },
+]);
 
 const setCategory = async (id) => {
- await router.push({
-  query: {
-   ...route.query,
-   category: id,
-   subCategory: undefined
-  }
- })
- await nextTick()
- await getProducts(id)
-}
+ await router.push({ query: { category: id } });
+ await nextTick();
+ await productsStore.getProductsByCategory(id);
+};
 
 const setSubCategory = async (id) => {
- await router.push({
-  query: {
-   ...route.query,
-   subCategory: id
-  }
- })
- await nextTick()
- await getProducts(id)
-}
+ await router.push({ query: { ...route.query, subCategory: id } });
+ await nextTick();
+ await productsStore.getProductsByCategory(id);
+};
 
-if (route.query.subCategory) {
- getProducts(route.query.subCategory)
-} else {
- getProducts(route.query.category)
-}
+watch(
+  () => route.query.category,
+  async (category) => {
+   if (category) {
+    await productsStore.getProductsByCategory(category);
+   } else {
+    await productsStore.getCategoryWithEightProducts();
+   }
+  }
+);
+
+onMounted(async () => {
+ await nextTick();
+ await productsStore.getCategoryWithEightProducts();
+ await productsStore.getCatalog();
+ if (route.query.category) {
+  await productsStore.getProductsByCategory(route.query.category);
+ }
+});
 
 useHead({
  title: t("headers.store.title"),
@@ -100,106 +81,179 @@ useHead({
    content: t("headers.store.og_url"),
   },
  ],
- link: [{rel: "canonical", href: t("headers.store.canonical")}],
+ link: [{ rel: "canonical", href: t("headers.store.canonical") }],
 });
 </script>
 
 <template>
- <Breadcrumbs :links="links"/>
+ <Breadcrumbs :links="links" />
  <div class="container mx-auto px-4 md:px-0 mt-10 pb-10">
   <div class="max-w-2xl mb-5">
    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
     {{ $t("catalog.title") }}
    </h2>
-   <h3 class="mt-2 text-lg leading-8 text-gray-600">
+   <p class="mt-2 text-lg leading-8 text-gray-600">
     {{ $t("catalog.description") }}
-   </h3>
+   </p>
   </div>
-
-  <div class="flex flex-col md:flex-row items-start gap-5 relative">
-
-   <div class="w-full md:w-1/4 shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white">
+  <div class="flex flex-col md:flex-row items-start gap-5">
+   <div
+     class="w-full md:w-1/4 shadow p-5 rounded-lg relative mb-5 md:md-0 bg-white"
+   >
     <div v-if="catalogList">
-     <h3 class="text-lg font-bold text-gray-900 mb-6">
+     <h3 class="text-lg font-bold text-gray-900 mb-5">
       {{ $t("catalog.categories.title") }}
      </h3>
-     <div v-for="(category, index) in catalogList.data" :key="index" class="mb-4">
-      <div
-        :class="{
-          'bg-red-100 border border-red-400 shadow-md': category.id === +route.query.category,
-          'hover:bg-gray-50': category.id !== +route.query.category
-        }"
-        class="flex items-center gap-4 cursor-pointer rounded-lg p-3 transition-all duration-300 ease-in-out"
-        @click="setCategory(category.id)">
-       <img
-         :src="category.icon || errorImg"
-         :alt="category.name"
-         class="h-12 w-12 object-contain object-center rounded-full border border-gray-300"/>
-       <h3 class="text-sm font-semibold text-gray-800">
-        {{ category.name }}
-       </h3>
-      </div>
-      <div v-if="category.id === +route.query.category" class="pl-6 mt-2">
-       <div v-for="(subCategory, ind) in category.sub_category" :key="ind">
+     <div class="grid grid-cols-1 gap-y-2">
+      <div v-for="(item, index) of catalogList.data" :key="index">
+       <div
+         :class="{
+                  'bg-gray-100': item.id === parseInt(route.query.category),
+                }"
+         class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
+         @click="setCategory(item.id)"
+       >
+        <img
+          v-if="
+                    item.icon !==
+                    'https://static.thenounproject.com/png/5191452-200.png'
+                  "
+          :alt="item.name"
+          :src="item.icon"
+          class="h-10 w-10 object-contain object-center"
+        />
+        <img
+          v-else
+          :alt="item.name"
+          class="h-10 w-10 object-contain object-center"
+          src="@/assets/img/logos/mainVert.png"
+        />
+        <h3 class="text-center text-sm font-bold">{{ item.name }}</h3>
+       </div>
+       <div
+         v-if="item.id === parseInt(route.query.category)"
+         class="pl-5 mt-2"
+       >
         <div
+          v-for="(subItem, ind) of item.sub_category"
+          :key="ind"
           :class="{
-              'bg-red-200 border border-red-400 shadow-md': subCategory.id === +route.query.subCategory,
-              'hover:bg-gray-50': subCategory.id !== +route.query.subCategory
-            }"
-          class="flex items-center gap-4 cursor-pointer rounded-lg p-2 transition-all duration-300 ease-in-out"
-          @click="setSubCategory(subCategory.id)">
+                    'bg-gray-100':
+                      subItem.id === parseInt(route.query.subCategory),
+                  }"
+          class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
+          @click="setSubCategory(subItem.id)"
+        >
          <img
-           :src="subCategory.icon || '@/assets/img/logos/mainVert.png'"
-           :alt="subCategory.name"
-           class="h-10 w-10 object-contain object-center rounded-full border border-gray-300"/>
-         <h3 class="text-sm font-medium text-gray-700">
-          {{ subCategory.name }}
+           v-if="
+                      subItem.icon !==
+                      'https://static.thenounproject.com/png/5191452-200.png'
+                    "
+           :alt="subItem.name"
+           :src="subItem.icon"
+           class="h-10 w-10 object-contain object-center"
+         />
+         <img
+           v-else
+           :alt="subItem.name"
+           class="h-10 w-10 object-contain object-center"
+           src="@/assets/img/logos/mainVert.png"
+         />
+         <h3 class="text-center text-sm font-bold">
+          {{ subItem.name }}
          </h3>
         </div>
-        <div v-if="ind < category.sub_category.length - 1" class="border-b border-gray-200 my-2"></div>
        </div>
-       <div class="border-t border-gray-300 mt-4"></div>
       </div>
      </div>
     </div>
    </div>
-
-   <div class="w-full md:w-[74%] transition-height min-h-[800px]">
-    <div v-if="products && products.data">
-     <div v-if="products.data.length"
-          class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pb-10">
-      <div class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-       <div
-         v-for="(product, key) in products.data"
-         :key="key">
-        <ProductPaginated :product="product"/>
+   <div class="w-full md:w-3/4">
+    <div v-if="categoryWithProducts && !route.query.category">
+     <div
+       v-for="(item, index) in displayedItems"
+       :key="index"
+       class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pb-10"
+     >
+      <h2 class="text-xl font-bold text-gray-900">{{ item.name }}</h2>
+      <div
+        class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+      >
+       <div v-for="(product, ind) in item.products" :key="ind">
+        <Product :product="product" />
        </div>
       </div>
+     </div>
+     <div class="mt-8 flex justify-center">
+      <button
+        v-if="itemsToShow < categoryWithProducts.data.length"
+        class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+        @click="showMoreItems"
+      >
+       {{ $t("catalog.show_more") }}
+      </button>
+     </div>
+    </div>
+    <div
+      v-else-if="productsStore.productsByCategory && route.query.category"
+    >
+     <h2 class="text-3xl font-semibold mb-10">
+      {{ productsStore.productsByCategory.data.name }}
+     </h2>
+     <div
+       v-if="
+              productsStore.productsByCategory.data.products_limitless.length >
+              0
+            "
+       class="mb-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+     >
       <div
-        class="mt-8 flex justify-center"
-        v-if="products?.meta?.current_page < products?.meta?.last_page">
-       <button
-         class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
-         @click="showMoreItems">
-        <span v-if="isLoadingMore">Подождите...</span>
-        <span v-else>{{ $t("catalog.show_more") }}</span>
-       </button>
+        v-for="(product, ind) in productsStore.productsByCategory.data
+                .products_limitless"
+        :key="ind"
+      >
+       <Product :product="product" />
       </div>
      </div>
-     <div v-else class="text-red-500 text-center">
-      {{ $t("catalog.no_products") }}
+     <div
+       v-if="
+              productsStore.productsByCategory.data.sub_category_limitless
+                .length > 0
+            "
+     >
+      <div
+        v-for="(item, index) in productsStore.productsByCategory.data
+                .sub_category_limitless"
+        :key="index"
+        class="mx-auto pb-10"
+      >
+       <h2 class="text-xl font-bold text-gray-900">{{ item.name }}</h2>
+       <div
+         class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+       >
+        <div
+          v-for="(product, ind) in item.products_limitless"
+          :key="ind"
+        >
+         <Product :product="product" />
+        </div>
+       </div>
+      </div>
      </div>
+     <p
+       v-if="
+              productsStore.productsByCategory.data.products_limitless
+                .length === 0 &&
+              productsStore.productsByCategory.data.sub_category_limitless
+                .length === 0
+            "
+       class="text-center text-red-500"
+     >
+      {{ $t("catalog.no_products") }}
+     </p>
     </div>
-    <div v-else class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-     <ProductPreloader/>
-    </div>
+    <ProductPreloader v-else />
    </div>
   </div>
  </div>
 </template>
-
-<style scoped>
-.transition-height {
- transition: height 0.3s ease-in-out;
-}
-</style>
