@@ -34,18 +34,18 @@ const getProducts = async (id, page = 1) => {
  });
 
  if (page === 1) {
-  products.value = data.value; // Перезаписываем список на первой странице
+  products.value = data.value
  } else {
-  products.value.data.push(...data.value.data); // Добавляем данные к текущему списку
+  products.value.data.push(...data.value.data)
  }
- currentPage.value = data.value.meta?.current_page; // Обновляем текущую страницу
+ currentPage.value = data.value.meta?.current_page
 };
 
 const showMoreItems = async () => {
  if (hasMorePages.value && !isLoadingMore.value) {
-  isLoadingMore.value = true; // Включаем состояние загрузки
+  isLoadingMore.value = true
   await getProducts(route.query.subCategory || route.query.category, currentPage.value + 1);
-  isLoadingMore.value = false; // Выключаем состояние загрузки
+  isLoadingMore.value = false
  }
 };
 
@@ -116,59 +116,55 @@ useHead({
    </h3>
   </div>
 
-  <div class="flex flex-col md:flex-row items-start gap-5">
+  <div class="flex flex-col md:flex-row items-start gap-5 relative">
 
-   <div class="w-full md:w-fourth shadow p-5 rounded-lg relative mb-5 md:md-0 bg-white">
+   <div class="w-full md:w-1/4 shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white">
     <div v-if="catalogList">
-     <h3 class="text-lg font-bold text-gray-900 mb-5">
+     <h3 class="text-lg font-bold text-gray-900 mb-6">
       {{ $t("catalog.categories.title") }}
      </h3>
-     <div v-for="(category, index) of catalogList.data" :key="index">
+     <div v-for="(category, index) in catalogList.data" :key="index" class="mb-4">
       <div
-        :class="{'bg-gray-100': category.id === +route.query.category}"
-        class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
+        :class="{
+          'bg-red-100 border border-red-400 shadow-md': category.id === +route.query.category,
+          'hover:bg-gray-50': category.id !== +route.query.category
+        }"
+        class="flex items-center gap-4 cursor-pointer rounded-lg p-3 transition-all duration-300 ease-in-out"
         @click="setCategory(category.id)">
        <img
-         v-if="category.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-         :alt="category.name"
          :src="category.icon || errorImg"
-         class="h-10 w-10 object-contain object-center"/>
-       <img
-         v-else
          :alt="category.name"
-         class="h-10 w-10 object-contain object-center"
-         src="@/assets/img/logos/mainVert.png"/>
-       <h3 class="text-center text-sm font-bold">{{ category.name }}</h3>
+         class="h-12 w-12 object-contain object-center rounded-full border border-gray-300"/>
+       <h3 class="text-sm font-semibold text-gray-800">
+        {{ category.name }}
+       </h3>
       </div>
-      <div
-        v-if="category.id === +route.query.category"
-        class="pl-5 mt-2">
-       <div
-         v-for="(subCategory, ind) of category.sub_category"
-         :key="ind"
-         :class="{ 'bg-gray-100': subCategory.id === +route.query.subCategory}"
-         class="flex items-center gap-5 hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-pointer rounded-lg p-1"
-         @click="setSubCategory(subCategory.id)">
-        <img
-          v-if="subCategory.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
-          :alt="subCategory.name"
-          :src="subCategory.icon"
-          class="h-10 w-10 object-contain object-center"/>
-        <img
-          v-else
-          :alt="subCategory.name"
-          class="h-10 w-10 object-contain object-center"
-          src="@/assets/img/logos/mainVert.png"/>
-        <h3 class="text-center text-sm font-bold">
-         {{ subCategory.name }}
-        </h3>
+      <div v-if="category.id === +route.query.category" class="pl-6 mt-2">
+       <div v-for="(subCategory, ind) in category.sub_category" :key="ind">
+        <div
+          :class="{
+              'bg-red-200 border border-red-400 shadow-md': subCategory.id === +route.query.subCategory,
+              'hover:bg-gray-50': subCategory.id !== +route.query.subCategory
+            }"
+          class="flex items-center gap-4 cursor-pointer rounded-lg p-2 transition-all duration-300 ease-in-out"
+          @click="setSubCategory(subCategory.id)">
+         <img
+           :src="subCategory.icon || '@/assets/img/logos/mainVert.png'"
+           :alt="subCategory.name"
+           class="h-10 w-10 object-contain object-center rounded-full border border-gray-300"/>
+         <h3 class="text-sm font-medium text-gray-700">
+          {{ subCategory.name }}
+         </h3>
+        </div>
+        <div v-if="ind < category.sub_category.length - 1" class="border-b border-gray-200 my-2"></div>
        </div>
+       <div class="border-t border-gray-300 mt-4"></div>
       </div>
      </div>
     </div>
    </div>
 
-   <div class="w-full md:w-[74%]">
+   <div class="w-full md:w-[74%] transition-height min-h-[800px]">
     <div v-if="products">
      <div v-if="products.data && products.data.length"
           class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pb-10">
@@ -196,7 +192,12 @@ useHead({
      <ProductPreloader/>
     </div>
    </div>
-
   </div>
  </div>
 </template>
+
+<style scoped>
+.transition-height {
+ transition: height 0.3s ease-in-out;
+}
+</style>
