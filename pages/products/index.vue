@@ -22,7 +22,6 @@ const products = ref([])
 
 const currentPage = ref(1)
 const isLoadingMore = ref(false)
-const hasMorePages = computed(() => products.value?.meta?.current_page < products.value?.meta?.last_page);
 
 const getProducts = async (id, page = 1) => {
  const { data } = await useApi(`/products/paginated/${id}`, {
@@ -40,6 +39,8 @@ const getProducts = async (id, page = 1) => {
  }
  currentPage.value = data.value.meta?.current_page
 };
+
+const hasMorePages = computed(() => products.value?.meta?.current_page < products.value?.meta?.last_page);
 
 const showMoreItems = async () => {
  if (hasMorePages.value && !isLoadingMore.value) {
@@ -165,8 +166,8 @@ useHead({
    </div>
 
    <div class="w-full md:w-[74%] transition-height min-h-[800px]">
-    <div v-if="products">
-     <div v-if="products.data && products.data.length"
+    <div v-if="products && products.data">
+     <div v-if="products.data.length"
           class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pb-10">
       <div class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
        <div
