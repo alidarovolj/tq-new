@@ -22,7 +22,7 @@ const products = ref([])
 
 const currentPage = ref(1)
 const isLoadingMore = ref(false)
-const hasMorePages = computed(() => products.value.meta?.current_page < products.value.meta?.last_page);
+const hasMorePages = computed(() => products.value?.meta?.current_page < products.value?.meta?.last_page);
 
 const getProducts = async (id, page = 1) => {
  const { data } = await useApi(`/products/paginated/${id}`, {
