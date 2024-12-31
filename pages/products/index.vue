@@ -40,10 +40,9 @@ const getProducts = async (id, page = 1) => {
  currentPage.value = data.value.meta?.current_page
 };
 
-const hasMorePages = computed(() => products.value?.meta?.current_page < products.value?.meta?.last_page);
 
 const showMoreItems = async () => {
- if (hasMorePages.value && !isLoadingMore.value) {
+ if (!isLoadingMore.value) {
   isLoadingMore.value = true
   await getProducts(route.query.subCategory || route.query.category, currentPage.value + 1);
   isLoadingMore.value = false
@@ -176,7 +175,9 @@ useHead({
         <ProductPaginated :product="product"/>
        </div>
       </div>
-      <div class="mt-8 flex justify-center" v-if="hasMorePages">
+      <div
+        class="mt-8 flex justify-center"
+        v-if="products?.meta?.current_page < products?.meta?.last_page">
        <button
          class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
          @click="showMoreItems">
