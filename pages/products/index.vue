@@ -2,83 +2,68 @@
 import ProductPreloader from "~/components/general/productPreloader.vue";
 import ProductPaginated from "~/components/cards/ProductPaginated.vue";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
-import errorImg from '@/assets/img/logos/mainVert.png'
 
-const {t} = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 const links = computed(() => [
- {title: t("breadcrumbs.home"), link: localePath("/")},
- {title: t("breadcrumbs.store"), link: localePath("/products")},
+ { title: t("breadcrumbs.home"), link: localePath("/") },
+ { title: t("breadcrumbs.store"), link: localePath("/products") },
 ]);
 
 const route = useRoute();
 const router = useRouter();
 
 const productsStore = useProductsStore();
-const {catalogList} = storeToRefs(productsStore);
+const { catalogList } = storeToRefs(productsStore);
 
-const products = ref([])
+const pending = ref(true);
+const products = ref();
 
-const currentPage = ref(1)
-const isLoadingMore = ref(false)
-const hasMorePages = computed(() => products.value.meta?.current_page < products.value.meta?.last_page);
-
-const getProducts = async (id, page = 1) => {
+const getProducts = async (id, page = 1, perPage = 24) => {
+ pending.value = true;
  const { data } = await useApi(`/products/paginated/${id}`, {
   params: {
    ...route.query,
    page,
-   perPage: 24,
+   perPage,
   },
  });
-
- if (page === 1) {
-  products.value = data.value
- } else {
-  products.value.data.push(...data.value.data)
- }
- currentPage.value = data.value.meta?.current_page
+ products.value = data.value;
+ pending.value = false;
 };
 
-const showMoreItems = async () => {
- if (hasMorePages.value && !isLoadingMore.value) {
-  isLoadingMore.value = true
-  await getProducts(route.query.subCategory || route.query.category, currentPage.value + 1);
-  isLoadingMore.value = false
- }
+const updateQuery = (updates) => {
+ router.push({
+  query: {
+   ...route.query,
+   ...updates,
+  },
+ });
 };
 
-productsStore.getCatalog()
+const changePerPage = () => {
+ const newPerPage = (Number(route.query.perPage) || 24) + 24;
+ updateQuery({ perPage: newPerPage, page: 1 });
+};
 
-const setCategory = async (id) => {
- await router.push({
-  query: {
-   ...route.query,
-   category: id,
-   subCategory: undefined
+onMounted(async () => {
+ await nextTick();
+ const id = route.query.subCategory || route.query.category;
+ if (id) {
+  await getProducts(id, Number(route.query.page) || 1, Number(route.query.perPage) || 24);
+ }
+});
+
+watch(
+  () => route.query,
+  async () => {
+   const id = route.query.subCategory || route.query.category;
+   if (id) {
+    await getProducts(id, Number(route.query.page) || 1, Number(route.query.perPage) || 24);
+   }
   }
- })
- await nextTick()
- await getProducts(id)
-}
-
-const setSubCategory = async (id) => {
- await router.push({
-  query: {
-   ...route.query,
-   subCategory: id
-  }
- })
- await nextTick()
- await getProducts(id)
-}
-
-if (route.query.subCategory) {
- getProducts(route.query.subCategory)
-} else {
- getProducts(route.query.category)
-}
+);
 
 useHead({
  title: t("headers.store.title"),
@@ -100,7 +85,7 @@ useHead({
    content: t("headers.store.og_url"),
   },
  ],
- link: [{rel: "canonical", href: t("headers.store.canonical")}],
+ link: [{ rel: "canonical", href: t("headers.store.canonical") }],
 });
 </script>
 
@@ -118,78 +103,39 @@ useHead({
 
   <div class="flex flex-col md:flex-row items-start gap-5 relative">
 
-   <div class="w-full md:w-1/4 shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white">
-    <div v-if="catalogList">
-     <h3 class="text-lg font-bold text-gray-900 mb-6">
-      {{ $t("catalog.categories.title") }}
-     </h3>
-     <div v-for="(category, index) in catalogList.data" :key="index" class="mb-4">
-      <div
-        :class="{
-          'bg-red-100 border border-red-400 shadow-md': category.id === +route.query.category,
-          'hover:bg-gray-50': category.id !== +route.query.category
-        }"
-        class="flex items-center gap-4 cursor-pointer rounded-lg p-3 transition-all duration-300 ease-in-out"
-        @click="setCategory(category.id)">
-       <img
-         :src="category.icon || errorImg"
-         :alt="category.name"
-         class="h-12 w-12 object-contain object-center rounded-full border border-gray-300"/>
-       <h3 class="text-sm font-semibold text-gray-800">
-        {{ category.name }}
-       </h3>
-      </div>
-      <div v-if="category.id === +route.query.category" class="pl-6 mt-2">
-       <div v-for="(subCategory, ind) in category.sub_category" :key="ind">
-        <div
-          :class="{
-              'bg-red-200 border border-red-400 shadow-md': subCategory.id === +route.query.subCategory,
-              'hover:bg-gray-50': subCategory.id !== +route.query.subCategory
-            }"
-          class="flex items-center gap-4 cursor-pointer rounded-lg p-2 transition-all duration-300 ease-in-out"
-          @click="setSubCategory(subCategory.id)">
-         <img
-           :src="subCategory.icon || '@/assets/img/logos/mainVert.png'"
-           :alt="subCategory.name"
-           class="h-10 w-10 object-contain object-center rounded-full border border-gray-300"/>
-         <h3 class="text-sm font-medium text-gray-700">
-          {{ subCategory.name }}
-         </h3>
-        </div>
-        <div v-if="ind < category.sub_category.length - 1" class="border-b border-gray-200 my-2"></div>
-       </div>
-       <div class="border-t border-gray-300 mt-4"></div>
-      </div>
-     </div>
-    </div>
+   <div class="w-full md:w-2/4 lg:w-1/4 md:sticky md:top-[1rem]">
+    <ProductsCatalog/>
    </div>
 
    <div class="w-full md:w-[74%] transition-height min-h-[800px]">
-    <div v-if="products">
-     <div v-if="products.data && products.data.length"
-          class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 pb-10">
-      <div class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-       <div
-         v-for="(product, key) in products.data"
-         :key="key">
-        <ProductPaginated :product="product"/>
-       </div>
-      </div>
-      <div class="mt-8 flex justify-center" v-if="hasMorePages">
-       <button
-         class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
-         @click="showMoreItems">
-        <span v-if="isLoadingMore">Подождите...</span>
-        <span v-else>{{ $t("catalog.show_more") }}</span>
-       </button>
-      </div>
-     </div>
-     <div v-else class="text-red-500 text-center">
+    <ProductPreloader v-if="pending"/>
+
+    <div v-else-if="products">
+     <div
+       class="text-red-500 text-center"
+       v-if="!products.data.length">
       {{ $t("catalog.no_products") }}
      </div>
-    </div>
-    <div v-else class="mt-8 grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-     <ProductPreloader/>
+
+     <div class="grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+      <div
+        v-for="(product, key) in products.data"
+        :key="key">
+       <ProductPaginated :product="product"/>
+      </div>
+     </div>
+
+     <div
+       v-if="(products.meta.total > 0) && (products.meta.per_page < products.meta.total)"
+       class="mt-8 flex justify-center" >
+      <button
+        class="rounded-md bg-mainColor px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mainColor"
+        @click="changePerPage">
+       <span v-if="pending">Подождите...</span>
+       <span v-else>{{ $t("catalog.show_more") }}</span>
+      </button>
+     </div>
+
     </div>
    </div>
   </div>
