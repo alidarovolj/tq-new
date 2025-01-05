@@ -93,6 +93,20 @@ watch(
   }
 )
 
+onBeforeRouteUpdate((to, from, next) => {
+
+ if (!Object.keys(to.query).length) {
+  return next({
+   query: {
+    perPage: 24,
+    page: 1,
+    category:17
+   }
+  })
+ }
+ next()
+})
+
 useHead({
  title: t("headers.store.title"),
  meta: [
