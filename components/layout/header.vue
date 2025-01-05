@@ -82,7 +82,6 @@ const tempCode = useCookie("temporary_code", {
 
 onMounted(async () => {
   await nextTick();
-  await productsStore.getCategoryWithEightProducts();
   await productsStore.getCatalog();
   if (auth.token) {
     await user.getProfile();
