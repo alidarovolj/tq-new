@@ -20,6 +20,22 @@ const { catalogList } = storeToRefs(productsStore);
 
 const pending = ref(true);
 const products = ref();
+const order_by = ref('new')
+
+const sortOrders = ref([
+ {
+  id:'new',
+  title:'Сначала новые'
+ },
+ {
+  id:'asc',
+  title:'По возрастанию цены'
+ },
+ {
+  id:'desc',
+  title:'По убыванию цены'
+ }
+])
 
 const getProducts = async (id, page = 1, perPage = 24) => {
  pending.value = true;
@@ -40,16 +56,17 @@ const updateQuery = (updates) => {
    ...route.query,
    ...updates,
   },
- });
-};
+ })
+}
 
 const changePerPage = () => {
  const newPerPage = (Number(route.query.perPage) || 24) + 24;
- updateQuery({ perPage: newPerPage, page: 1 });
-};
+ updateQuery({ perPage: newPerPage, page: 1 })
+}
 
 onMounted(async () => {
  await nextTick();
+ order_by.value = route.query.order_by || 'new'
  const id = route.query.subCategory || route.query.category;
  if (id) {
   await getProducts(id, Number(route.query.page) || 1, Number(route.query.perPage) || 24);
@@ -65,6 +82,16 @@ watch(
    }
   }
 );
+
+watch(
+  () => [route.query.subCategory, route.query.category],
+  ([newSubCategory, newCategory], [oldSubCategory, oldCategory]) => {
+   if (newSubCategory !== oldSubCategory || newCategory !== oldCategory) {
+    order_by.value = 'new'
+    updateQuery({ order_by: 'new' })
+   }
+  }
+)
 
 useHead({
  title: t("headers.store.title"),
@@ -118,11 +145,33 @@ useHead({
       {{ $t("catalog.no_products") }}
      </div>
 
-     <div class="grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-      <div
-        v-for="(product, key) in products.data"
-        :key="key">
-       <ProductPaginated :product="product"/>
+     <div v-else-if="products.data">
+      <div class="flex justify-end">
+       <select
+         class="w-full md:w-max"
+         v-model="order_by"
+         name="order_by"
+         id="order_by"
+         @change="$event => navigateTo({
+          query: {
+            ...route.query,
+            order_by: $event.target.value
+          }
+        })">
+        <option
+          v-for="(sort, key) of sortOrders"
+          :key="key"
+          :value="sort.id">
+         {{sort.title}}
+        </option>
+       </select>
+      </div>
+      <div class="grid gap-x-2 grid-cols-2 gap-y-12 md:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+       <div
+         v-for="(product, key) in products.data"
+         :key="key">
+        <ProductPaginated :product="product"/>
+       </div>
       </div>
      </div>
 
