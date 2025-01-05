@@ -33,8 +33,8 @@ const setCategory = (id, type) => {
   router.push({
    query: {
     ...route.query,
+    perPage:24,
     subCategory: id,
-    perPage:24
    }
   })
  }

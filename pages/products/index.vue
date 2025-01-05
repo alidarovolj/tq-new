@@ -98,9 +98,11 @@ onBeforeRouteUpdate((to, from, next) => {
  if (!Object.keys(to.query).length) {
   return next({
    query: {
-    perPage: 24,
+    category: route.query.category || undefined,
+    subCategory: route.query.subCategory || undefined,
+    order_by: route.query.order_by || undefined,
     page: 1,
-    category:17
+    perPage: 24,
    }
   })
  }
