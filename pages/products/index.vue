@@ -164,7 +164,7 @@ useHead({
      <div v-else-if="products.data">
       <div class="flex justify-end">
        <select
-         class="w-full md:w-max"
+         class="w-full md:w-max rounded-lg"
          v-model="order_by"
          name="order_by"
          id="order_by"

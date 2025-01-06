@@ -29,7 +29,7 @@ const onError = e => {
 </script>
 
 <template>
- <div>
+ <div class="hover:shadow-lg hover:-translate-y-3 transition-all">
   <NuxtLink
     :to="`/products/${product.id}`"
     class="relative">
@@ -48,22 +48,16 @@ const onError = e => {
       src="@/assets/img/logos/mainVert.png"
     />
    </div>
-   <div class="relative mt-4">
+   <div class="relative mt-4 px-2">
     <h3 class="text-sm font-medium text-gray-900 h-10 flex items-center">{{ product.name }}</h3>
     <p class="text-lg font-semibold my-1">{{ intl(product?.price) }}</p>
     <p class="text-gray-500 text-xs">Вы можете указать кол-во товара в корзине</p>
    </div>
-   <!--      <div class="absolute inset-x-0 top-0 left-0 flex w-full h-72 items-end justify-end overflow-hidden rounded-lg p-4">-->
-   <!--        <div aria-hidden="true"-->
-   <!--             class="absolute inset-x-0 bottom-0 left-0 h-36 bg-gradient-to-t from-black w-full opacity-50"></div>-->
-   <!--        <p v-if="product.price > 0" class="relative text-lg font-semibold text-white">{{ product.price }}₸</p>-->
-   <!--      </div>-->
   </NuxtLink>
-  <div class="mt-6">
+  <div class="mt-6 p-2">
    <div
      v-if="product.quantity === 0"
-     class="relative bg-gray-200 cursor-not-allowed flex transition-all items-center justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium text-gray-900"
-   >
+     class="relative bg-gray-200 cursor-not-allowed flex transition-all items-center justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium text-gray-900">
     Добавить в корзину
    </div>
    <div v-else
