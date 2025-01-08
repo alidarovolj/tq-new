@@ -174,7 +174,7 @@ useHead({
         <form class="w-full lg:flex-auto" @submit.prevent="sendForm">
           <div class="mx-auto">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
+              <div class="sm:col-span-2">
                 <label
                   class="block text-sm font-semibold leading-6 text-gray-900"
                   for="first-name"
