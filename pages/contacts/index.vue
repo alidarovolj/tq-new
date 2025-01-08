@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { vMaska } from "maska/vue";
+import {vMaska} from "maska/vue";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
-import { useNotificationStore } from "~/stores/notifications";
-import { useVuelidate } from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+import {useNotificationStore} from "~/stores/notifications";
+import {useVuelidate} from "@vuelidate/core";
+import {required} from "@vuelidate/validators";
 
 const localePath = useLocalePath();
-const { t } = useI18n();
+const {t} = useI18n();
 
 const links = computed(() => [
-  { title: t("breadcrumbs.home"), link: localePath("/") },
-  { title: t("breadcrumbs.contacts"), link: localePath("/contacts") },
+  {title: t("breadcrumbs.home"), link: localePath("/")},
+  {title: t("breadcrumbs.contacts"), link: localePath("/contacts")},
 ]);
 
 const loading = ref(false);
@@ -29,11 +29,11 @@ const agreementTrue = (value) => value === true;
 
 const v$ = useVuelidate(
   {
-    email: { required },
-    name: { required },
-    note: { required },
-    agreement: { required, agreementTrue },
-    phone: { required, minLength: 11 },
+    email: {required},
+    name: {required},
+    note: {required},
+    agreement: {required, agreementTrue},
+    phone: {required, minLength: 11},
   },
   form
 );
@@ -97,119 +97,77 @@ useHead({
       content: t("headers.contacts.og_url"),
     },
   ],
-  link: [{ rel: "canonical", href: t("headers.contacts.canonical") }],
+  link: [{rel: "canonical", href: t("headers.contacts.canonical")}],
 });
 </script>
 
 <template>
-  <Breadcrumbs :links="links" />
+  <Breadcrumbs :links="links"/>
   <div class="pt-12 pb-32">
     <div class="container mx-auto px-4 md:px-0">
       <div class="mx-auto max-w-2xl lg:mx-0">
         <h2 class="text-3xl font-bold tracking-tight text-gray-900">
           {{ $t("contacts.title") }}
         </h2>
-        <p class="my-6 leading-8 text-gray-600">
+        <p class="my-3 text-gray-600">
           {{ $t("contacts.description") }}
         </p>
       </div>
-      <div
-        class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4 mb-10"
-      >
+      <div class="">
         <!-- North Region -->
         <div>
           <h3
-            class="border-l border-mainColor pl-6 font-semibold text-gray-900"
+            class="font-semibold text-gray-900"
           >
-            {{ $t("contacts.regions.north.title") }}
+            Жанбиров Дамир Бауржанович
           </h3>
-          <address
-            class="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600"
-          >
-            <p>{{ $t("contacts.regions.north.regions[0]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[1]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[2]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[3]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[4]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[5]") }}</p>
-            <p>{{ $t("contacts.regions.north.regions[6]") }}</p>
-            <p class="font-semibold mt-5">
-              {{ $t("contacts.regions.north.contact_name") }}
-              <a class="text-mainColor font-normal" href="tel:+7 775 245-33-03"
-                >+7 775 245-33-03</a
-              >
-            </p>
-          </address>
-        </div>
-
-        <!-- West Region -->
-        <div>
           <h3
-            class="border-l border-mainColor pl-6 font-semibold text-gray-900"
+            class="font-semibold text-gray-900 mb-4"
           >
-            {{ $t("contacts.regions.west.title") }}
+            Қасымжан Ерболсын Дауренұлы
           </h3>
-          <address
-            class="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600"
-          >
-            <p>{{ $t("contacts.regions.west.regions[0]") }}</p>
-            <p>{{ $t("contacts.regions.west.regions[1]") }}</p>
-            <p>{{ $t("contacts.regions.west.regions[2]") }}</p>
-            <p>{{ $t("contacts.regions.west.regions[3]") }}</p>
-            <p class="font-semibold mt-5">
-              {{ $t("contacts.regions.west.contact_name") }}
-              <a class="text-mainColor font-normal" href="tel:+7 776 713-13-33"
-                >+7 776 713-13-33</a
-              >
-            </p>
-          </address>
-        </div>
 
-        <!-- South Region -->
-        <div>
-          <h3
-            class="border-l border-mainColor pl-6 font-semibold text-gray-900"
-          >
-            {{ $t("contacts.regions.south.title") }}
-          </h3>
-          <address
-            class="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600"
-          >
-            <p>{{ $t("contacts.regions.south.regions[0]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[1]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[2]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[3]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[4]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[5]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[6]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[7]") }}</p>
-            <p>{{ $t("contacts.regions.south.regions[8]") }}</p>
-            <p class="font-semibold mt-5">
-              {{ $t("contacts.regions.south.contact_name") }}
-              <a class="text-mainColor font-normal" href="tel:+7 707 111 97 81"
-                >+7 707 111 97 81</a
-              >
-            </p>
-          </address>
-        </div>
 
-        <!-- Car City Region -->
-        <div>
-          <h3
-            class="border-l border-mainColor pl-6 font-semibold text-gray-900"
-          >
-            {{ $t("contacts.regions.car_city.title") }}
-          </h3>
-          <address
-            class="border-l border-gray-200 pl-6 pt-2 not-italic text-gray-600"
-          >
-            <p class="font-semibold mt-5">
-              {{ $t("contacts.regions.car_city.contact_name") }}
-              <a class="text-mainColor font-normal" href="tel:+7 747 237-79-75"
-                >+7 747 237-79-75</a
+          <address class="not-italic text-gray-600">
+            <p class="font-semibold mb-2">
+              📧 Электронная почта:
+              <NuxtLink
+                class="text-mainColor font-normal"
+                href="mailto:tq.gazbas@gmail.com">
+                tq.gazbas@gmail.com
+              </NuxtLink>
+            </p>
+            <p class="font-semibold mb-2">
+              📍Адрес:
+              <NuxtLink
+                class="text-mainColor font-normal"
+                href="https://2gis.kz/almaty/geo/9430047375085852?m=76.874271%2C43.229795%2F16"
+                target="_blank">
+                г. Алматы, ул. Садовникова 99
+              </NuxtLink
               >
             </p>
+
+            <p class="font-semibold mb-2">
+              📞 Телефон:
+              <NuxtLink
+                class="text-mainColor font-normal"
+                href="tel:+77767131333">
+                +7 (776) 713-13-33
+              </NuxtLink>
+            </p>
+            <p class="font-semibold mb-2">
+              📞 Телефон:
+              <NuxtLink
+                class="text-mainColor font-normal"
+                href="tel:+77472377975">
+                +7 (747) 237-79-75
+              </NuxtLink>
+            </p>
           </address>
+          <p class="my-6 leading-8 text-gray-600">
+            Мы ценим ваше время и стремимся отвечать максимально быстро. Обращайтесь, и мы обязательно поможем!
+          </p>
         </div>
       </div>
       <div class="flex flex-col md:flex-row gap-10">
@@ -239,7 +197,7 @@ useHead({
                 <label
                   class="block text-sm font-semibold leading-6 text-gray-900"
                   for="email"
-                  >{{ $t("contacts.form.email") }}</label
+                >{{ $t("contacts.form.email") }}</label
                 >
                 <div class="mt-2.5">
                   <input
@@ -317,11 +275,12 @@ useHead({
           </div>
         </form>
         <iframe
+          allowfullscreen="true"
           frameborder="0"
           height="538"
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A4c6d3f0416cfdbf45c45ea2f3603b94ebf8147db2aaac311ea6d6bba015a23b9&amp;source=constructor"
-          width="100%"
-        ></iframe>
+          src="https://yandex.kz/map-widget/v1/?ll=76.874149%2C43.229194&mode=search&oid=100256009348&ol=biz&z=17.14"
+          style="position:relative;"
+          width="100%"></iframe>
       </div>
     </div>
   </div>

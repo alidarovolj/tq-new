@@ -104,3 +104,49 @@ a:focus-visible {
         transform: rotate(360deg);
     }
 }
+
+/*@media only screen and (min-width: 1280px) {*/
+/*    .container {*/
+/*        width: 1140px;*/
+/*    }*/
+/*}*/
+
+/*@media only screen and (max-width: 1280px) {*/
+/*    .container {*/
+/*        padding: 0 16px;*/
+/*    }*/
+/*}*/
+
+.container {
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 950px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1400px;
+    }
+}
