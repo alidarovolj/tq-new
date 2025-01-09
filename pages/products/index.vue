@@ -162,9 +162,12 @@ useHead({
      </div>
 
      <div v-else-if="products.data">
-      <div class="flex justify-end">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-xl">
+          {{products.data[0].category?.name}}
+        </h3>
        <select
-         class="w-full md:w-max rounded-lg"
+         class="w-half md:w-max rounded-lg"
          v-model="order_by"
          name="order_by"
          id="order_by"

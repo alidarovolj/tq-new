@@ -43,7 +43,7 @@ const setCategory = (id, type) => {
 
 <template>
 
- <div class="shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white">
+ <div class="shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white overflow-y-auto h-screen">
 
   <div v-if="catalog">
 

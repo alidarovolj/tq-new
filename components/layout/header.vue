@@ -39,9 +39,15 @@ const productsStore = useProductsStore();
 const isDropdownOpen = ref(false);
 const mobileMenuOpen = ref(false);
 
+const catalogDropdownRef = ref()
+
+useClickOutside(catalogDropdownRef, () => {
+  isDropdownOpen.value = false
+})
+
 const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value;
-};
+  isDropdownOpen.value = !isDropdownOpen.value
+}
 
 // Функция для перехода по категории
 const goToCategory = (categoryId) => {
@@ -316,6 +322,7 @@ onMounted(async () => {
             @after-leave="isDropdownOpen = false"
           >
             <div
+              ref="catalogDropdownRef"
               v-if="isDropdownOpen"
               class="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             >

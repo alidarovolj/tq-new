@@ -48,11 +48,11 @@ export async function api(url, method, options = {}, query = {}) {
 
         return response.data;
     } catch (error) {
-        if (error.response && error.response.status === 401 || error.response.status === 500) {
+        if (error.response && error.response.status === 401) {
             const authCookie = useCookie('token')
             authCookie.value = null
             user.userProfile = false
-            router.push('/');
+            await router.push('/');
         } else {
             console.error(error);
             throw new Error(error.response?.data?.message || 'Request failed');
