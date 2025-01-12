@@ -29,11 +29,11 @@ const sortOrders = ref([
  },
  {
   id:'asc',
-  title:'По возрастанию цены'
+  title:'Сначала дешевые'
  },
  {
   id:'desc',
-  title:'По убыванию цены'
+  title:'Сначала дорогие'
  }
 ])
 

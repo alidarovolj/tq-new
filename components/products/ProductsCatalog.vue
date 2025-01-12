@@ -4,16 +4,17 @@ import errorImg from '@/assets/img/logos/mainVert.png'
 const route = useRoute()
 const router = useRouter()
 
+const emit = defineEmits(['onClickCategory'])
+
 const catalog = ref()
+const catalogShown = ref(true)
 
 const getCatalog = async () => {
-
  const {data, error} = await useApi('/catalog')
 
  if (error.value) return
 
  catalog.value = data.value
-
 }
 
 getCatalog()
@@ -23,8 +24,8 @@ const setCategory = (id, type) => {
   router.push({
    query: {
     ...route.query,
-    page:1,
-    perPage:24,
+    page: 1,
+    perPage: 24,
     category: id,
     subCategory: undefined
    }
@@ -33,85 +34,96 @@ const setCategory = (id, type) => {
   router.push({
    query: {
     ...route.query,
-    perPage:24,
+    perPage: 24,
     subCategory: id,
    }
   })
  }
+
+ emit('onClickCategory')
+}
+
+const toggleCatalog = () => {
+ catalogShown.value = !catalogShown.value
 }
 </script>
 
 <template>
+ <div>
+  <!-- Контейнер для кнопки и каталога -->
+  <div class="shadow-lg rounded-lg bg-white overflow-hidden">
 
- <div class="shadow-lg p-6 rounded-lg md:sticky md:top-[1rem] mb-5 bg-white overflow-y-auto h-screen">
+   <!-- Кнопка показать/скрыть каталог -->
+   <button
+     @click="toggleCatalog"
+     class="w-full bg-mainColor text-white px-4 py-2 font-medium transition md:hidden">
+    {{ catalogShown ? 'Скрыть каталог' : 'Показать каталог' }}
+   </button>
 
-  <div v-if="catalog">
+   <!-- Каталог -->
+   <div
+     v-if="catalogShown"
+     class="p-6 overflow-y-auto transition-all duration-300 ease-in-out max-h-screen">
 
-   <div v-if="catalog.data.length">
-
-    <h3 class="text-lg font-bold text-gray-900 mb-2">
-     {{ $t("catalog.categories.title") }}
-    </h3>
-
-    <div class="flex flex-col gap-2">
-     <div
-       v-for="(category, key) in catalog.data"
-       :key="key">
-      <div
-        @click="setCategory(category.id, 'category')"
-        :class="{
-          'bg-red-100 border border-red-400 shadow-md': category.id === +route.query.category,
-          'hover:bg-gray-50': category.id !== +route.query.category
-        }"
-        class="flex items-center gap-4 cursor-pointer font-bold rounded-lg p-3 transition-all duration-300 ease-in-out">
-       <img
-         :src="category.icon || errorImg"
-         class="h-12 w-12">
-       <h3>
-        {{ category.name }}
-       </h3>
-      </div>
-
-      <div v-if="category.sub_category.length">
+    <div v-if="catalog">
+     <div v-if="catalog.data.length">
+      <h3 class="text-lg font-bold text-gray-900 mb-2">
+       {{ $t("catalog.categories.title") }}
+      </h3>
+      <div class="flex flex-col gap-2">
        <div
-         v-if="category.id === +route.query.category"
-         class="flex flex-col gap-2 mt-2 ml-8">
+         v-for="(category, key) in catalog.data"
+         :key="key">
         <div
-          v-for="(subCategory, index) in category.sub_category"
-          :key="index"
-          class="subcategory-item">
+          @click="setCategory(category.id, 'category')"
+          :class="{
+           'bg-red-100 border border-red-400 shadow-md': category.id === +route.query.category,
+           'hover:bg-gray-50': category.id !== +route.query.category
+          }"
+          class="flex items-center gap-4 cursor-pointer font-bold rounded-lg p-3 transition-all duration-300 ease-in-out">
+         <img
+           :src="category.icon || errorImg"
+           class="h-12 w-12">
+         <h3>
+          {{ category.name }}
+         </h3>
+        </div>
+        <div v-if="category.sub_category.length">
          <div
-           @click="setCategory(subCategory.id, 'sub_category')"
-           :class="{
+           v-if="category.id === +route.query.category"
+           class="flex flex-col gap-2 mt-2 ml-8">
+          <div
+            v-for="(subCategory, index) in category.sub_category"
+            :key="index"
+            class="subcategory-item">
+           <div
+             @click="setCategory(subCategory.id, 'sub_category')"
+             :class="{
               'bg-red-200 border border-red-400 shadow-md': subCategory.id === +route.query.subCategory,
               'hover:bg-gray-50': subCategory.id !== +route.query.subCategory
-            }"
-           class="flex items-center border rounded font-medium p-1 sub_category cursor-pointer">
-          <img
-            :src="subCategory.icon || errorImg"
-            class="h-12 w-12">
-          <h3>
-           {{ subCategory.name }}
-          </h3>
+             }"
+             class="flex items-center border rounded font-medium p-1 sub_category cursor-pointer">
+            <img
+              :src="subCategory.icon || errorImg"
+              class="h-12 w-12">
+            <h3>
+             {{ subCategory.name }}
+            </h3>
+           </div>
+          </div>
          </div>
         </div>
        </div>
       </div>
-
+     </div>
+     <div v-else>
+      Нет данных
      </div>
     </div>
+    <div v-else>
+     Подождите...
+    </div>
    </div>
-
-   <div v-else>
-    Нет данных
-   </div>
-
   </div>
-
-  <div v-else>
-   Подождите...
-  </div>
-
  </div>
-
 </template>
