@@ -1,30 +1,21 @@
 <script setup>
-import { MinusIcon, PlusIcon, StarIcon } from "@heroicons/vue/20/solid";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
-import { useProductsStore } from "~/stores/products.js";
-import { computed } from "vue";
+import {MinusIcon, PlusIcon, StarIcon} from "@heroicons/vue/20/solid";
+import {Tab, TabGroup, TabList, TabPanel, TabPanels} from "@headlessui/vue";
+import {useProductsStore} from "~/stores/products.js";
+import {computed} from "vue";
 import ProductPreloader from "~/components/general/productPreloader.vue";
 import intl from "@/utils/intl.js";
 
 const products = useProductsStore();
 const cart = useCartStore();
-const { detailProduct, sameProducts } = storeToRefs(products);
+const {detailProduct, sameProducts} = storeToRefs(products);
 const route = useRoute();
-const { t } = useI18n();
+const {t} = useI18n();
 
 const addToCart = ref({
   product_id: route.params.id,
   quantity: 1,
 });
-
-const isInCart = computed(
-  () =>
-    cart.cartList &&
-    Array.isArray(cart.cartList.data) &&
-    cart.cartList.data.some(
-      (item) => item.product.id === detailProduct.value.data.id
-    )
-);
 
 const breakpoints = ref({
   0: {
@@ -37,11 +28,47 @@ const breakpoints = ref({
   },
 });
 
+const isMobile = ref(false)
+
+const handleMouseOver = (event) => {
+  if (isMobile.value) return;
+
+  const img = event.target; // Получаем саму картинку
+  img.style.transform = `scale(${img.closest("[data-scale]").dataset.scale})`;
+};
+
+const handleMouseOut = (event) => {
+  if (isMobile.value) return;
+
+  const img = event.target; // Получаем саму картинку
+  img.style.transform = "scale(1)";
+};
+
+const handleMouseMove = (event) => {
+  if (isMobile.value) return;
+
+  const img = event.target; // Получаем саму картинку
+  const rect = img.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width) * 100;
+  const y = ((event.clientY - rect.top) / rect.height) * 100;
+  img.style.transformOrigin = `${x}% ${y}%`;
+};
+
+const handleResize = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
 onMounted(async () => {
   await nextTick();
   await products.getDetailProduct(route.params.id);
   await products.getSameProducts(route.params.id);
+  isMobile.value = window.innerWidth <= 768;
+  window.addEventListener('resize', handleResize);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
+})
 
 const reviews = {
   average: 4,
@@ -108,7 +135,7 @@ const headData = computed(() => ({
       content: t("headers.store.og_url"),
     },
   ],
-  link: [{ rel: "canonical", href: t("headers.store.canonical") }],
+  link: [{rel: "canonical", href: t("headers.store.canonical")}],
 }));
 
 useHead(headData);
@@ -123,16 +150,16 @@ useHead(headData);
       >
         <div class="lg:col-span-4 lg:row-end-1">
           <div
-            class="h-[400px] w-full flex items-center justify-center overflow-hidden rounded-lg bg-gray-100"
-          >
+            class="tile h-[400px] w-full flex items-center justify-center overflow-hidden rounded-lg"
+            data-scale="2.4">
             <img
-              v-if="
-                detailProduct.data.icon !==
-                'https://static.thenounproject.com/png/5191452-200.png'
-              "
+              v-if="detailProduct.data.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
               :alt="detailProduct.data.name"
               :src="detailProduct.data.icon"
-              class="h-full w-auto object-contain object-center px-5"
+              class="h-full w-auto object-contain object-center px-5 cursor-zoom-in"
+              @mousemove="handleMouseMove"
+              @mouseout="handleMouseOut"
+              @mouseover="handleMouseOver"
             />
             <img
               v-else
@@ -152,9 +179,7 @@ useHead(headData);
                 {{ $t("product_detail.category") }}:
                 {{ detailProduct.data.category.name }}
               </p>
-              <h1
-                class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-              >
+              <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
                 {{ detailProduct.data.name }}
               </h1>
 
@@ -187,7 +212,7 @@ useHead(headData);
 
           <div
             class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 font-bold">
-              {{ intl(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
+            {{ intl(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
           </div>
           <div>
             <p class="mb-2">
@@ -206,7 +231,7 @@ useHead(headData);
                         (addToCart.quantity = addToCart.quantity - 1)
                     "
                   >
-                    <MinusIcon class="w-5 h-5" />
+                    <MinusIcon class="w-5 h-5"/>
                   </button>
                   <p class="text-[#7B7B7B] text-xl">
                     {{ addToCart.quantity }}
@@ -215,7 +240,7 @@ useHead(headData);
                     class="text-mainColor"
                     @click="addToCart.quantity = addToCart.quantity + 1"
                   >
-                    <PlusIcon class="w-5 h-5" />
+                    <PlusIcon class="w-5 h-5"/>
                   </button>
                 </div>
               </div>
@@ -302,6 +327,7 @@ useHead(headData);
         <client-only>
           <my-carousel-carousel
             :breakpoints="breakpoints"
+            :autoplay="6000"
             :mouse-drag="true"
             :touch-drag="true"
           >
@@ -310,16 +336,42 @@ useHead(headData);
               :key="index"
               class="px-3"
             >
-              <CardsProduct :product="item" />
+              <CardsProduct :product="item"/>
             </my-carousel-slide>
             <template #addons>
-              <my-carousel-navigation />
-              <my-carousel-pagination />
+<!--              <my-carousel-navigation/>-->
+              <my-carousel-pagination/>
             </template>
           </my-carousel-carousel>
         </client-only>
       </div>
-      <ProductPreloader v-else />
+      <ProductPreloader v-else/>
     </div>
   </div>
 </template>
+
+<style scoped>
+
+.tile {
+  position: relative;
+  overflow: hidden;
+}
+
+.tile img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.txt {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.x {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
