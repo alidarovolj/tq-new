@@ -29,8 +29,8 @@ const editForm = ref({
 
 const editQuantity = async (id, quantity) => {
   editForm.value.quantity = quantity
-  if (editForm.value.quantity === 0) {
-    notifications.showNotification('error', 'Редактирование не удалось', 'Кол-во не может ровняться 0 или меньше')
+  if (editForm.value.quantity <= 0) {
+    notifications.showNotification('error', 'Редактирование не удалось', 'Кол-во не может быть меньше 1')
     editForm.value.quantity = null
     return
   }
@@ -99,14 +99,14 @@ useHead({
     <Breadcrumbs :links="links"/>
     <div class="container mx-auto px-4 md:px-0">
       <div class="pt-12 pb-32">
-        <div class="flex justify-between">
-          <h1 class="text-3xl mb-8 font-semibold">
+        <div class="flex flex-col gap-4 sm:flex-row justify-between">
+          <h1 class="text-3xl font-semibold">
             {{ t('cart.title') }}: <span v-if="cartList">{{ cartList.data.length }}</span>
           </h1>
           <div v-if="cartList">
             <div
                 v-if="cartList.data.length > 0"
-                class="flex items-center text-mainColor gap-2"
+                class="flex cursor-pointer items-center text-mainColor gap-2"
                 @click="removeCartLocal">
               <TrashIcon class="w-7 h-7"/>
               <p class="font-semibold">
@@ -158,16 +158,22 @@ useHead({
                   <!--                      {{ item.product_variant.value }}{{ $t('products.details.kg') }}-->
                   <!--                    </div>-->
                   <!--                  </td>-->
-                  <td class="whitespace-nowrap px-3 py-5  ">
-                    <div class="text-mainColor flex gap-7">
+                  <td class="whitespace-nowrap px-3 py-5">
+                    <div class="text-mainColor flex items-center w-max gap-7">
                       <button
                           class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
                           @click="editQuantity(item.id, item.quantity - 1)">
                         <MinusIcon class="w-5 h-5"/>
                       </button>
-                      <p class=" text-xl">
-                        {{ item.quantity }}
-                      </p>
+                      <input
+                        class="max-w-[110px] text-center border-[#F0DFDF] bg-[#FAFAFA] rounded-md"
+                        v-model="item.quantity"
+                        @blur="editQuantity(item.id, item.quantity)"
+                        min="1"
+                        type="number">
+<!--                      <p class="text-xl">-->
+<!--                        {{ item.quantity }}-->
+<!--                      </p>-->
                       <button
                           class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
                           @click="editQuantity(item.id, item.quantity + 1)">
@@ -273,3 +279,19 @@ useHead({
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Для всех браузеров */
+input[type="number"] {
+ -moz-appearance: textfield; /* Для Firefox */
+ -webkit-appearance: none;  /* Для Chrome, Safari, Edge */
+ appearance: none;          /* Универсальное свойство */
+}
+
+/* Убирает стрелки на мобильных устройствах */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+</style>
