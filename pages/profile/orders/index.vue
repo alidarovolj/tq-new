@@ -35,36 +35,41 @@
                       </p>
                       <p class="text-sm font-medium">
                         {{ $t("orders.order.status") }}:
-                        <span
-                          v-if="item.status === 'pending'"
-                          class="bg-blue-200 text-blue-500 p-2 rounded"
-                          >{{ $t("orders.statuses.pending") }}</span
-                        >
-                        <span
-                          v-if="item.status === 'payed'"
-                          class="bg-orange-200 text-orange-500 p-2 rounded"
-                          >{{ $t("orders.statuses.payed") }}</span
-                        >
-                        <span
-                          v-if="item.status === 'delivery'"
-                          class="bg-purple-200 text-purple-500 p-2 rounded"
-                          >{{ $t("orders.statuses.delivery") }}</span
-                        >
-                        <span
-                          v-if="item.status === 'delivered'"
-                          class="bg-green-200 text-green-500 p-2 rounded"
-                          >{{ $t("orders.statuses.delivered") }}</span
-                        >
-                        <span
-                          v-if="item.status === 'canceled'"
-                          class="bg-red-200 text-red-500 p-2 rounded"
-                          >{{ $t("orders.statuses.canceled") }}</span
-                        >
-                        <span
-                          v-if="item.status === 'return_process'"
-                          class="bg-red-200 text-red-500 p-2 rounded"
-                          >{{ $t("orders.statuses.return_process") }}</span
-                        >
+                       <span
+                         :class="statuses[item.status]?.color"
+                         class="p-2 rounded">
+                        {{statuses[item.status]?.title}}
+                       </span>
+<!--                        <span-->
+<!--                          v-if="item.status === 'pending'"-->
+<!--                          class="bg-blue-200 text-blue-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.pending") }}</span-->
+<!--                        >-->
+<!--                        <span-->
+<!--                          v-if="item.status === 'payed'"-->
+<!--                          class="bg-orange-200 text-orange-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.payed") }}</span-->
+<!--                        >-->
+<!--                        <span-->
+<!--                          v-if="item.status === 'delivery'"-->
+<!--                          class="bg-purple-200 text-purple-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.delivery") }}</span-->
+<!--                        >-->
+<!--                        <span-->
+<!--                          v-if="item.status === 'delivered'"-->
+<!--                          class="bg-green-200 text-green-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.delivered") }}</span-->
+<!--                        >-->
+<!--                        <span-->
+<!--                          v-if="item.status === 'canceled'"-->
+<!--                          class="bg-red-200 text-red-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.canceled") }}</span-->
+<!--                        >-->
+<!--                        <span-->
+<!--                          v-if="item.status === 'return_process'"-->
+<!--                          class="bg-red-200 text-red-500 p-2 rounded"-->
+<!--                          >{{ $t("orders.statuses.return_process") }}</span-->
+<!--                        >-->
                       </p>
                     </div>
                     <div class="text-right">
@@ -195,6 +200,41 @@ const links = computed(() => [
   { title: t("breadcrumbs.profile"), link: localePath("/profile") },
   { title: t("breadcrumbs.orders"), link: localePath("/profile/orders") },
 ]);
+
+const statuses = {
+ 'pending': {
+  title: 'Новый',
+  color:'bg-blue-200 text-blue-500'
+ },
+ 'forming': {
+  title: 'Формирование заказа',
+  color:'bg-yellow-200 text-yellow-500'
+ },
+ 'accepted': {
+  title: 'Согласован с клиентом',
+  color:'bg-orange-200 text-orange-500'
+ },
+ 'delivery': {
+  title: 'Процесс сборки',
+  color:'bg-purple-200 text-purple-500'
+ },
+ 'delivered': {
+  title: 'Доставлен',
+  color:'bg-green-200 text-green-500'
+ },
+ 'return_process': {
+  title: 'Возврат',
+  color:'bg-red-200 text-red-500'
+ },
+ 'payed':{
+  title: 'Оплачен',
+  color:'bg-orange-200 text-orange-500'
+ },
+ 'canceled': {
+  title: 'Отменен',
+  color:'bg-red-200 text-red-500'
+ }
+}
 
 onMounted(async () => {
   await nextTick();
