@@ -22,7 +22,15 @@ const breakpoints = ref({
     itemsToShow: 1,
     snapAlign: "center",
   },
+  600: {
+   itemsToShow: 3,
+   snapAlign: "center",
+  },
   700: {
+   itemsToShow: 4,
+   snapAlign: "start",
+  },
+  900: {
     itemsToShow: 5,
     snapAlign: "start",
   },
@@ -339,7 +347,9 @@ useHead(headData);
               <CardsProduct :product="item"/>
             </my-carousel-slide>
             <template #addons>
-<!--              <my-carousel-navigation/>-->
+             <div class="hidden sm:block">
+              <my-carousel-navigation/>
+             </div>
               <my-carousel-pagination/>
             </template>
           </my-carousel-carousel>
@@ -359,19 +369,5 @@ useHead(headData);
 
 .tile img {
   transition: transform 0.2s ease-in-out;
-}
-
-.txt {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  font-size: 14px;
-  z-index: 10;
-}
-
-.x {
-  font-size: 20px;
-  font-weight: bold;
 }
 </style>
