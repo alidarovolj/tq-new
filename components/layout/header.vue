@@ -474,7 +474,7 @@ onMounted(async () => {
                     <MenuButton
                       class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     >
-                      {{ user.userProfile.data.name }}
+                      {{ user.userProfile.name }}
                       <ChevronDownIcon
                         aria-hidden="true"
                         class="-mr-1 h-5 w-5 text-gray-400"
@@ -491,22 +491,74 @@ onMounted(async () => {
                     leave-to-class="transform opacity-0 scale-95"
                   >
                     <MenuItems
-                      class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      class="absolute  z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     >
                       <div class="py-1">
                         <MenuItem v-slot="{ active }">
-                          <div
-                            :class="[
-                              active
-                                ? 'bg-gray-100 text-gray-900'
-                                : 'text-gray-700',
-                              'block w-full px-4 py-2 text-left text-sm',
-                            ]"
-                            class="text-red-500"
-                            @click="logoutUser"
-                          >
-                            {{ $t("profile.logout") }}
-                          </div>
+                         <div class="py-1">
+                          <MenuItem v-slot="{ active }">
+                           <div class="flex gap-2">
+                            <NuxtLink
+                              :class="[
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block w-full px-4 py-2 text-left text-sm',
+                              ]"
+                              class="flex gap-2"
+                              @click="mobileMenuOpen = false"
+                              :to="localePath('/profile/orders')"
+                            >
+                             <ArchiveBoxIcon class="h-5 w-5" />
+                             <p>{{ $t("profile.my_orders") }}</p>
+                            </NuxtLink>
+                           </div>
+                          </MenuItem>
+                          <MenuItem v-slot="{ active }">
+                           <div class="flex gap-2">
+                            <NuxtLink
+                              :class="[
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block w-full px-4 py-2 text-left text-sm',
+                              ]"
+                              class="flex gap-2"
+                              @click="mobileMenuOpen = false"
+                              :to="localePath('/profile/addresses')"
+                            >
+                             <MapPinIcon class="h-5 w-5" />
+                             <p>{{ $t("profile.my_addresses") }}</p>
+                            </NuxtLink>
+                           </div>
+                          </MenuItem>
+                          <MenuItem v-slot="{ active }">
+                           <NuxtLink
+                             :class="[
+                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                               'block w-full px-4 py-2 text-left text-sm',
+                             ]"
+                             class="flex gap-2"
+                             @click="mobileMenuOpen = false; navigateTo(localePath('/profile'))"
+                           >
+                            <UserIcon class="h-5 w-5" />
+                            <p>{{ $t("profile.my_profile") }}</p>
+                           </NuxtLink>
+                          </MenuItem>
+                          <MenuItem v-slot="{ active }">
+                           <div
+                             :class="[
+                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                               'block w-full px-4 py-2 text-left text-sm',
+                             ]"
+                             class="text-red-500 flex gap-2"
+                             @click="logoutUser"
+                           >
+                            <ArrowRightStartOnRectangleIcon class="h-5 w-5" />
+                            <p>{{ $t("profile.logout") }}</p>
+                           </div>
+                          </MenuItem>
+                         </div>
                         </MenuItem>
                       </div>
                     </MenuItems>
