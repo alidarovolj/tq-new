@@ -2,7 +2,7 @@
   <div
     class="bg-white dark:text-darkText dark:bg-darkElBg rounded-md px-0 md:px-5 h-full"
   >
-    <form @submit.prevent="searchByFilter" class="w-full relative text-xs">
+    <div class="w-full relative text-xs">
       <div class="w-full">
         <div class="flex gap-2 md:gap-5">
           <div class="relative w-full">
@@ -17,8 +17,7 @@
             />
             <div
               v-if="isOpen && products.searchedProducts?.data.length"
-              class="absolute top-full left-0 w-full bg-white dark:bg-darkElBg border z-30 rounded-md"
-            >
+              class="absolute top-full left-0 w-full bg-white dark:bg-darkElBg border z-30 rounded-md">
               <ul>
                 <li
                   v-for="(element, index) in products.searchedProducts?.data"
@@ -53,7 +52,7 @@
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -64,17 +63,26 @@ import { useRoute, useRouter } from "vue-router";
 
 const isOpen = ref(false);
 const form = ref({ name: "" });
-const filteredElements = ref([]);
 const dropdownWrapper = ref(null);
 const route = useRoute();
 const router = useRouter();
 const products = useProductsStore();
 
+// let controller
+
 const filterElements = async () => {
-  await router.push({
-    query: { ...route.query, page: 1, keyword: form.value.name },
-  });
-  await products.productsSearch();
+
+ // controller?.abort()
+ // controller = new AbortController()
+
+ isOpen.value = true;
+
+ if(!form.value.name) {
+  isOpen.value = false;
+  return
+ }
+
+  await products.productsSearch(form.value.name);
 };
 
 const handleFocus = () => {
@@ -93,38 +101,14 @@ const handleClickOutside = (event) => {
   }
 };
 
-const searchByFilter = () => {
-  const queryFilters = {};
-  Object.keys(form.value).forEach((key) => {
-    const value = form.value[key];
-    if (value) {
-      queryFilters[`fields[${key}]`] = value.trim();
-    }
-  });
-  router.push({ query: { ...route.query, ...queryFilters, page: 1 } });
-};
-
 onMounted(() => {
   document.addEventListener("mousedown", handleClickOutside);
-  populateFormFromQuery();
+  // populateFormFromQuery();
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener("mousedown", handleClickOutside);
 });
-
-const populateFormFromQuery = async () => {
-  if (route.query.keyword) {
-    await products.productsSearch();
-  }
-  await nextTick();
-  Object.keys(form.value).forEach((key) => {
-    const queryFilter = `fields[${key}]`;
-    if (route.query[queryFilter]) {
-      form.value[key] = route.query[queryFilter];
-    }
-  });
-};
 </script>
 
 <style scoped>

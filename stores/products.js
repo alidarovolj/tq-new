@@ -1,5 +1,5 @@
-import {defineStore} from "pinia";
-import {useNotificationStore} from "~/stores/notifications.js";
+import { defineStore } from "pinia";
+import { useNotificationStore } from "~/stores/notifications.js";
 
 export const useProductsStore = defineStore("products", () => {
     const categoryWithProducts = ref(null);
@@ -71,12 +71,15 @@ export const useProductsStore = defineStore("products", () => {
             }
         },
         async productsSearch(keyword) {
-            try {
-                const response = await api(`/search`, "GET", {}, route.query);
-                searchedProducts.value = response;
-            } catch (e) {
-                notifications.showNotification("error", "Произошла ошибка", e);
-            }
+
+          const { data, error } = await useApi(`/search?keyword=${keyword}`)
+
+          if(error.value) {
+            notifications.showNotification("error", "Произошла ошибка", error.value);
+            return
+          }
+          searchedProducts.value = data.value
+
         }
     };
 });
