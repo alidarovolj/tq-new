@@ -106,22 +106,23 @@ onMounted(async () => {
     <div
       class="container mx-auto px-4 md:px-0 pt-3 flex items-center justify-between"
     >
-      <div
-        class="flex flex-col md:flex-row gap-3 md:gap-5 items-start md:items-center"
-      >
+      <div class="flex flex-row-reverse justify-between w-full sm:w-max sm:flex-row gap-3 md:gap-5 items-center">
         <LocaleSwitcher />
-        <a
-          class="flex items-center gap-2 hover:text-mainColor transition-all"
-          href="https://2gis.kz/almaty/firm/70000001083914324"
-        >
+        <div class="flex flex-col sm:flex-row md:gap-5 gap-3">
+         <a
+           target="_blank"
+           class="flex items-center gap-2 hover:text-mainColor transition-all"
+           href="https://2gis.kz/almaty/firm/70000001083914324"
+         >
           <MapIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor" />
           <p class="text-xs md:text-sm">{{ $t("header.address.city") }}</p>
-        </a>
-        <div class="flex items-center gap-2">
+         </a>
+         <div class="flex items-center gap-2">
           <ClockIcon class="w-5 md:w-7 h-5 md:h-7 text-mainColor" />
           <p class="text-xs md:text-sm">
-            {{ $t("header.working_hours.time") }}
+           {{ $t("header.working_hours.time") }}
           </p>
+         </div>
         </div>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-3 items-center">
