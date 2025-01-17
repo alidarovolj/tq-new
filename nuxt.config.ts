@@ -72,5 +72,12 @@ export default defineNuxtConfig({
     ],
     carousel: {
         prefix: 'my-carousel',
-    }
+    },
+
+    runtimeConfig: {
+      public: {
+        API_LINK: import.meta.env.NUXT_BASE_URL,
+        mode: import.meta.env.NUXT_MODE
+      }
+    },
 })

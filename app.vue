@@ -8,6 +8,8 @@ const metrika = useMetrika()
 onMounted( async () => {
   await nextTick()
 
+  // if (useRuntimeConfig.public.mode !== 'production') return
+
   metrika.init()
 })
 </script>
