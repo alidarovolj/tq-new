@@ -36,12 +36,12 @@ useHead({
 <template>
   <div>
     <Hero />
-<!--     <InfoGrid />-->
-<!--    <Catalog />-->
+    <!-- <InfoGrid /> -->
+    <Catalog />
     <Timeline />
-<!--     <Cta />-->
-<!--        <Products />-->
-<!--     <Testimonials />-->
+    <!-- <Cta /> -->
+    <!--    <Products />-->
+    <!-- <Testimonials /> -->
     <!--    <News />-->
     <ContactForm />
   </div>
