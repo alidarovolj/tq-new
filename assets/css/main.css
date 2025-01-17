@@ -50,6 +50,17 @@ a:focus-visible {
     box-shadow: 0px 0px 20px 0px #0000000D;
 }
 
+@media (max-width: 640px) {
+  .carousel .carousel__prev {
+    left: -20px;
+    padding: 10px;
+    color: #ad2725;
+    border-radius: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 20px 0px #0000000D;
+  }
+}
+
 .carousel .carousel__next {
     right: -80px;
     padding: 10px;
@@ -57,6 +68,17 @@ a:focus-visible {
     border-radius: 100%;
     background: #fff;
     box-shadow: 0px 0px 20px 0px #0000000D;
+}
+
+@media (max-width: 640px) {
+  .carousel .carousel__next {
+    right: -20px;
+    padding: 10px;
+    color: #ad2725;
+    border-radius: 100%;
+    background: #fff;
+    box-shadow: 0px 0px 20px 0px #0000000D;
+  }
 }
 
 .carousel__pagination-button::after {

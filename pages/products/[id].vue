@@ -331,7 +331,10 @@ useHead(headData);
           </TabGroup>
         </div>
       </div>
-      <div v-if="sameProducts">
+      <div class="mt-10" v-if="sameProducts">
+       <span class="font-bold tracking-tight text-gray-900 text-3xl sm:text-4xl">
+        С этим товаром покупают
+       </span>
         <client-only>
           <my-carousel-carousel
             :breakpoints="breakpoints"
@@ -347,7 +350,7 @@ useHead(headData);
               <CardsProduct :product="item"/>
             </my-carousel-slide>
             <template #addons>
-             <div class="hidden sm:block">
+             <div>
               <my-carousel-navigation/>
              </div>
               <my-carousel-pagination/>
