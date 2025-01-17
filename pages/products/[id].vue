@@ -241,9 +241,11 @@ useHead(headData);
                   >
                     <MinusIcon class="w-5 h-5"/>
                   </button>
-                  <p class="text-[#7B7B7B] text-xl">
-                    {{ addToCart.quantity }}
-                  </p>
+                 <input
+                   class="max-w-[70px] sm:max-w-[110px] text-center border-none bg-[#FAFAFA] rounded-md"
+                   v-model="addToCart.quantity"
+                   min="1"
+                   type="number">
                   <button
                     class="text-mainColor"
                     @click="addToCart.quantity = addToCart.quantity + 1"
@@ -372,5 +374,20 @@ useHead(headData);
 
 .tile img {
   transition: transform 0.2s ease-in-out;
+}
+
+
+/* Для всех браузеров */
+input[type="number"] {
+ -moz-appearance: textfield; /* Для Firefox */
+ -webkit-appearance: none;  /* Для Chrome, Safari, Edge */
+ appearance: none;          /* Универсальное свойство */
+}
+
+/* Убирает стрелки на мобильных устройствах */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
 }
 </style>
