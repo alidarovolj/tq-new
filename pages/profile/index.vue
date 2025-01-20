@@ -159,36 +159,6 @@ onMounted(async () => {
                          class="p-2 rounded">
                         {{statuses[item.status]?.title}}
                        </span>
-<!--                        <span-->
-<!--                          v-if="item.status === 'pending'"-->
-<!--                          class="bg-blue-200 text-blue-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.pending") }}</span-->
-<!--                        >-->
-<!--                        <span-->
-<!--                          v-if="item.status === 'payed'"-->
-<!--                          class="bg-orange-200 text-orange-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.payed") }}</span-->
-<!--                        >-->
-<!--                        <span-->
-<!--                          v-if="item.status === 'delivery'"-->
-<!--                          class="bg-purple-200 text-purple-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.delivery") }}</span-->
-<!--                        >-->
-<!--                        <span-->
-<!--                          v-if="item.status === 'delivered'"-->
-<!--                          class="bg-green-200 text-green-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.delivered") }}</span-->
-<!--                        >-->
-<!--                        <span-->
-<!--                          v-if="item.status === 'canceled'"-->
-<!--                          class="bg-red-200 text-red-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.canceled") }}</span-->
-<!--                        >-->
-<!--                        <span-->
-<!--                          v-if="item.status === 'return_process'"-->
-<!--                          class="bg-red-200 text-red-500 p-2 rounded"-->
-<!--                          >{{ $t("orders.statuses.return_process") }}</span-->
-<!--                        >-->
                       </p>
                     </div>
                     <div class="text-right">

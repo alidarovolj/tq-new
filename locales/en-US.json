@@ -318,7 +318,8 @@
     "orders": "Orders",
     "favourites": "Favorites",
     "payment_success": "Successful payment",
-    "about": "About the company"
+    "about": "About the company",
+    "refunds": "Refunds"
   },
   "payment_success": {
     "title": "Thank you for your order!",

@@ -4,7 +4,8 @@ import {
   ArrowLeftEndOnRectangleIcon,
   ChevronRightIcon,
   GlobeAmericasIcon,
-  UserIcon
+  UserIcon,
+  ReceiptRefundIcon
 } from "@heroicons/vue/24/outline"
 import {useAuthStore} from "~/stores/auth.js";
 import {useNotificationStore} from "~/stores/notifications.js";
@@ -22,6 +23,7 @@ const notifications = useNotificationStore()
 const links = computed(() => [
   {title: t('breadcrumbs.profile'), icon: UserIcon, link: localePath('/profile')},
   {title: t('breadcrumbs.orders'), icon: ArchiveBoxIcon, link: localePath('/profile/orders')},
+  {title: t('breadcrumbs.refunds'), icon: ReceiptRefundIcon, link: localePath('/profile/refunds')},
   {title: t('breadcrumbs.addresses'), icon: GlobeAmericasIcon, link: localePath('/profile/addresses')}
 ]);
 

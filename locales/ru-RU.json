@@ -318,7 +318,8 @@
     "orders": "Заказы",
     "favourites": "Избранное",
     "payment_success": "Успешная оплата",
-    "about": "О компании"
+    "about": "О компании",
+    "refunds": "Возвраты"
   },
   "payment_success": {
     "title": "Спасибо за ваш заказ!",
