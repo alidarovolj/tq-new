@@ -7,6 +7,7 @@ import { useModalsStore } from "~/stores/modals";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import intl from "~/utils/intl.js";
+import {MinusIcon, PlusIcon} from "@heroicons/vue/24/outline/index.js";
 
 const runtimeConfig = useRuntimeConfig();
 const route = useRoute();
@@ -20,89 +21,109 @@ const auth = useAuthStore();
 auth.initCookieToken();
 const { token } = storeToRefs(auth);
 
+const isSubmitted = ref(false)
 const loading = ref(false);
 const form = ref({
-  id: modals.modal.modalData.id,
-  order_item_ids: [],
-  comment: "",
+ order_item: modals.modal.modalData?.order_items.map(item => ({
+  id: item.id,
+  quantity: item.quantity || 1,
+  selected: false,
+  product: item.product,
+  icon: item.icon,
+  price: item.price,
+  maxQuantity: item.quantity
+ })),
+ comment: "",
 });
 
 const v$ = useVuelidate(
   {
-    order_item_ids: { required },
-    comment: { required },
+   order_item: {
+    required,
+    $each: { selected: { required } },
+   },
+   comment: { required },
   },
   form
 );
 
 const isAllSelected = computed(() => {
- const orderItemIds = modals.modal.modalData.order_items.map(item => item.id);
- return orderItemIds.every(id => form.value.order_item_ids.includes(id));
+ return form.value.order_item.every(item => item.selected);
 });
 
 const indeterminate = computed(() => {
- return (
-   form.value.order_item_ids.length > 0 &&
-   !isAllSelected.value
- );
+ const selectedCount = form.value.order_item.filter(item => item.selected).length;
+ return selectedCount > 0 && selectedCount < form.value.order_item.length;
 });
 
 const toggleSelectAll = () => {
- if (isAllSelected.value) {
-  form.value.order_item_ids = []
- } else {
-  form.value.order_item_ids = modals.modal.modalData.order_items.map(
-    item => item.id
-  )
+ const allSelected = isAllSelected.value;
+ form.value.order_item.forEach(item => {
+  item.selected = !allSelected;
+ });
+};
+
+const editQuantity = (id, newQuantity) => {
+ const item = form.value.order_item.find(item => item.id === id);
+ if (item) {
+  item.quantity = Math.min(item.maxQuantity, Math.max(1, newQuantity)); // Учет maxQuantity
  }
-}
+};
 
 const handleReturnSubmit = async () => {
-  loading.value = true
-  await v$.value.$validate()
+ loading.value = true
+ isSubmitted.value = true
+ await v$.value.$validate()
 
-  if (v$.value.$error) {
-    notifications.showNotification(
-      "error",
-      "Данные не заполнены",
-      "Проверьте правильность введенных данных и попробуйте снова."
-    )
-    loading.value = false
-    return
-  }
+ if (v$.value.$error) {
+  notifications.showNotification(
+    "error",
+    "Данные не заполнены",
+    "Проверьте правильность введенных данных и попробуйте снова."
+  );
+  loading.value = false;
+  return;
+ }
 
-  try {
-    const response = await axios.post(
-      `https://api-new.gazbas.kz/api/orders/my-orders/${modals.modal.modalData.id}/return`,
-      form.value,
-      {
-        params: route.query,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token.value}`,
-        },
-      }
-    );
+ const selectedItems = form.value.order_item
+   .filter(item => item.selected)
+   .map(item => ({ id: item.id, quantity: item.quantity }));
 
-    if (response.status === 200) {
-      await orders.getOrders();
-      modals.modal.show = false;
-      notifications.showNotification(
-        "success",
-        "Успешно",
-        "Заявка на возврат отправлена."
-      );
+ if (selectedItems.length === 0) {
+  notifications.showNotification(
+    "error",
+    "Ошибка",
+    "Выберите хотя бы один товар."
+  );
+  loading.value = false;
+  return;
+ }
+
+ try {
+  const response = await axios.post(
+    `https://api-new.gazbas.kz/api/orders/my-orders/${modals.modal.modalData.id}/return`,
+    { order_item: selectedItems, comment: form.value.comment },
+    {
+     params: route.query,
+     headers: {
+      Authorization: `Bearer ${token.value}`,
+      "Content-Type": "application/json",
+     },
     }
-  } catch (error) {
-    notifications.showNotification(
-      "error",
-      "Ошибка",
-      "Не удалось отправить заявку на возврат."
-    );
-  } finally {
-    loading.value = false;
+  );
+
+  if (response.status === 200) {
+   await orders.getOrders();
+   modals.modal.show = false;
+   notifications.showNotification("success", "Успешно", "Заявка на возврат отправлена.");
   }
+ } catch (error) {
+  notifications.showNotification("error", "Ошибка", "Не удалось отправить заявку на возврат.");
+ } finally {
+  loading.value = false;
+ }
 };
+
 </script>
 
 <template>
@@ -115,7 +136,7 @@ const handleReturnSubmit = async () => {
       Мы рассмотрим вашу заявку в течение дня.
     </span>
     <form @submit.prevent="handleReturnSubmit">
-     <div v-if="modals.modal.modalData.order_items.length">
+     <div v-if="form.order_item.length">
       <table class="min-w-full divide-y divide-gray-300">
        <thead class="bg-[#FAFAFA]">
        <tr class="px-4">
@@ -124,7 +145,6 @@ const handleReturnSubmit = async () => {
           scope="col">
          <input
            type="checkbox"
-           :class="{'border-red-500': v$.order_item_ids.$error && v$.order_item_ids.$dirty}"
            :indeterminate="indeterminate"
            :checked="isAllSelected"
            @change="toggleSelectAll"
@@ -152,14 +172,12 @@ const handleReturnSubmit = async () => {
        </thead>
        <tbody class="divide-y divide-gray-200 bg-white">
        <tr
-         v-for="(item, key) in modals.modal.modalData.order_items"
+         v-for="(item, key) in form.order_item"
          :key="key"
          class="border-b">
         <td class="whitespace-nowrap pl-4 pr-3 sm:pl-0">
          <input
-           v-model="form.order_item_ids"
-           :value="item.id"
-           :class="{'border-red-500': v$.order_item_ids.$error && v$.order_item_ids.$dirty}"
+           v-model="item.selected"
            type="checkbox"/>
         </td>
         <td>
@@ -179,8 +197,28 @@ const handleReturnSubmit = async () => {
          </div>
         </td>
         <td class="whitespace-nowrap px-3">
-         <div class="text-mainColor flex items-center gap-5">
-          <p class="text-sm">{{ item.quantity }} шт.</p>
+         <div class="text-mainColor flex items-center w-max gap-7">
+          <button
+            type="button"
+            :disabled="item.quantity <= 1"
+            class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+            @click="editQuantity(item.id, item.quantity - 1)">
+           <MinusIcon class="w-5 h-5"/>
+          </button>
+          <input
+            v-model="item.quantity"
+            class="max-w-[50px] text-center border-[#F0DFDF] bg-[#FAFAFA] rounded-md"
+            min="1"
+            :max="item.maxQuantity"
+            @blur="editQuantity(item.id, item.quantity)"
+            type="number">
+          <button
+            type="button"
+            class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+            :disabled="item.quantity >= item.maxQuantity"
+            @click="editQuantity(item.id, item.quantity + 1)">
+           <PlusIcon class="w-5 h-5"/>
+          </button>
          </div>
         </td>
         <td class="whitespace-nowrap px-3">
@@ -190,10 +228,10 @@ const handleReturnSubmit = async () => {
        </tbody>
       </table>
       <span
-        v-if="v$.order_item_ids.$error && v$.order_item_ids.$dirty"
-        class="text-red-500 text-sm">
-      Выберите товары
-     </span>
+        v-if="form.order_item.every(item => !item.selected) && isSubmitted"
+        class="text-red-500">
+          Необходимо выбрать хотя бы один товар.
+        </span>
      </div>
       <div class="mt-6">
         <label
@@ -215,16 +253,6 @@ const handleReturnSubmit = async () => {
        class="text-red-500 text-sm">
       Введите причину возврата
      </span>
-<!--      <div class="mt-6">-->
-<!--        <label for="file" class="block text-sm font-medium text-gray-700 mb-2">-->
-<!--          Прикрепите фото товара-->
-<!--        </label>-->
-<!--        <input-->
-<!--          type="file"-->
-<!--          @change="(e) => (form.file = e.target.files[0])"-->
-<!--          class="block w-full text-sm text-gray-500"-->
-<!--        />-->
-<!--      </div>-->
       <div class="flex justify-end gap-3 mt-6">
         <button
           type="button"
@@ -242,3 +270,19 @@ const handleReturnSubmit = async () => {
     </form>
   </div>
 </template>
+
+<style scoped>
+/* Для всех браузеров */
+input[type="number"] {
+ -moz-appearance: textfield; /* Для Firefox */
+ -webkit-appearance: none;  /* Для Chrome, Safari, Edge */
+ appearance: none;          /* Универсальное свойство */
+}
+
+/* Убирает стрелки на мобильных устройствах */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+</style>

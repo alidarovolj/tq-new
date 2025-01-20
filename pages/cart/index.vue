@@ -171,9 +171,6 @@ useHead({
                         @blur="editQuantity(item.id, item.quantity)"
                         min="1"
                         type="number">
-<!--                      <p class="text-xl">-->
-<!--                        {{ item.quantity }}-->
-<!--                      </p>-->
                       <button
                           class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
                           @click="editQuantity(item.id, item.quantity + 1)">
