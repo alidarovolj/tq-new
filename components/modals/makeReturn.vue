@@ -35,15 +35,12 @@ const v$ = useVuelidate(
   form
 );
 
-
-// Select all logic
 const isAllSelected = computed(() => {
  const orderItemIds = modals.modal.modalData.order_items.map(item => item.id);
  return orderItemIds.every(id => form.value.order_item_ids.includes(id));
 });
 
 const indeterminate = computed(() => {
- const orderItemIds = modals.modal.modalData.order_items.map(item => item.id);
  return (
    form.value.order_item_ids.length > 0 &&
    !isAllSelected.value
@@ -73,13 +70,6 @@ const handleReturnSubmit = async () => {
     loading.value = false
     return
   }
-
-  // const formData = new FormData();
-  // formData.append("id", form.value.id);
-  // formData.append("reason", form.value.reason);
-  // if (form.value.file) {
-  //   formData.append("file", form.value.file);
-  // }
 
   try {
     const response = await axios.post(
@@ -125,17 +115,16 @@ const handleReturnSubmit = async () => {
       Мы рассмотрим вашу заявку в течение дня.
     </span>
     <form @submit.prevent="handleReturnSubmit">
-     <table
-       v-if="modals.modal.modalData.order_items.length"
-       class="min-w-full divide-y divide-gray-300">
-      <thead class="bg-[#FAFAFA]">
+     <div v-if="modals.modal.modalData.order_items.length">
+      <table class="min-w-full divide-y divide-gray-300">
+       <thead class="bg-[#FAFAFA]">
        <tr class="px-4">
         <th
           class="py-3.5 pr-3 text-left font-semibold text-gray-900"
-          scope="col"
-        >
+          scope="col">
          <input
            type="checkbox"
+           :class="{'border-red-500': v$.order_item_ids.$error && v$.order_item_ids.$dirty}"
            :indeterminate="indeterminate"
            :checked="isAllSelected"
            @change="toggleSelectAll"
@@ -160,18 +149,18 @@ const handleReturnSubmit = async () => {
          {{ t("cart.table.price") }}
         </th>
        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200 bg-white">
+       </thead>
+       <tbody class="divide-y divide-gray-200 bg-white">
        <tr
          v-for="(item, key) in modals.modal.modalData.order_items"
          :key="key"
          class="border-b">
         <td class="whitespace-nowrap pl-4 pr-3 sm:pl-0">
          <input
-           type="checkbox"
-           :value="item.id"
            v-model="form.order_item_ids"
-         />
+           :value="item.id"
+           :class="{'border-red-500': v$.order_item_ids.$error && v$.order_item_ids.$dirty}"
+           type="checkbox"/>
         </td>
         <td>
          <div class="flex items-center">
@@ -198,8 +187,14 @@ const handleReturnSubmit = async () => {
          <div class="text-gray-900">{{ intl(item.price) }}</div>
         </td>
        </tr>
-      </tbody>
-     </table>
+       </tbody>
+      </table>
+      <span
+        v-if="v$.order_item_ids.$error && v$.order_item_ids.$dirty"
+        class="text-red-500 text-sm">
+      Выберите товары
+     </span>
+     </div>
       <div class="mt-6">
         <label
           for="reason"
@@ -210,11 +205,16 @@ const handleReturnSubmit = async () => {
           v-model="form.comment"
           id="reason"
           class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-          :class="{ '!border-red-500': v$.comment.$error }"
+          :class="{ '!border-red-500': v$.comment.$error && v$.comment.$dirty }"
           placeholder="Введите причину возврата"
           name="reason"
           rows="3"/>
       </div>
+     <span
+       v-if="v$.comment.$error && v$.comment.$dirty"
+       class="text-red-500 text-sm">
+      Введите причину возврата
+     </span>
 <!--      <div class="mt-6">-->
 <!--        <label for="file" class="block text-sm font-medium text-gray-700 mb-2">-->
 <!--          Прикрепите фото товара-->
