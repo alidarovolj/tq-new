@@ -19,6 +19,9 @@ export default defineNuxtConfig({
         lazy: true,
         langDir: "locales/",
         strategy: "prefix_except_default",
+        compilation:{
+          strictMessage: false
+        },
         defaultLocale: "ru-RU",
         locales: [
             {
@@ -44,7 +47,7 @@ export default defineNuxtConfig({
             },
         ],
         detectBrowserLanguage: false,
-        vueI18n: "./i18n.config.ts",
+        vueI18n: './i18n.config.ts'
     },
 
     postcss: {
