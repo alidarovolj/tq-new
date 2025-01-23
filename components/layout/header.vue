@@ -18,6 +18,7 @@ import {
   ShoppingBagIcon,
   UserIcon,
   XMarkIcon,
+  ReceiptRefundIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 import { useUserStore } from "~/stores/user.js";
@@ -215,6 +216,24 @@ onMounted(async () => {
                       <UserIcon class="h-5 w-5" />
                       <p>{{ $t("profile.my_profile") }}</p>
                     </NuxtLink>
+                  </MenuItem>
+                  <MenuItem v-slot="{ active }">
+                   <div class="flex gap-2">
+                    <NuxtLink
+                      :class="[
+                                  active
+                                    ? 'bg-gray-100 text-gray-900'
+                                    : 'text-gray-700',
+                                  'block w-full px-4 py-2 text-left text-sm',
+                                ]"
+                      class="flex gap-2"
+                      @click="mobileMenuOpen = false"
+                      :to="localePath('/profile/refunds')"
+                    >
+                     <ReceiptRefundIcon class="h-5 w-5" />
+                     <p>{{ $t("breadcrumbs.refunds") }}</p>
+                    </NuxtLink>
+                   </div>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <div
@@ -512,6 +531,24 @@ onMounted(async () => {
                             >
                              <ArchiveBoxIcon class="h-5 w-5" />
                              <p>{{ $t("profile.my_orders") }}</p>
+                            </NuxtLink>
+                           </div>
+                          </MenuItem>
+                          <MenuItem v-slot="{ active }">
+                           <div class="flex gap-2">
+                            <NuxtLink
+                              :class="[
+                                active
+                                  ? 'bg-gray-100 text-gray-900'
+                                  : 'text-gray-700',
+                                'block w-full px-4 py-2 text-left text-sm',
+                              ]"
+                              class="flex gap-2"
+                              @click="mobileMenuOpen = false"
+                              :to="localePath('/profile/refunds')"
+                            >
+                             <ReceiptRefundIcon class="h-5 w-5" />
+                             <p>{{ $t("breadcrumbs.refunds") }}</p>
                             </NuxtLink>
                            </div>
                           </MenuItem>
