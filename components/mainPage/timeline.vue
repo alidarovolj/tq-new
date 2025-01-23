@@ -199,7 +199,7 @@ ul{
 
 ol{
  list-style: -moz-arabic-indic;
- padding-left: 20px;
+ padding-left: 25px;
  font-size:18px;
 }
 </style>
