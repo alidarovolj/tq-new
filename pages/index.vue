@@ -35,7 +35,7 @@ useHead({
     <Hero />
 <!--     <InfoGrid />-->
     <Catalog />
-    <Timeline />
+<!--    <Timeline />-->
 <!--     <Cta />-->
 <!--        <Products />-->
 <!--     <Testimonials />-->
