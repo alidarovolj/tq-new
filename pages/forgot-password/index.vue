@@ -7,6 +7,7 @@ import { useNotificationStore} from "~/stores/notifications.js"
 import img1 from "@/assets/img/auth/1.jpg"
 import img2 from "@/assets/img/auth/2.jpg"
 import img3 from "@/assets/img/auth/3.jpg"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline";
 
 const { t } = useI18n()
 const route = useRoute()
@@ -22,6 +23,8 @@ const codeSent = ref(false)
 const tempToken = ref(null)
 const resendTimeout = ref(60)
 const resendDisabled = ref(false)
+const passwordInputType = ref('password')
+const passwordConfirmInputType = ref('password')
 
 const form = ref({ phone_number: ''})
 
@@ -262,7 +265,7 @@ useHead({
                @submit.prevent="updatePassword">
               <div
                 :class="{'!border !border-red-500':v$Password.password.$error}"
-                class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+                class="relative rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                <label
                  class="block text-xs font-medium text-gray-900"
                  for="password">
@@ -274,12 +277,20 @@ useHead({
                  placeholder="********"
                  class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                  name="password"
-                 type="password" />
+                 :type="passwordInputType" />
+               <EyeIcon
+                 v-if="passwordInputType === 'password'"
+                 @click="passwordInputType = 'text'"
+                 class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
+               <EyeSlashIcon
+                 v-else
+                 @click="passwordInputType = 'password'"
+                 class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
               </div>
 
               <div
                 :class="{'!border !border-red-500':v$Password.password_confirmation.$error}"
-                class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+                class="relative rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                <label
                  class="block text-xs font-medium text-gray-900"
                  for="password_confirmation">
@@ -291,7 +302,15 @@ useHead({
                  placeholder="********"
                  class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                  name="password_confirmation"
-                 type="text" />
+                 :type="passwordConfirmInputType" />
+               <EyeIcon
+                 v-if="passwordConfirmInputType === 'password'"
+                 @click="passwordConfirmInputType = 'text'"
+                 class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
+               <EyeSlashIcon
+                 v-else
+                 @click="passwordConfirmInputType = 'password'"
+                 class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
               </div>
 
               <div>

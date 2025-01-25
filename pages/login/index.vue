@@ -8,6 +8,7 @@ import img2 from "@/assets/img/auth/2.jpg";
 import img3 from "@/assets/img/auth/3.jpg";
 import {useAuthStore} from "~/stores/auth.js";
 import {useUserStore} from "~/stores/user.js";
+import {EyeIcon, EyeSlashIcon} from "@heroicons/vue/24/outline/index.js";
 
 const loading = ref(false);
 const notifications = useNotificationStore()
@@ -19,6 +20,7 @@ const user = useUserStore()
 const cart = useCartStore()
 
 const isLoginError = ref(false)
+const passwordType = ref('password')
 
 const form = ref({
   phone: '',
@@ -152,7 +154,7 @@ useHead({
 
                 <div
                     :class="{ '!border !border-red-500': v$.password.$error || isLoginError  }"
-                    class="rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+                    class="relative rounded-md px-3 pb-1.5 pt-2.5 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
                   <label class="block text-xs font-medium text-gray-900" for="password">
                     {{ $t('forms.password.title') }}
                   </label>
@@ -163,9 +165,17 @@ useHead({
                       class="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       name="password"
                       placeholder="********"
-                      type="password"
+                      :type="passwordType"
                       @input="isLoginError = false"
                   />
+                 <EyeIcon
+                   v-if="passwordType === 'password'"
+                   @click="passwordType = 'text'"
+                   class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
+                 <EyeSlashIcon
+                   v-else
+                   @click="passwordType = 'password'"
+                   class="h-5 w-5 absolute right-3 top-1/2 cursor-pointer" />
                 </div>
 
                <span v-if="isLoginError" class="text-red-500 text-sm">
