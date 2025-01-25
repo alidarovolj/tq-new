@@ -190,7 +190,7 @@ const timeline = ref([
   </div>
 </template>
 
-<style>
+<style scoped>
 ul{
  list-style: disc;
  padding-left: 20px;
