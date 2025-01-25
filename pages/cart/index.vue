@@ -101,7 +101,13 @@ useHead({
       <div class="pt-12 pb-32">
         <div class="flex flex-col gap-4 sm:flex-row justify-between">
           <h1 class="text-3xl font-semibold">
-            {{ t('cart.title') }}: <span v-if="cartList">{{ cartList.data.length }}</span>
+            {{ t('cart.title') }}:
+           <span v-if="cartList">
+            {{ cartList.data.length }}
+           </span>
+           <span v-else-if="cart.tempCart">
+            {{ cart.tempCart.data.length }}
+           </span>
           </h1>
           <div v-if="cartList">
             <div
@@ -114,6 +120,17 @@ useHead({
               </p>
             </div>
           </div>
+         <div v-else-if="cart.tempCart">
+          <div
+            v-if="cart.tempCart.data.length > 0"
+            class="flex cursor-pointer items-center text-mainColor gap-2"
+            @click="removeCartLocal">
+           <TrashIcon class="w-7 h-7"/>
+           <p class="font-semibold">
+            {{ t('cart.clear') }}
+           </p>
+          </div>
+         </div>
         </div>
         <div class="mt-8 flow-root">
           <div
@@ -199,6 +216,83 @@ useHead({
             <NoResults v-else/>
           </div>
           <div
+            v-else-if="cart.tempCart"
+            class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+           <div
+             v-if="cart.tempCart.data.length > 0"
+             class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 mb-8 overflow-x-auto">
+            <table
+              class="min-w-full divide-y divide-gray-300">
+             <thead class="bg-[#FAFAFA]">
+             <tr>
+              <th class="py-3.5 pl-4 pr-3 text-left  font-semibold text-gray-900" scope="col">
+               {{ t('cart.table.product') }}
+              </th>
+              <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
+               {{ t('cart.table.quantity') }}
+              </th>
+              <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
+               {{ t('cart.table.price') }}
+              </th>
+              <th class="px-3 py-3.5 text-left  font-semibold text-gray-900" scope="col">
+               {{ t('cart.table.total') }}
+              </th>
+              <th class="relative py-3.5 pl-3 pr-4 sm:pr-0" scope="col">
+              </th>
+             </tr>
+             </thead>
+             <tbody class="divide-y divide-gray-200 bg-white">
+             <tr
+               v-for="(item, index) in cart.tempCart.data"
+               :key="index">
+              <td class="whitespace-nowrap py-5 pl-4 pr-3  sm:pl-0">
+               <div class="flex items-center">
+                <div class="ml-4">
+                 <div class="font-medium text-gray-900">{{ item.product.name }}</div>
+                </div>
+               </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-5">
+               <div class="text-mainColor flex items-center w-max gap-7">
+                <button
+                  class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                  @click="editQuantity(item.id, item.quantity - 1)">
+                 <MinusIcon class="w-5 h-5"/>
+                </button>
+                <input
+                  class="max-w-[110px] text-center border-[#F0DFDF] bg-[#FAFAFA] rounded-md"
+                  v-model="item.quantity"
+                  @blur="editQuantity(item.id, item.quantity)"
+                  min="1"
+                  type="number">
+                <button
+                  class="border border-[#F0DFDF] rounded-full w-7 h-7 flex items-center justify-center hover:bg-[#F0DFDF] transition-all"
+                  @click="editQuantity(item.id, item.quantity + 1)">
+                 <PlusIcon class="w-5 h-5"/>
+                </button>
+               </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-5  ">
+               <div class="text-gray-900">
+                {{ intl(item.price)}}
+               </div>
+              </td>
+              <td class="whitespace-nowrap px-3 py-5 font-semibold ">
+               {{ intl(item.price) }}
+              </td>
+              <td class="whitespace-nowrap px-3 py-5 font-semibold ">
+               <TrashIcon
+                 class="w-6 h-6 text-red-500 cursor-pointer"
+                 @click="removeLocal(item.id)"
+               />
+              </td>
+             </tr>
+             </tbody>
+            </table>
+           </div>
+           <NoResults v-else/>
+          </div>
+          <div
               v-else
               class="border rounded-lg p-2">
             <div
@@ -272,6 +366,50 @@ useHead({
             </div>
           </div>
         </div>
+       <div v-else-if="cart.tempCart">
+        <div
+          v-if="cart.tempCart.data.length > 0"
+          class="bg-[#FAFAFA] py-5 px-6 rounded-lg set_shadow">
+         <p class="text-mainColor text-2xl font-semibold border-b border-[#F0DFDF] pb-3 mb-4">
+          {{ $t('cart.checkout.title') }}
+         </p>
+         <div class="flex flex-col md:flex-row justify-between">
+          <div class="w-full md:w-1/3">
+           <p class="text-xl mb-3 font-semibold">
+            {{ $t('cart.checkout.coupon_title') }}
+           </p>
+           <p class="mb-8">
+            {{ $t('cart.checkout.coupon_text') }}
+           </p>
+           <div class="flex flex-col md:flex-row justify-between gap-5 mb-10 md:mb-0">
+            <input
+              :placeholder="$t('cart.checkout.coupon_placeholder')"
+              class="w-full px-4 border-b border-[#F0DFDF] bg-[#FAFAFA]"
+              type="text">
+            <button
+              class="w-full whitespace-nowrap border border-mainColor text-mainColor px-6 py-2 rounded-lg text-lg font-semibold">
+             {{ $t('cart.checkout.coupon_button') }}
+            </button>
+           </div>
+          </div>
+          <div class="w-full md:w-1/3 flex flex-col justify-between">
+           <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
+            <p>{{ $t('cart.checkout.summary') }}</p>
+            <p>{{ intl(cartPrice)}}</p>
+           </div>
+           <div class="border-b border-[#F0DFDF] flex items-center justify-between py-3">
+            <p>{{ $t('cart.checkout.total') }}</p>
+            <p class="text-xl font-bold">{{ intl(cartPrice) }}</p>
+           </div>
+           <NuxtLink
+             :to="localePath('/cart/checkout')"
+             class="w-full bg-mainColor text-white px-6 py-2 rounded-lg text-lg font-semibold text-center">
+            {{ $t('cart.checkout.checkout_button') }}
+           </NuxtLink>
+          </div>
+         </div>
+        </div>
+       </div>
       </div>
     </div>
   </div>

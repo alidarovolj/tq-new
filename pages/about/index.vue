@@ -1,5 +1,4 @@
 <script setup>
-import News from "~/components/general/news.vue";
 import Breadcrumbs from "~/components/general/breadcrumbs.vue";
 
 const localePath = useLocalePath();

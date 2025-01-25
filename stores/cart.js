@@ -7,6 +7,7 @@ export const useCartStore = defineStore("cart", () => {
     const editedItem = ref(null);
     const removedCart = ref(null);
     const temporaryCode = ref(null);
+    const tempCart = ref(null)
     const cartPrice = ref(0);
     const route = useRoute()
     const notifications = useNotificationStore()
@@ -25,6 +26,7 @@ export const useCartStore = defineStore("cart", () => {
         removedCart,
         cartPrice,
         temporaryCode,
+        tempCart,
         async getCart() {
             try {
                 const response = await api(`/carts/`, "GET", {}, route.query);
@@ -101,9 +103,9 @@ export const useCartStore = defineStore("cart", () => {
         async getTemporaryCart() {
             try {
                 const response = await api(`/carts/`, "GET", {}, {
-                    temporary_code: temporaryCode.value.temporary_code
+                    temporary_code: tempCode.value
                 });
-                temporaryCode.value = response;
+                tempCart.value = response
                 if (response && response.data) {
                     cartPrice.value = 0;
                     response.data.forEach((item) => {

@@ -22,6 +22,14 @@ const isInCart = computed(
     )
 )
 
+const isInTempCart = computed(
+  () => cart.tempCart
+    && Array.isArray(cart.tempCart.data)
+    && cart.tempCart.data.some(
+      item => item.product.id === props.product.id
+    )
+)
+
 const onError = e => {
  e.target.setAttribute('src', errorImg || '')
 }
@@ -62,9 +70,9 @@ const onError = e => {
    </div>
    <div v-else
         :class="['relative flex transition-all bg-mainColor items-center cursor-pointer justify-center rounded-md border border-transparent px-3 py-2 text-sm font-medium',
-           isInCart ? '!bg-green-500 text-white' : 'bg-green-500 text-white']"
-        v-bind="isInCart ? {} : { 'onClick': () => cart.addItem(addToCart) }">
-    {{ isInCart ? 'В корзине' : `Добавить в корзину` }}
+           isInCart || isInTempCart ? '!bg-green-500 text-white' : 'bg-green-500 text-white']"
+        v-bind="isInCart || isInTempCart ? {} : { 'onClick': () => cart.addItem(addToCart) }">
+    {{ isInCart || isInTempCart ? 'В корзине' : `Добавить в корзину` }}
    </div>
   </div>
  </div>

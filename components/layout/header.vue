@@ -380,8 +380,28 @@ onMounted(async () => {
             </p>
           </NuxtLink>
         </div>
+       <div v-else-if="cart.tempCart">
+        <NuxtLink
+          :to="localePath('/cart')"
+          class="flex items-center gap-2 border border-gray-300 hover:text-white transition-all hover:bg-mainColor h-full px-2 rounded"
+        >
+         <div class="relative">
+          <div
+            v-if="cart.tempCart.data.length > 0"
+            class="bg-mainColor text-white w-5 h-5 absolute right-0 top-0 translate-x-1/2 -translate-y-2/3 flex items-center justify-center rounded-full text-xs"
+          >
+           {{ cart.tempCart.data.length }}
+          </div>
+          <ShoppingBagIcon class="w-5 h-5 cursor-pointer" />
+         </div>
+         <p class="hidden md:block text-sm">
+          {{ $t("navigation.cart") }}
+         </p>
+        </NuxtLink>
+       </div>
       </div>
     </div>
+
     <Dialog
       :open="mobileMenuOpen"
       class="lg:hidden"
