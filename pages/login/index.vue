@@ -1,7 +1,7 @@
 <script setup>
 import {vMaska} from "maska/vue"
 import {useVuelidate} from "@vuelidate/core"
-import {required} from "@vuelidate/validators"
+import {minLength, required} from "@vuelidate/validators"
 import {useNotificationStore} from "~/stores/notifications.js";
 import img1 from "@/assets/img/auth/1.jpg";
 import img2 from "@/assets/img/auth/2.jpg";
@@ -28,7 +28,7 @@ const form = ref({
 })
 
 const v$ = useVuelidate({
-  phone: {required, minLength: 11},
+  phone: {required, minLength: minLength(18)},
   password: {required, minLength: 8}
 }, form);
 
