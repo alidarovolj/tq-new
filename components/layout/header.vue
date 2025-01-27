@@ -96,7 +96,7 @@ onMounted(async () => {
   } else {
     await cart.getTemporaryCode();
     tempCode.value = cart.temporaryCode.temporary_code;
-    await cart.getTemporaryCart();
+    // await cart.getTemporaryCart();
     user.userProfile = false;
   }
 });

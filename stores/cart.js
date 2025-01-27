@@ -94,16 +94,16 @@ export const useCartStore = defineStore("cart", () => {
         },
         async getTemporaryCode() {
             try {
-                const response = await api(`/carts/temporary`, "GET", {}, route.query);
-                temporaryCode.value = response;
+              temporaryCode.value = await api(`/carts/temporary`, "GET", {}, route.query);
+              await this.getTemporaryCart(temporaryCode.value.temporary_code);
             } catch (e) {
-                // notifications.showNotification("error", "Произошла ошибка", e);
+                notifications.showNotification("error", "Произошла ошибка", e);
             }
         },
-        async getTemporaryCart() {
+        async getTemporaryCart(code = null) {
             try {
                 const response = await api(`/carts/`, "GET", {}, {
-                    temporary_code: tempCode.value
+                    temporary_code: tempCode.value || code
                 });
                 tempCart.value = response
                 if (response && response.data) {
