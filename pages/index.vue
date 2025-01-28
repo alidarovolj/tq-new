@@ -2,7 +2,7 @@
 import Hero from "~/components/mainPage/hero.vue";
 import ContactForm from "~/components/mainPage/contactForm.vue";
 import Catalog from "~/components/mainPage/catalog.vue";
-import Timeline from "~/components/mainPage/timeline.vue";
+import LiquidationsBlock from "~/components/mainPage/LiquidationsBlock.vue";
 
 const { t } = useI18n();
 
@@ -35,6 +35,7 @@ useHead({
     <Hero />
 <!--     <InfoGrid />-->
     <Catalog />
+   <LiquidationsBlock/>
 <!--    <Timeline />-->
 <!--     <Cta />-->
 <!--        <Products />-->
