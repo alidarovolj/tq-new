@@ -43,17 +43,9 @@ const onError = e => {
     class="relative">
    <div class="relative h-72 w-full overflow-hidden rounded-lg">
     <img
-      v-if="product.icon !== 'https://static.thenounproject.com/png/5191452-200.png'"
       :alt="product.name"
-      :src="product.icon || errorImg"
-      @error="onError"
+      :src="product?.icon"
       class="h-full w-full object-contain object-center px-5"
-    />
-    <img
-      v-else
-      :alt="product.name"
-      class="h-full w-full object-contain object-center px-5"
-      src="@/assets/img/logos/mainVert.png"
     />
    </div>
    <div class="relative mt-4 px-2">
