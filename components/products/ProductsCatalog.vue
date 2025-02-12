@@ -1,5 +1,4 @@
 <script setup>
-import errorImg from '@/assets/img/logos/mainVert.png'
 
 const route = useRoute()
 const router = useRouter()
@@ -82,7 +81,7 @@ const toggleCatalog = () => {
           }"
           class="flex items-center gap-4 cursor-pointer font-bold rounded-lg p-3 transition-all duration-300 ease-in-out">
          <img
-           :src="category.icon || errorImg"
+           :src="category.icon"
            class="h-12 w-12">
          <h3>
           {{ category.name }}
@@ -104,7 +103,7 @@ const toggleCatalog = () => {
              }"
              class="flex items-center border rounded font-medium p-1 sub_category cursor-pointer">
             <img
-              :src="subCategory.icon || errorImg"
+              :src="subCategory.icon"
               class="h-12 w-12">
             <h3>
              {{ subCategory.name }}
