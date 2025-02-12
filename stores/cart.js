@@ -42,6 +42,8 @@ export const useCartStore = defineStore("cart", () => {
             }
         },
         async addItem(product) {
+
+          return;
             let body = null
             if (token.value) {
                 body = product

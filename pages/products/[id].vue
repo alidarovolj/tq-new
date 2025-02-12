@@ -218,10 +218,10 @@ useHead(headData);
             </div>
           </div>
 
-          <div
-            class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 font-bold">
-            {{ intl(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}
-          </div>
+<!--          <div-->
+<!--            class="mt-10 mb-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 font-bold">-->
+<!--            {{ intl(detailProduct.data.price) }}{{ $t("product_detail.price_per_unit") }}-->
+<!--          </div>-->
           <div>
             <p class="mb-2">
               {{ $t("product_detail.quantity") }}

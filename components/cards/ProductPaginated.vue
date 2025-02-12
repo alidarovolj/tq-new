@@ -49,9 +49,9 @@ const onError = e => {
     />
    </div>
    <div class="relative mt-4 px-2">
-    <h3 class="text-sm font-medium text-gray-900 h-10 flex items-center">{{ product.name }}</h3>
-    <p class="text-lg font-semibold my-1">{{ intl(product?.price) }}</p>
-    <p class="text-gray-500 text-xs">Вы можете указать кол-во товара в корзине</p>
+    <h3 class="text-sm font-medium text-gray-900  flex items-center">{{ product.name }}</h3>
+<!--    <p class="text-lg font-semibold my-1">{{ intl(product?.price) }}</p>-->
+    <p class="text-gray-500 text-xs mt-2">Вы можете указать кол-во товара в корзине</p>
    </div>
   </NuxtLink>
   <div class="mt-6 p-2">
