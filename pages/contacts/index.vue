@@ -152,16 +152,24 @@ useHead({
               📞 Телефон:
               <NuxtLink
                 class="text-mainColor font-normal"
-                href="tel:+77767131333">
-                +7 (776) 713-13-33
+                href="tel:+77715142525">
+                +7 (771) 514-25-25
               </NuxtLink>
             </p>
             <p class="font-semibold mb-2">
               📞 Телефон:
               <NuxtLink
-                class="text-mainColor font-normal"
-                href="tel:+77472377975">
-                +7 (747) 237-79-75
+                  class="text-mainColor font-normal"
+                  href="tel:+77029742525">
+                +7 (702) 974-25-25
+              </NuxtLink>
+            </p>
+            <p class="font-semibold mb-2">
+              📞 Телефон:
+              <NuxtLink
+                  class="text-mainColor font-normal"
+                  href="tel:+77029472525">
+                +7 (702) 947-25-25
               </NuxtLink>
             </p>
           </address>
